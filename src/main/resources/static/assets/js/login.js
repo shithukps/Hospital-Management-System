@@ -1,4 +1,35 @@
 $(document).ready(function() {
+// check the inputbox values whther it is empty or not on blur function
+$("#username").blur(function(){
+     var user = $('#username').val();
+     if(user=='')
+     {
+            $('#error_username').slideDown();
+            $('#error_username').html('Please provide username');
+     }
+     else
+     {
+            $('#error_cred').slideUp();
+            $('#error_username').slideUp();
+
+
+     }
+});
+$("#password").blur(function(){
+     var pass = $('#password').val();
+     if(pass=='')
+     {
+            $('#error_password').slideDown();
+            $('#error_password').html('Please provide password');
+     }
+     else
+     {
+            $('#error_cred').slideUp();
+            $('#error_password').slideUp();
+
+
+     }
+});
 
     $("#submitBtn").click(function() {
         var username=$("#username").val();
@@ -8,19 +39,30 @@ $(document).ready(function() {
                         'id':username,
                         'password':password
             };
-            var studentJson=JSON.stringify(userData);
+            var loginJson=JSON.stringify(userData);
+
+            if(username==''){
+                      $('#error_username').slideDown();
+                      $('#error_username').html('Please provide username');
+                }
+                else if(password==''){
+                       $('#error_password').slideDown();
+                       $('#error_password').html('Please provide password');
+                }
+
+                else{
+                         $('#error_username').slideUp();
+                          $('#error_password').slideUp();
             $.ajax({
                 type:"POST",
                 url:'http://localhost:8080/login',
                 headers:{
                     "Content-Type":"application/json"
                 },
-                data:studentJson,
+                data:loginJson,
                 success: function(data){
                                     if(data=="success"){
-                                        alert("ss");
                                       $.cookie("username", username);
-                                      alert("vv");
                                       window.location.replace("http://localhost:8080/registration");
                                     }
                                     else{
@@ -29,5 +71,6 @@ $(document).ready(function() {
                                     }
                 }
             });//close of loginAjax
+         }
     });//close of buttonClick
 });

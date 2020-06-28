@@ -1,117 +1,161 @@
 package com.project.hms.db.models;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Date;
 
+@Entity
+@Table(name="patient")
+public class Patient {
 
-    @Table(name="Patient")
-    public class Patient {
-        @Column(name = "SSNID")
+    @Id @GeneratedValue(strategy= GenerationType.IDENTITY)
         @Size(max = 9)
+        @Column(name = "patient_id")
         @NotNull
-        private String SSNID;
+        private String patient_id;
 
-
-        //    @JsonIgnore
-        @Size(max = 9)
-        @Column(name = "Patient_id")
-        @NotNull
-        private String Patient_id;
+    @Size(max = 9)
+    @Column(name = "ssnid")
+    @NotNull
+    private String ssnid;
 
         @Size(max = 30)
-        @Column(name = "Patient_Name")
+        @Column(name = "patient_name")
         @NotNull
-        private String Patient_Name;
+        private String patient_Name;
 
         @Size(max = 50)
-        @Column(name = "Address")
+        @Column(name = "address")
         @NotNull
-        private String Address;
+        private String address;
 
         @Size(max = 3)
         @Column(name = "age")
         @NotNull
-        private String age;
+        private int age;
 
         @Size(max = 8)
-        @Column(name = "Date_of_admission")
+        @Column(name = "date_of_admission")
         @NotNull
-        private String Date_of_admission;
+        private Date date_of_admission;
 
         @Size(max = 10)
-        @Column(name = "Room_type")
+        @Column(name = "room_type")
         @NotNull
-        private String Room_type;
+        private String room_type;
 
+        @Size(max=20)
+        @Column(name = "city")
+        @NotNull
+        private String city;
 
-        public Patient(@Size(max = 9) @NotNull String SSNID, @Size(max = 9) @NotNull String patient_id, @Size(max = 30) @NotNull String patient_Name, @Size(max = 50) @NotNull String address, @Size(max = 3) @NotNull String age, @Size(max = 8) @NotNull String date_of_admission, @Size(max = 10) @NotNull String room_type) {
-            this.SSNID = SSNID;
-            Patient_id = patient_id;
-            Patient_Name = patient_Name;
-            Address = address;
-            this.age = age;
-            Date_of_admission = date_of_admission;
-            Room_type = room_type;
+        @Size(max=20)
+        @Column(name = "state")
+        @NotNull
+        private String state;
+
+        @Size(max=15)
+        @Column(name = "status")
+        @NotNull
+        private String status;
+
+        public Patient() {
+
         }
 
-        public String getSSNID() {
-            return SSNID;
-        }
-
-        public void setSSNID(String SSNID) {
-            this.SSNID = SSNID;
-        }
-
-
-
-        public String getPatient_id() {
-            return Patient_id;
-        }
-
-        public void setPatient_id(String patient_id) {
-            Patient_id = patient_id;
-        }
-        public String getPatient_Name() {
-            return Patient_Name;
-        }
-
-        public void setPatient_Name(String patient_Name) {
-            Patient_Name = patient_Name;
-        }
-
-        public String getAddress() {
-            return Address;
-        }
-
-        public void setAddress(String address) {
-            Address = address;
-        }
-
-        public String getAge() {
-            return age;
-        }
-
-        public void setAge(String age) {
-            this.age = age;
-        }
-
-        public String getDate_of_admission() {
-            return Date_of_admission;
-        }
-
-        public void setDate_of_admission(String date_of_admission) {
-            Date_of_admission = date_of_admission;
-        }
-
-        public String getRoom_type() {
-            return Room_type;
-        }
-
-        public void setRoom_type(String room_type) {
-            Room_type = room_type;
-        }
+    public Patient(@Size(max = 9) @NotNull String ssnid, @Size(max = 9) @NotNull String patient_id, @Size(max = 30) @NotNull String patient_Name, @Size(max = 50) @NotNull String address, @Size(max = 3) @NotNull int age, @Size(max = 8) @NotNull Date date_of_admission, @Size(max = 10) @NotNull String room_type, @Size(max = 20) @NotNull String city, @Size(max = 20) @NotNull String state, @Size(max = 15) @NotNull String status) {
+        this.ssnid = ssnid;
+        this.patient_id = patient_id;
+        this.patient_Name = patient_Name;
+        this.address = address;
+        this.age = age;
+        this.date_of_admission = date_of_admission;
+        this.room_type = room_type;
+        this.city = city;
+        this.state = state;
+        this.status = status;
     }
+
+    public String getssnid() {
+        return ssnid;
+    }
+
+    public void setssnid(String ssnid) {
+        this.ssnid = ssnid;
+    }
+
+    public String getPatient_id() {
+        return patient_id;
+    }
+
+    public void setPatient_id(String patient_id) {
+        this.patient_id = patient_id;
+    }
+
+    public String getPatient_Name() {
+        return patient_Name;
+    }
+
+    public void setPatient_Name(String patient_Name) {
+        this.patient_Name = patient_Name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public Date getDate_of_admission() {
+        return date_of_admission;
+    }
+
+    public void setDate_of_admission(Date date_of_admission) {
+        this.date_of_admission = date_of_admission;
+    }
+
+    public String getRoom_type() {
+        return room_type;
+    }
+
+    public void setRoom_type(String room_type) {
+        this.room_type = room_type;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+}
 

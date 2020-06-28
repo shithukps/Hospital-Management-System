@@ -11,6 +11,9 @@ html,body {
     display: flex;
     justify-content: center;
 }
+.error{
+    color:"red";
+}
 .databox {
     width: 600px;
 }

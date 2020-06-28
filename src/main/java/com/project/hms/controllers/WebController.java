@@ -18,4 +18,9 @@ public class WebController {
     {
         return "login";
     }
+
+    @RequestMapping("/registration")
+    public String registration(){
+        return "patient_registration";
+    }
 }

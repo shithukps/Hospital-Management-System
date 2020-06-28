@@ -1,9 +1,12 @@
-create table IF NOT EXISTS Patient(
-  SSNID int(9) not null,
-  Patient_id int(9) primary key not null AUTO_INCREMENT,
-  Patient_Name char(30) not null,
-  Address varchar(50) not null,
-  age int(3) not null,
-  Date_of_admission Date not null,
-  Room_type char(10) not null
+create table IF NOT EXISTS patient(
+  patient_id int AUTO_INCREMENT primary key,
+  ssnid varchar(9) not null,
+  patient_name varchar(30) not null,
+  address varchar(50) not null,
+  age int not null,
+  date_of_admission Date not null,
+  room_type char(10) not null,
+  city varchar(20) not null,
+  state varchar(20) not null,
+  status varchar(15) not null
 );

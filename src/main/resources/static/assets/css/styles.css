@@ -53,7 +53,7 @@ html,body {
   	margin-bottom: 20px;
   	padding: 0 15px;
 }
-.loginbox form input[type="submit"] {
+#submitBtn{
   	width: 100%;
   	padding: 15px;
  	margin-top: 20px;
@@ -64,7 +64,7 @@ html,body {
   	color: #ffffff;
   	transition: background-color 0.2s;
 }
-.loginbox form input[type="submit"]:hover {
+#submitBtn:hover {
 	background-color: #2868c7;
   	transition: background-color 0.2s;
 }

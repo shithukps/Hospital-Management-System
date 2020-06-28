@@ -1,0 +1,83 @@
+* {
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "segoe ui", roboto, oxygen, ubuntu, cantarell, "fira sans", "droid sans", "helvetica neue", Arial, sans-serif;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+html,body {
+    background-color: #1e3954;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+.databox {
+    width: 600px;
+}
+.useroptions
+{
+    width: 175px;
+    height: 30px;
+    margin-left: 20px;
+}
+h1
+{
+    text-align: center;
+    color: #ffffff;
+    font-size: 24px;
+    padding: 20px 0 20px 0;
+}
+h2 {
+    text-align: center;
+    color: #ffffff;
+    font-size: 24px;
+    padding: 20px 0 20px 0;
+    border-bottom: 1px solid #dee0e4;
+}
+.databox form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 10px;
+}
+table
+{
+color: #ffffff;
+}
+td
+{
+    height: 40px;
+}
+input[type="text"],input[type="date"],select,textarea {
+    width: 310px;
+    height: 30px;
+    margin-left: 20px;
+}
+#submitBtn{
+    width: 40%;
+    padding: 15px;
+    margin-top: 20px;
+    margin-right: 10px;
+    background-color: #3274d6;
+    border: 0;
+    cursor: pointer;
+    font-weight: bold;
+    color: #ffffff;
+    transition: background-color 0.2s;
+}
+#resetBtn{
+    width: 40%;
+    padding: 15px;
+    margin-top: 20px;
+    margin-left: 10px;
+    background-color: #ff0000;
+    border: 0;
+    cursor: pointer;
+    font-weight: bold;
+    color: #ffffff;
+    transition: background-color 0.2s;
+}
+#submitBtn:hover {
+  background-color: #2868c7;
+    transition: background-color 0.2s;
+}

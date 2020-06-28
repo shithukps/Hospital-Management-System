@@ -1,0 +1,132 @@
+<html>
+    <head>
+        <title>
+            Delete Patient
+        </title>
+        <link rel="stylesheet" href="assets/css/main.css">
+    </head>
+    <body>
+        <div class="databox">
+            <div><h1>ABC Hospital</h1></div>
+            <div>
+                <select class="useroptions" name="admin" id="admin">
+                    <option value="Select">Select</option>
+                    <option value="Register Patient">Register Patient</option>
+                    <option value="Update Patient">Update Patient</option>
+                    <option value="Delete Patient">Delete Patient</option>
+                    <option value="View Patient List">View Patient List</option>
+                    <option value="Billing">Billing</option>
+                </select>
+                <select class="useroptions" name="pharmasist" id="pharmasist">
+                    <option value="Select">Select</option>
+                    <option value="Issue Medicine">Issue Medicine</option>
+                    <option value="Get Patient Details">Get Patient Details</option>
+                </select>
+                <select class="useroptions" name="diagnostics" id="diagnostics">
+                    <option value="Select">Select</option>
+                    <option value="Diagnostics">Diagnostics</option>
+                    <option value="Get Patient Details">Get Patient Details</option>
+                </select>
+            </div>
+            <h2>
+                Delete Patient
+            </h2>
+        <form action="" method="POST">
+            <table>
+                <tr>
+                    <td>
+                        <label>Patient ID *</label>
+                    </td>
+                    <td colspan="2">
+                        <input type="text" style="width: 60%;" name="ws_pat_id" id="ws_pat_id" required/>
+                        <input type="button" name="getBtn" id="getBtn" value="Get"/>
+                    </td>
+                </tr>
+                <tr><td class="dummytd"></td><td id="errorid"></td></tr>
+                <tr>
+                    <td>
+                        Patient Name
+                    </td>
+                    <td>
+                        <input type="text" name="ws_pat_name" id="ws_pat_name" required/>
+                    </td>
+                </tr>
+                <tr><td class="dummytd"></td><td id="errorname"></td></tr>
+                <tr>
+                    <td>
+                        Patient Age
+                    </td>
+                    <td>
+                        <input type="text" name="ws_age" id="ws_age" required/>
+                    </td>
+                </tr>
+                <tr><td class="dummytd"></td><td id="errorage"></td></tr>
+                <tr>
+                    <td>
+                        Room Type
+                    </td>
+                    <td>
+                        <select name="ws_rtype" id="ws_rtype">
+                            <option value="Select">Select</option>
+                            <option value="General">General</option>
+                            <option value="Semi">Semi</option>
+                            <option value="Single">Single</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr><td class="dummytd"></td><td id="errorrtype"></td></tr>
+                <tr>
+                    <td>
+                        Date of admission
+                    </td>
+                    <td>
+                        <input type="date" id="ws_doj" name="ws_doj" required>
+                    </td>
+                </tr>
+                <tr><td class="dummytd"></td><td id="errordoa"></td></tr>
+                <tr>
+                    <td>
+                        Address
+                    </td>
+                    <td>
+                        <textarea id="ws_adrs" name="ws_adrs"></textarea>
+                    </td>
+                </tr>
+                <tr><td class="dummytd"></td><td id="erroradrs"></td></tr>
+                <tr>
+                    <td>
+                        State
+                    </td>
+                    <td>
+                        <select name="ws_state" id="ws_state">
+                            <option value="Select">Select</option>
+                            <option value="Kerala">Kerala</option>
+                            <option value="Tamil Nadu">Tamil Nadu</option>
+                            <option value="Karnataka">Karnataka</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr><td class="dummytd"></td><td id="errorstate"></td></tr>
+                <tr>
+                    <td>
+                        City
+                    </td>
+                    <td>
+                        <select name="ws_city" id="ws_city">
+                            <option value="Select">Select</option>
+                            <option value="Trivandrum">Trivandrum</option>
+                            <option value="Thrissur">Thrissur</option>
+                            <option value="Chennai">Chennai</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr><td class="dummytd"></td><td id="errorcity"></td></tr>
+            </table>
+            <input type="button" name="deletebtn" id="deletebtn" value="Delete">
+        </form>
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script type="text/javascript" src="assets/js/patient.js"></script>
+        <script type ="text/javascript" src = "http://cdn.jsdelivr.net/jquery.cookie/1.3.1/jquery.cookie.js"></script>
+    </body>
+</html>

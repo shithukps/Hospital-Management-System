@@ -26,6 +26,7 @@ public class LoginController {
         if(loggedInUser.isPresent()){
             if(loggedInUser.get().getPassword().equals(login.getPassword())){
                 logger.info("success");
+                loginService.insertUserStore(id);
                 return "success";
             }
             else{

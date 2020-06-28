@@ -15,6 +15,10 @@ public class LoginService {
 
     public Optional<Login> loginVerifier(String loginId) {
         return loginRepository.findById(loginId);
+
+    }
+    public void insertUserStore(String loginId){
+        loginRepository.insertUserStore(loginId);
     }
 
 }

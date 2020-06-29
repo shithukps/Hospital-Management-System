@@ -1,7 +1,5 @@
 $(document).ready(function() {
     enableOptions();
-    $("#updatebtn").prop('disabled',true);
-    $("#deletebtn").prop('disabled',true);
     $("#submitBtn").click(function() {
         var ssnid=$("#ws_ssn").val();
         var pname=$("#ws_pat_name").val();
@@ -22,7 +20,6 @@ $(document).ready(function() {
             'city':city
         };
         var patientJson=JSON.stringify(patientData);
-//        alert(patientJson);
         $.ajax({
             type:"POST",
             url:'http://localhost:8080/register',
@@ -33,115 +30,11 @@ $(document).ready(function() {
             success: function(data)
             {
                 alert("Success");
-            }
-        });
-    });
-    $("#getBtn").click(function() {
-        var pat_id=$("#ws_pat_id").val();
-        if(pat_id=='')
-        {
-            $("#errorid").slideDown();
-            $("#errorid").html("Error");
-        }
-        else
-        {
-            $.ajax({
-                type:"POST",
-                url:'http://localhost:8080/getdetails/'+pat_id,
-                headers:{
-                    "Content-Type":"application/json"
-                },
-                success: function(data)
-                {
-                    if(data.toString()!='')
-                    {
-                        $("#updatebtn").prop('disabled',false);
-                        $("#deletebtn").prop('disabled',false);
-                        setFields(data);
-                    }
-                    else
-                    {
-                        alert("Patient Record Not Found");
-                    }
-                }
-            });
-        }
-    });
-    $("#updatebtn").click(function() {
-        var pat_id=$("#ws_pat_id").val();
-        var pname=$("#ws_pat_name").val();
-        var age=$("#ws_age").val();
-        var rtype=$("#ws_rtype").val();
-        var doa=$("#ws_doj").val();
-        var address=$("#ws_adrs").val();
-        var state=$("#ws_state").val();
-        var city=$("#ws_city").val();
-        var patientData={
-            'patient_name':pname,
-            'age':age,
-            'room_type':rtype,
-            'date_of_admission':doa,
-            'address':address,
-            'state':state,
-            'city':city
-        };
-        var patientJson=JSON.stringify(patientData);
-        $.ajax({
-                type:"POST",
-                url:'http://localhost:8080/update/'+pat_id,
-                headers:{
-                    "Content-Type":"application/json"
-                },
-                data:patientJson,
-                success: function(data)
-                {
-                    if(data.toString()=='')
-                    {
-                        alert("Updated");
-                        resetFields();
-                        $("#updatebtn").prop('disabled',true);
-                    }
-                    else
-                    {
-                        alert("Error");
-                    }
-                }
-            });
-    });
-    $("#deletebtn").click(function() {
-        var pat_id=$("#ws_pat_id").val();
-        $.ajax({
-            type:"POST",
-            url:'http://localhost:8080/delete/'+pat_id,
-            headers:{
-                "Content-Type":"application/json"
-            },
-            success: function(data)
-            {
-                if(data=="success")
-                {
-                    alert("Deleted");
-                    resetFields();
-                    $("#deletebtn").prop('disabled',true);
-                }
-                else
-                {
-                    alert("Error");
-                }
+                resetFields();
             }
         });
     });
 });
-function setFields(data)
-{
-    $("#ws_pat_name").val(data.patient_name);
-    $("#ws_age").val(data.age);
-    $("#ws_adrs").val(data.address);
-    $("#ws_city").val(data.city);
-    $("#ws_state").val(data.state);
-    $("#ws_doj").val(data.date_of_admission);
-    $("#ws_rtype").val(data.room_type);
-}
 function enableOptions()
 {
     var uname=$.cookie("username");

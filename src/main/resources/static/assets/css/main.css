@@ -143,3 +143,43 @@ input[type="text"],input[type="date"],select,textarea {
 {
     height:0px;
 }
+#patientstbl {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    text-align: center;
+  }
+  #patientstbl.center{
+      margin-left: auto;
+      margin-right: auto;
+  }
+  
+  #patientstbl td, #patientstbl th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  #patientstbl tr:nth-child(even){background-color: #f2f2f2;}
+  
+  #patientstbl tr:hover {background-color: #ddd;}
+  
+  #patientstbl th {
+    padding:10px 10px 10px 10px;
+    text-align: center;
+    background-color:#3274d6;
+    color: white;
+  }
+.viewbox {
+    width: 800px;
+}
+.useroptions
+{
+    align-items: center;
+    justify-content: center;
+}
+.options
+{
+    align-items: center;
+    justify-content: center;
+}
+.hidden{display:none;}

@@ -1,0 +1,53 @@
+<html>
+<head>
+<title>
+    View all Patients
+</title>
+<style>
+</style>
+<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+    <div  class="databox">
+    <div>
+        <div><h1>ABC Hospital</h1></div>
+        <div>
+            <select class="useroptions" name="admin" id="admin">
+                <option value="Select">Select</option>
+                <option value="Register Patient">Register Patient</option>
+                <option value="Update Patient">Update Patient</option>
+                <option value="Delete Patient">Delete Patient</option>
+                <option value="View Patient List">View Patient List</option>
+                <option value="Billing">Billing</option>
+            </select>
+            <select class="useroptions" name="pharmasist" id="pharmasist">
+                <option value="Select">Select</option>
+                <option value="Issue Medicine">Issue Medicine</option>
+                <option value="Get Patient Details">Get Patient Details</option>
+            </select>
+            <select class="useroptions" name="diagnostics" id="diagnostics">
+                <option value="Select">Select</option>
+                <option value="Diagnostics">Diagnostics</option>
+                <option value="Get Patient Details">Get Patient Details</option>
+            </select>
+        </div>
+    </div>
+<div>
+<h2 style="text-align: center;">View Patients</h2>
+<table id="patientstbl"  class="hidden">
+  <tr>
+    <th>Patient Id</th>
+    <th>Name</th>
+    <th>Age</th>
+    <th>Address</th>
+    <th>DOJ</th>
+    <th>Type Of Room</th>
+  </tr>
+</table>
+</div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="assets/js/viewpatients.js"></script>
+<script type ="text/javascript" src = "http://cdn.jsdelivr.net/jquery.cookie/1.3.1/jquery.cookie.js"></script>
+</body>
+</html>

@@ -7,21 +7,20 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
 
-@Entity
-@Table(name="medicine_tracking")
 
+@Table(name="medicine_tracking")
 public class MedicineTracking {
-    @Id
+
     @Column(name = "patient_id")
-//        @NotNull
+    @NotNull
     private Integer patient_id;
-    @Id
+
     @Column(name = "medicine_id")
-//        @NotNull
+    @NotNull
     private Integer medicine_id;
 
     @Column(name = "quantity_issued")
-//        @NotNull
+    @NotNull
     private Integer quantity_issued;
     public MedicineTracking(){
 

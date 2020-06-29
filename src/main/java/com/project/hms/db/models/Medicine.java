@@ -13,21 +13,21 @@ import java.util.Date;
 public class Medicine {
     @Id
     @Column(name = "medicine_id")
-//        @NotNull
+    @NotNull
     private Integer medicine_id;
 
     @Size(max = 50)
     @Column(name = "medicine_name")
-//        @NotNull
+    @NotNull
     private String medicine_name;
 
     @Column(name = "quantity_avail")
-//        @NotNull
+    @NotNull
     private Integer quantity_avail;
 
 
     @Column(name = "rate")
-//        @NotNull
+    @NotNull
     private float rate;
 
     public Medicine(){

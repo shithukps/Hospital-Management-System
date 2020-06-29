@@ -28,4 +28,9 @@ public class WebController {
     public String updatePatient(){
         return "update_patient";
     }
+
+    @RequestMapping("/deletePatient")
+    public String deletePatient(){
+        return "delete_patient";
+    }
 }

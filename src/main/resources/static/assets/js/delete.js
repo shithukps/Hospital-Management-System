@@ -21,6 +21,7 @@ $(document).ready(function() {
                     if(data.toString()!='')
                     {
                         $("#deletebtn").prop('disabled',false);
+                        $("#ws_pat_id").prop('disabled',true);
                         setFields(data);
                     }
                     else
@@ -41,29 +42,38 @@ $(document).ready(function() {
             },
             success: function(data)
             {
-                if(data=="success")
-                {
                     alert("Deleted");
+                    $("#ws_pat_id").prop('disabled',false);
                     resetFields();
                     $("#deletebtn").prop('disabled',true);
-                }
-                else
-                {
-                    alert("Error");
-                }
             }
         });
     });
 });
 function setFields(data)
 {
-    $("#ws_pat_name").val(data.patient_name);
-    $("#ws_age").val(data.age);
-    $("#ws_adrs").val(data.address);
-    $("#ws_city").val(data.city);
-    $("#ws_state").val(data.state);
-    $("#ws_doj").val(data.date_of_admission);
-    $("#ws_rtype").val(data.room_type);
+    len = data.length;
+    if(len > 0){
+        var arr=data.split(",");
+        var name=arr[0];
+        var age=arr[1];
+        var room=arr[2];
+        var date=arr[3];
+        var address=arr[4];
+        var state=arr[5];
+        var city=arr[6];
+        $("#ws_pat_name").val(name);
+        $("#ws_age").val(age);
+        $("#ws_adrs").val(address);
+        $("#ws_city").val(city);
+        $("#ws_state").val(state);
+        $("#ws_doj").val(date);
+        $("#ws_rtype").val(room);
+    }
+    else{
+        alert("Empty List");
+    }
+
 }
 function enableOptions()
 {
@@ -87,7 +97,7 @@ function enableOptions()
 }
 function resetFields()
 {
-    document.getElementById("ws_ssn").value="";
+    $("#ws_pat_id").val('');
     document.getElementById("ws_pat_name").value="";
     document.getElementById("ws_age").value="";
     document.getElementById("ws_adrs").value="";

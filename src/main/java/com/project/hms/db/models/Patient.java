@@ -1,73 +1,66 @@
 package com.project.hms.db.models;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import com.sun.istack.NotNull;
 
 import javax.persistence.*;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
-@Table(name="patient")
+@Table
 public class Patient {
+    @Id @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @Column(name = "patient_id")
+    @NotNull
+    private int patient_id;
 
-        @Id
-        @Column(name = "patient_id")
-//        @NotNull
-        private Integer patient_id;
+    @NotNull
+    @Size(max = 9)
+    @Column(name = "ssnid")
+    private String ssnid;
 
-        @Size(max = 9)
-        @Column(name = "ssnid")
-//        @NotNull
-        private String ssnid;
 
-        @Size(max = 30)
-        @Column(name = "patient_name")
-//        @NotNull
-        private String patient_name;
+    @Size(max = 30)
+    @NotNull
+    @Column(name = "patient_name")
+    private String patient_name;
 
-        @Size(max = 50)
-        @Column(name = "address")
-//        @NotNull
-        private String address;
+    @Size(max = 50)
+    @NotNull
+    @Column(name = "address")
+    private String address;
 
-//        @Size(max = 3)
-        @Column(name = "age")
-//        @NotNull
-        private int age;
+    @Column(name = "age")
+    @NotNull
+    private int age;
 
-        @Size(max = 8)
-        @Column(name = "date_of_admission")
-//        @NotNull
-        private Date date_of_admission;
+    @NotNull
+    @Column(name = "date_of_admission")
+    private String date_of_admission;
 
-        @Size(max = 10)
-        @Column(name = "room_type")
-//        @NotNull
-        private String room_type;
+    @Size(max = 10)
+    @NotNull
+    @Column(name = "room_type")
+    private String room_type;
 
-        @Size(max=20)
-        @Column(name = "city")
-//        @NotNull
-        private String city;
+    @Size(max=20)
+    @NotNull
+    @Column(name = "city")
+    private String city;
 
-        @Size(max=20)
-        @Column(name = "state")
-//        @NotNull
-        private String state;
+    @Size(max=20)
+    @NotNull
+    @Column(name = "state")
+    private String state;
 
-        @Size(max=15)
-        @Column(name = "status")
-//        @NotNull
-        private String status;
+    @Size(max=15)
+    @NotNull
+    @Column(name = "status")
+    private String status;
 
-        public Patient() {
-
-        }
-
-    public Patient(String ssnid,Integer patient_id,String patient_name,String address,int age,Date date_of_admission,String room_type,String city,String state,String status) {
-        this.ssnid = ssnid;
+    public Patient(int patient_id, @Size(max = 9) String ssnid, @Size(max = 30) String patient_name, @Size(max = 50) String address, int age, String date_of_admission, @Size(max = 10) String room_type, @Size(max = 20) String city, @Size(max = 20) String state, @Size(max = 15) String status) {
         this.patient_id = patient_id;
+        this.ssnid = ssnid;
         this.patient_name = patient_name;
         this.address = address;
         this.age = age;
@@ -78,28 +71,29 @@ public class Patient {
         this.status = status;
     }
 
+    public int getPatient_id() {
+        return patient_id;
+    }
+
+    public void setPatient_id(int patient_id) {
+        this.patient_id = patient_id;
+    }
+
     public String getSsnid() {
         return ssnid;
     }
+
 
     public void setSsnid(String ssnid) {
         this.ssnid = ssnid;
     }
 
-    public Integer getPatient_id() {
-        return patient_id;
-    }
-
-//    public void setPatient_id(Integer patient_id) {
-//        this.patient_id = patient_id;
-//    }
-
     public String getPatient_name() {
         return patient_name;
     }
 
-    public void setPatient_name(String patient_Name) {
-        this.patient_name = patient_Name;
+    public void setPatient_name(String patient_name) {
+        this.patient_name = patient_name;
     }
 
     public String getAddress() {
@@ -118,11 +112,11 @@ public class Patient {
         this.age = age;
     }
 
-    public Date getDate_of_admission() {
+    public String getDate_of_admission() {
         return date_of_admission;
     }
 
-    public void setDate_of_admission(Date date_of_admission) {
+    public void setDate_of_admission(String date_of_admission) {
         this.date_of_admission = date_of_admission;
     }
 
@@ -158,4 +152,3 @@ public class Patient {
         this.status = status;
     }
 }
-

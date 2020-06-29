@@ -18,9 +18,17 @@ public class PatientController {
     }
 
     @RequestMapping(value="/getdetails/{pat_id}",method = RequestMethod.POST)
-    public List<Patient> getPatientDetails(@PathVariable Integer pat_id) {
+    public String getPatientDetails(@PathVariable Integer pat_id) {
         return patientService.getPatientDetails(pat_id);
-//        patientService.registerPatient(patient.getssnid(),patient.getPatient_name(),patient.getAddress(),patient.getAge(),patient.getDate_of_admission(),patient.getRoom_type(),patient.getState(),patient.getCity());
+    }
 
+    @RequestMapping(value="/update/{pat_id}",method = RequestMethod.POST)
+    public void updatePatientDetails(@RequestBody Patient patient,@PathVariable Integer pat_id) {
+        patientService.updatePatientDetails(patient.getPatient_name(),patient.getAge(),patient.getRoom_type(),patient.getDate_of_admission(),patient.getAddress(),patient.getState(),patient.getCity(),pat_id);
+    }
+
+    @RequestMapping(value="/delete/{pat_id}",method = RequestMethod.POST)
+    public void deletePatientDetails(@PathVariable Integer pat_id) {
+        patientService.deletePatientDetails(pat_id);
     }
 }

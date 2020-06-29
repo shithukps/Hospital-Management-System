@@ -158,7 +158,9 @@ input[type="text"],input[type="date"],select,textarea {
     border: 1px solid #ddd;
     padding: 8px;
   }
-  
+
+  #patientstbl tr{color:#3274d6;}
+
   #patientstbl tr:nth-child(even){background-color: #f2f2f2;}
   
   #patientstbl tr:hover {background-color: #ddd;}

@@ -33,4 +33,14 @@ public class WebController {
     public String deletePatient(){
         return "delete_patient";
     }
+
+    @RequestMapping("/viewPatients")
+    public String viewPatient(){
+        return "view_patients";
+    }
+
+    @RequestMapping("/searchPatients")
+    public String searchPatient(){
+        return "search_patient";
+    }
 }

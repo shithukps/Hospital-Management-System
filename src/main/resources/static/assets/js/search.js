@@ -17,14 +17,7 @@ $(document).ready(function() {
                 },
                 success: function(data)
                 {
-                    if(data.toString()!='')
-                    {
-                        setFields(data);
-                    }
-                    else
-                    {
-                        alert("Patient Record Not Found");
-                    }
+                    setFields(data);
                 }
             });
         }
@@ -32,13 +25,30 @@ $(document).ready(function() {
 });
 function setFields(data)
 {
-    $("#ws_pat_name").val(data.patient_name);
-    $("#ws_age").val(data.age);
-    $("#ws_adrs").val(data.address);
-    $("#ws_city").val(data.city);
-    $("#ws_state").val(data.state);
-    $("#ws_doj").val(data.date_of_admission);
-    $("#ws_rtype").val(data.room_type);
+    len = data.length;
+    if(len > 0){
+        var arr=data.split(",");
+        var name=arr[0];
+        var age=arr[1];
+        var room=arr[2];
+        var date=arr[3];
+        var address=arr[4];
+        var state=arr[5];
+        var city=arr[6];
+        $("#ws_pat_name").val(name);
+        $("#ws_age").val(age);
+        $("#ws_adrs").val(address);
+        $("#ws_city").val(city);
+        $("#ws_state").val(state);
+        $("#ws_doj").val(date);
+        $("#ws_rtype").val(room);
+
+    }
+    else{
+        alert("Empty List");
+        resetFields();
+    }
+
 }
 function enableOptions()
 {
@@ -62,7 +72,6 @@ function enableOptions()
 }
 function resetFields()
 {
-    document.getElementById("ws_ssn").value="";
     document.getElementById("ws_pat_name").value="";
     document.getElementById("ws_age").value="";
     document.getElementById("ws_adrs").value="";

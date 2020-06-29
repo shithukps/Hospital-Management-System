@@ -30,4 +30,12 @@ public class PatientService {
         patientRepository.deletePatientDetails(pat_id);
 
     }
+
+    public List<Patient> getAllDetails() {
+        return patientRepository.getAllDetails();
+    }
+
+    public String searchPatientDetails(Integer pat_id) {
+        return patientRepository.searchPatientDetails(pat_id);
+    }
 }

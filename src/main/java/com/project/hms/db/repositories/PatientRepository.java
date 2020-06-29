@@ -36,4 +36,14 @@ public interface PatientRepository extends CrudRepository<Patient,String> {
             value = "delete from patient where patient_id=:pat_id",
             nativeQuery = true)
     void deletePatientDetails(Integer pat_id);
+
+    @Query(
+            value = "select * from patient",
+            nativeQuery = true)
+    List<Patient> getAllDetails();
+
+    @Query(
+            value = "select patient_name,age,room_type,date_of_admission,address,state,city from patient where patient_id=:pat_id",
+            nativeQuery = true)
+    String searchPatientDetails(Integer pat_id);
 }

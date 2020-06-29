@@ -58,6 +58,9 @@ public class Patient {
     @Column(name = "status")
     private String status;
 
+    public Patient() {
+    }
+
     public Patient(int patient_id, @Size(max = 9) String ssnid, @Size(max = 30) String patient_name, @Size(max = 50) String address, int age, String date_of_admission, @Size(max = 10) String room_type, @Size(max = 20) String city, @Size(max = 20) String state, @Size(max = 15) String status) {
         this.patient_id = patient_id;
         this.ssnid = ssnid;

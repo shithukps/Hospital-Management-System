@@ -23,4 +23,9 @@ public class WebController {
     public String registration(){
         return "patient_registration";
     }
+
+    @RequestMapping("/updatePatient")
+    public String updatePatient(){
+        return "update_patient";
+    }
 }

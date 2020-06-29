@@ -7,6 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.List;
 
 public interface PatientRepository extends CrudRepository<Patient,String> {
     @Transactional
@@ -17,5 +18,8 @@ public interface PatientRepository extends CrudRepository<Patient,String> {
 
     void registerPatient(String ssnid, String patient_name, String address, int age, Date date_of_admission, String room_type, String city, String state);
 
-
+    @Query(
+            value = "select patient_name from patient where patient_id=:pat_id",
+            nativeQuery = true)
+    List<Patient> getPatientDetails(Integer pat_id);
 }

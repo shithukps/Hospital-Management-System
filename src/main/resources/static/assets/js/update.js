@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    enableOptions();
+//    enableOptions();
     $("#updatebtn").prop('disabled',true);
     $("#getBtn").click(function() {
         var pat_id=$("#ws_pat_id").val();

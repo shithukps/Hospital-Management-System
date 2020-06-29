@@ -2,6 +2,7 @@ package com.project.hms.db.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
@@ -10,11 +11,11 @@ import java.util.Date;
 @Table(name="patient")
 public class Patient {
 
-    @Id @GeneratedValue(strategy= GenerationType.IDENTITY)
-        @Size(max = 9)
+        @Id
+//        @Size(max = 9)
         @Column(name = "patient_id")
         @NotNull
-        private String patient_id;
+        private Integer patient_id;
 
     @Size(max = 9)
     @Column(name = "ssnid")
@@ -24,14 +25,14 @@ public class Patient {
         @Size(max = 30)
         @Column(name = "patient_name")
         @NotNull
-        private String patient_Name;
+        private String patient_name;
 
         @Size(max = 50)
         @Column(name = "address")
         @NotNull
         private String address;
 
-        @Size(max = 3)
+//        @Size(max = 3)
         @Column(name = "age")
         @NotNull
         private int age;
@@ -65,10 +66,10 @@ public class Patient {
 
         }
 
-    public Patient(@Size(max = 9) @NotNull String ssnid, @Size(max = 9) @NotNull String patient_id, @Size(max = 30) @NotNull String patient_Name, @Size(max = 50) @NotNull String address, @Size(max = 3) @NotNull int age, @Size(max = 8) @NotNull Date date_of_admission, @Size(max = 10) @NotNull String room_type, @Size(max = 20) @NotNull String city, @Size(max = 20) @NotNull String state, @Size(max = 15) @NotNull String status) {
+    public Patient(@Size(max = 9) @NotNull String ssnid, @Size(max = 9) @NotNull Integer patient_id, @Size(max = 30) @NotNull String patient_name, @Size(max = 50) @NotNull String address, @Size(max = 3) @NotNull int age, @Size(max = 8) @NotNull Date date_of_admission, @Size(max = 10) @NotNull String room_type, @Size(max = 20) @NotNull String city, @Size(max = 20) @NotNull String state, @Size(max = 15) @NotNull String status) {
         this.ssnid = ssnid;
         this.patient_id = patient_id;
-        this.patient_Name = patient_Name;
+        this.patient_name = patient_name;
         this.address = address;
         this.age = age;
         this.date_of_admission = date_of_admission;
@@ -78,28 +79,28 @@ public class Patient {
         this.status = status;
     }
 
-    public String getssnid() {
+    public String getSsnid() {
         return ssnid;
     }
 
-    public void setssnid(String ssnid) {
+    public void setSsnid(String ssnid) {
         this.ssnid = ssnid;
     }
 
-    public String getPatient_id() {
+    public Integer getPatient_id() {
         return patient_id;
     }
 
-    public void setPatient_id(String patient_id) {
-        this.patient_id = patient_id;
+//    public void setPatient_id(Integer patient_id) {
+//        this.patient_id = patient_id;
+//    }
+
+    public String getPatient_name() {
+        return patient_name;
     }
 
-    public String getPatient_Name() {
-        return patient_Name;
-    }
-
-    public void setPatient_Name(String patient_Name) {
-        this.patient_Name = patient_Name;
+    public void setPatient_name(String patient_Name) {
+        this.patient_name = patient_Name;
     }
 
     public String getAddress() {

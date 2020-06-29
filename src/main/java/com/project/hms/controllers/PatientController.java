@@ -20,7 +20,7 @@ public class PatientController {
     @RequestMapping(value="/getdetails/{pat_id}",method = RequestMethod.POST)
     public List<Patient> getPatientDetails(@PathVariable Integer pat_id) {
         return patientService.getPatientDetails(pat_id);
-        patientService.registerPatient(patient.getssnid(),patient.getPatient_name(),patient.getAddress(),patient.getAge(),patient.getDate_of_admission(),patient.getRoom_type(),patient.getState(),patient.getCity());
+//        patientService.registerPatient(patient.getssnid(),patient.getPatient_name(),patient.getAddress(),patient.getAge(),patient.getDate_of_admission(),patient.getRoom_type(),patient.getState(),patient.getCity());
 
     }
 }

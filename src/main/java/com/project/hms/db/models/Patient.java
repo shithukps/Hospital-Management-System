@@ -12,61 +12,60 @@ import java.util.Date;
 public class Patient {
 
         @Id
-//        @Size(max = 9)
         @Column(name = "patient_id")
-        @NotNull
+//        @NotNull
         private Integer patient_id;
 
-    @Size(max = 9)
-    @Column(name = "ssnid")
-    @NotNull
-    private String ssnid;
+        @Size(max = 9)
+        @Column(name = "ssnid")
+//        @NotNull
+        private String ssnid;
 
         @Size(max = 30)
         @Column(name = "patient_name")
-        @NotNull
+//        @NotNull
         private String patient_name;
 
         @Size(max = 50)
         @Column(name = "address")
-        @NotNull
+//        @NotNull
         private String address;
 
 //        @Size(max = 3)
         @Column(name = "age")
-        @NotNull
+//        @NotNull
         private int age;
 
         @Size(max = 8)
         @Column(name = "date_of_admission")
-        @NotNull
+//        @NotNull
         private Date date_of_admission;
 
         @Size(max = 10)
         @Column(name = "room_type")
-        @NotNull
+//        @NotNull
         private String room_type;
 
         @Size(max=20)
         @Column(name = "city")
-        @NotNull
+//        @NotNull
         private String city;
 
         @Size(max=20)
         @Column(name = "state")
-        @NotNull
+//        @NotNull
         private String state;
 
         @Size(max=15)
         @Column(name = "status")
-        @NotNull
+//        @NotNull
         private String status;
 
         public Patient() {
 
         }
 
-    public Patient(@Size(max = 9) @NotNull String ssnid, @Size(max = 9) @NotNull Integer patient_id, @Size(max = 30) @NotNull String patient_name, @Size(max = 50) @NotNull String address, @Size(max = 3) @NotNull int age, @Size(max = 8) @NotNull Date date_of_admission, @Size(max = 10) @NotNull String room_type, @Size(max = 20) @NotNull String city, @Size(max = 20) @NotNull String state, @Size(max = 15) @NotNull String status) {
+    public Patient(String ssnid,Integer patient_id,String patient_name,String address,int age,Date date_of_admission,String room_type,String city,String state,String status) {
         this.ssnid = ssnid;
         this.patient_id = patient_id;
         this.patient_name = patient_name;

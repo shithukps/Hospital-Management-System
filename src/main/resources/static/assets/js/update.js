@@ -218,6 +218,7 @@ $(document).ready(function() {
             getval(d);
         }
     });
+
 });
 function getval(optionData)
 {
@@ -315,82 +316,82 @@ function resetFields()
     $("#ws_rtype").prop('disabled',true);
 }
 $("#ws_pat_id").keypress(function (e) {
-    var keyCode = e.keyCode || e.which;
-    var regex = /^([0-9])$/;
-    var isValid = regex.test(String.fromCharCode(keyCode));
-    if (!isValid) {
-        $('#errorid').slideDown();
-        $("#errorid").html("Only Numbers are allowed.");
-    }
-    else
-    {
-        $('#errorid').slideUp();
-    }
-    return isValid;
-});
-$("#ws_pat_id").keyup(function(){
-        var len=$("#ws_pat_id").val().length;
-        if(len>9)
-        {
+        var keyCode = e.keyCode || e.which;
+        var regex = /^([0-9])$/;
+        var isValid = regex.test(String.fromCharCode(keyCode));
+        if (!isValid) {
             $('#errorid').slideDown();
-            $("#errorid").html("Maximum 9 digits are allowed");
+            $("#errorid").html("Only Numbers are allowed.");
         }
         else
         {
-            $('#errorage').slideUp();
+            $('#errorid').slideUp();
         }
-});
-$("#ws_pat_name").keypress(function (e) {
-    var keyCode = e.keyCode || e.which;
-    var regex = /^[A-Za-z]+$/;
-    var isValid = regex.test(String.fromCharCode(keyCode));
-    if (!isValid) {
-        $('#errorname').slideDown();
-        $("#errorname").html("Only alphabets are allowed.");
-    }
-    else
-    {
-        $('#errorname').slideUp();
-    }
-    return isValid;
-});
-$("#ws_age").keypress(function (e) {
-    var keyCode = e.keyCode || e.which;
-     var regex = /^([0-9])$/;
-    var isValid = regex.test(String.fromCharCode(keyCode));
-    if (!isValid) {
-        $('#errorage').slideDown();
-        $("#errorage").html("Only numbers are allowed.");
-    }
-    else
-    {
-        $('#errorage').slideUp();
-    }
-    return isValid;
-});
-$("#ws_age").keyup(function(){
-        var len=$("#ws_age").val().length;
-        if(len>3)
+        return isValid;
+    });
+    $("#ws_pat_id").keyup(function(){
+            var len=$("#ws_pat_id").val().length;
+            if(len>9)
+            {
+                $('#errorid').slideDown();
+                $("#errorid").html("Maximum 9 digits are allowed");
+            }
+            else
+            {
+                $('#errorage').slideUp();
+            }
+    });
+    $("#ws_pat_name").keypress(function (e) {
+        var keyCode = e.keyCode || e.which;
+        var regex = /^[A-Za-z]+$/;
+        var isValid = regex.test(String.fromCharCode(keyCode));
+        if (!isValid) {
+            $('#errorname').slideDown();
+            $("#errorname").html("Only alphabets are allowed.");
+        }
+        else
         {
+            $('#errorname').slideUp();
+        }
+        return isValid;
+    });
+    $("#ws_age").keypress(function (e) {
+        var keyCode = e.keyCode || e.which;
+         var regex = /^([0-9])$/;
+        var isValid = regex.test(String.fromCharCode(keyCode));
+        if (!isValid) {
             $('#errorage').slideDown();
-            $("#errorage").html("Maximum 3 digits are allowed");
+            $("#errorage").html("Only numbers are allowed.");
         }
         else
         {
             $('#errorage').slideUp();
         }
-});
-$("#ws_adrs").keypress(function (e) {
-    var keyCode = e.keyCode || e.which;
-    var regex = /^[A-Za-z0-9]+$/;
-    var isValid = regex.test(String.fromCharCode(keyCode));
-    if (!isValid) {
-        $('#erroradrs').slideDown();
-        $("#erroradrs").html("Only Alphabets and Numbers allowed.");
-    }
-    else
-    {
-        $('#erroradrs').slideUp();
-    }
-    return isValid;
-});
+        return isValid;
+    });
+    $("#ws_age").keyup(function(){
+            var len=$("#ws_age").val().length;
+            if(len>3)
+            {
+                $('#errorage').slideDown();
+                $("#errorage").html("Maximum 3 digits are allowed");
+            }
+            else
+            {
+                $('#errorage').slideUp();
+            }
+    });
+    $("#ws_adrs").keypress(function (e) {
+        var keyCode = e.keyCode || e.which;
+        var regex = /^[A-Za-z0-9]+$/;
+        var isValid = regex.test(String.fromCharCode(keyCode));
+        if (!isValid) {
+            $('#erroradrs').slideDown();
+            $("#erroradrs").html("Only Alphabets and Numbers allowed.");
+        }
+        else
+        {
+            $('#erroradrs').slideUp();
+        }
+        return isValid;
+    });

@@ -132,14 +132,19 @@ function setPatientData(data)
         var join_date=d1.getDate()+'-'+(d1.getMonth()+1)+'-'+d1.getFullYear();
         var leaveDate=today.getDate()+'-'+(today.getMonth()+1)+'-'+today.getFullYear();
         var noofdays =Math.floor((Date.UTC(today.getFullYear(), today.getMonth(), today.getDate()) - Date.UTC(d1.getFullYear(), d1.getMonth(), d1.getDate()) ) /(1000 * 60 * 60 * 24))
-
-        var txt = "";
-        txt += "<td><input type=\"text\" id=\"patient_id\" name=\"patient_id\" value="+pat_id+"><input type=\"button\" id=\"searchBtn\" name=\"searchBtn\" value=\"Search\"></td><td>"+name+"</td><td>"+age+"</td><td>"+address+"</td><td>"+join_date+"</td><td>"+leaveDate+"</td><td>"+room+"</td></tr>";
-        if(txt != "")
-        {
-            $('#patientstbl').find("tr:gt(0)").remove();   
-            $('#patientstbl').append(txt); 
-        }
+        $("#tdName").text(name);
+        $("#tdAge").text(age);
+        $("#tdAddress").text(address);
+        $("#tdDoj").text(join_date);
+        $("#tdDol").text(leaveDate);
+        $("#tdRoom").text(room);
+//        var txt = "";
+//        txt += "<td><input type=\"text\" id=\"patient_id\" name=\"patient_id\" value="+pat_id+"><input type=\"button\" id=\"searchBtn\" name=\"searchBtn\" value=\"Search\"></td><td>"+name+"</td><td>"+age+"</td><td>"+address+"</td><td>"+join_date+"</td><td>"+leaveDate+"</td><td>"+room+"</td></tr>";
+//        if(txt != "")
+//        {
+//            $('#patientstbl').find("tr:gt(0)").remove();
+//            $('#patientstbl').append(txt);
+//        }
         $("#noofdays").val(noofdays);
         if(room=="General")
         {
@@ -196,4 +201,5 @@ function resetFields()
     $("#billfordiagnostics").val('');
     $("#grandtotal").val('');
 }
+
 });

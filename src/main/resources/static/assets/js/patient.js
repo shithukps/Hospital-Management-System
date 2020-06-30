@@ -1,5 +1,6 @@
 $(document).ready(function() {
-//    enableOptions();
+    enableOptions();
+
     $("#submitBtn").click(function() {
         var ssnid=$("#ws_ssn").val();
         var pname=$("#ws_pat_name").val();

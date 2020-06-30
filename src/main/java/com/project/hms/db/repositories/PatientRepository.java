@@ -38,7 +38,7 @@ public interface PatientRepository extends CrudRepository<Patient,String> {
     void deletePatientDetails(Integer pat_id);
 
     @Query(
-            value = "select * from patient",
+            value = "select * from patient where status='ACTIVE'",
             nativeQuery = true)
     List<Patient> getAllDetails();
 

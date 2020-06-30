@@ -118,7 +118,6 @@ $(document).ready(function() {
                                         }
      });
 
->>>>>>> validation - update
     $("#getBtn").click(function() {
         var pat_id=$("#ws_pat_id").val();
         if(pat_id=='')
@@ -371,7 +370,7 @@ $("#ws_age").keypress(function (e) {
                 }
       });
 
-$("##ws_adrs").keypress(function (e) {
+$("#ws_adrs").keypress(function (e) {
             var keyCode = e.keyCode || e.which;
 
             //Regex for Valid Characters i.e. Alphabets and Numbers.

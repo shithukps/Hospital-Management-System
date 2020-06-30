@@ -36,7 +36,7 @@ $(document).ready(function() {
         });
     });
 });
-/*function enableOptions()
+function enableOptions()
 {
     var uname=$.cookie("username");
     var type=uname.substring(0, 3);
@@ -55,7 +55,7 @@ $(document).ready(function() {
     {
         document.getElementById("diagnostics").disabled=false;
     }
-}*/
+}
 function resetFields()
 {
     document.getElementById("ws_ssn").value="";

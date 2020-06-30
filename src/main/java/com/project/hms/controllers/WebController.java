@@ -13,7 +13,7 @@ public class WebController {
         return "Hello World";
     }
 
-    @RequestMapping("/hospitalLogin" )
+    @RequestMapping("/hospitalLogin")
     public String login()
     {
         return "login";

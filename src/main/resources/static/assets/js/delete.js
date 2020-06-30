@@ -1,6 +1,6 @@
 $(document).ready(function() {
     enableOptions();
-    $("#deletebtn").prop('disabled',true);
+    $("#deleteBtn").prop('disabled',true);
     $("#getBtn").click(function() {
         var pat_id=$("#ws_pat_id").val();
         if(pat_id=='')
@@ -20,7 +20,7 @@ $(document).ready(function() {
                 {
                     if(data.toString()!='')
                     {
-                        $("#deletebtn").prop('disabled',false);
+                        $("#deleteBtn").prop('disabled',false);
                         $("#ws_pat_id").prop('disabled',true);
                         setFields(data);
                     }
@@ -32,7 +32,7 @@ $(document).ready(function() {
             });
         }
     });
-    $("#deletebtn").click(function() {
+    $("#deleteBtn").click(function() {
         var pat_id=$("#ws_pat_id").val();
         $.ajax({
             type:"POST",
@@ -42,12 +42,12 @@ $(document).ready(function() {
             },
             success: function(data)
             {
-                if(data=="success")
+                if(data!="")
                 {
                     alert("Deleted");
                     $("#ws_pat_id").prop('disabled',false);
                     resetFields();
-                    $("#deletebtn").prop('disabled',true);
+                    $("#deleteBtn").prop('disabled',true);
                 }
                 else
                 {
@@ -73,7 +73,7 @@ function getval(optionData)
         break;
         case "Delete Patient":window.location.replace("http://localhost:8080/deletePatient");
         break;
-        case "Search Patient":window.location.replace("http://localhost:8080/search_patient");
+        case "Search Patient":window.location.replace("http://localhost:8080/searchPatients");
         break;
         case "View Patient":window.location.replace("http://localhost:8080/viewPatients");
         break;
@@ -105,13 +105,13 @@ function setFields(data)
         $("#ws_state").val(state);
         $("#ws_doj").val(date);
         $("#ws_rtype").val(room);
-        $("#ws_pat_name").prop('disabled',false);
-        $("#ws_age").prop('disabled',false);
-        $("#ws_adrs").prop('disabled',false);
-        $("#ws_city").prop('disabled',false);
-        $("#ws_state").prop('disabled',false);
-        $("#ws_doj").prop('disabled',false);
-        $("#ws_rtype").prop('disabled',false);
+        $("#ws_pat_name").prop('disabled',true);
+        $("#ws_age").prop('disabled',true);
+        $("#ws_adrs").prop('disabled',true);
+        $("#ws_city").prop('disabled',true);
+        $("#ws_state").prop('disabled',true);
+        $("#ws_doj").prop('disabled',true);
+        $("#ws_rtype").prop('disabled',true);
     }
     else
     {
@@ -129,6 +129,7 @@ function enableOptions()
         $("#useroptions").append(new Option("Delete Patient", "Delete Patient"));
         $("#useroptions").append(new Option("Search Patient", "Search Patient"));
         $("#useroptions").append(new Option("View Patients", "View Patients"));
+        $("#useroptions").append(new Option("Billing", "Billing"));
     }
     else if(type=="PHA")
     {

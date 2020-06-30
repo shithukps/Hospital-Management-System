@@ -1,6 +1,6 @@
 $(document).ready(function() {
     enableOptions();
-    $("#updatebtn").prop('disabled',true);
+    $("updateBtn").prop('disabled',true);
     $("#ws_pat_id").blur(function(){
         var patient_id = $('#ws_pat_id').val();
         if(patient_id=='')
@@ -116,7 +116,7 @@ $(document).ready(function() {
                 {
                     if(data.toString()!='')
                     {
-                        $("#updatebtn").prop('disabled',false);
+                        $("#updateBtn").prop('disabled',false);
                         $("#ws_pat_id").prop('disabled',true);
                         setFields(data);
                     }
@@ -128,7 +128,7 @@ $(document).ready(function() {
             });
         }
     });
-    $("#updatebtn").click(function() {
+    $("#updateBtn").click(function() {
         var pat_id=$("#ws_pat_id").val();
         var pname=$("#ws_pat_name").val();
         var age=$("#ws_age").val();
@@ -202,7 +202,7 @@ $(document).ready(function() {
                             alert("Updated");
                             resetFields();
                             $("#ws_pat_id").prop('disabled',false);
-                            $("#updatebtn").prop('disabled',true);
+                            $("#updateBtn").prop('disabled',true);
                         }
                         else
                         {
@@ -229,7 +229,7 @@ function getval(optionData)
         break;
         case "Delete Patient":window.location.replace("http://localhost:8080/deletePatient");
         break;
-        case "Search Patient":window.location.replace("http://localhost:8080/search_patient");
+        case "Search Patient":window.location.replace("http://localhost:8080/searchPatients");
         break;
         case "View Patient":window.location.replace("http://localhost:8080/viewPatients");
         break;
@@ -285,6 +285,7 @@ function enableOptions()
         $("#useroptions").append(new Option("Delete Patient", "Delete Patient"));
         $("#useroptions").append(new Option("Search Patient", "Search Patient"));
         $("#useroptions").append(new Option("View Patients", "View Patients"));
+        $("#useroptions").append(new Option("Billing", "Billing"));
     }
     else if(type=="PHA")
     {

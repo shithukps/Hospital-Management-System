@@ -47,7 +47,7 @@ function getval(optionData)
         break;
         case "Delete Patient":window.location.replace("http://localhost:8080/deletePatient");
         break;
-        case "Search Patient":window.location.replace("http://localhost:8080/search_patient");
+        case "Search Patient":window.location.replace("http://localhost:8080/searchPatients");
         break;
         case "View Patient":window.location.replace("http://localhost:8080/viewPatients");
         break;
@@ -97,6 +97,7 @@ function enableOptions()
         $("#useroptions").append(new Option("Delete Patient", "Delete Patient"));
         $("#useroptions").append(new Option("Search Patient", "Search Patient"));
         $("#useroptions").append(new Option("View Patients", "View Patients"));
+        $("#useroptions").append(new Option("Billing", "Billing"));
     }
     else if(type=="PHA")
     {

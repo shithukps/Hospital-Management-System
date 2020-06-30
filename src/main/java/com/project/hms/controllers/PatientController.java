@@ -46,4 +46,28 @@ public class PatientController {
         System.out.println("search details from Patient table");
         return patientService.searchPatientDetails(pat_id);
     }
+
+    @RequestMapping(value="/getBillingDetails/{pat_id}",method = RequestMethod.POST)
+    public String getBillingDetails(@PathVariable Integer pat_id) {
+        System.out.println("Getting billing details from Patient table");
+        return patientService.getBillingDetails(pat_id);
+    }
+
+    @RequestMapping(value="/getMedicineDetails/{pat_id}",method = RequestMethod.POST)
+    public List<String> getMedicineDetails(@PathVariable Integer pat_id) {
+        System.out.println("Getting medicine details from Patient table");
+        return patientService.getMedicineDetails(pat_id);
+    }
+
+    @RequestMapping(value="/getDiagnosticsDetails/{pat_id}",method = RequestMethod.POST)
+    public List<String> getDiagnosticsDetails(@PathVariable Integer pat_id) {
+        System.out.println("Getting diagnostic details from Patient table");
+        return patientService.getDiagnosticsDetails(pat_id);
+    }
+
+    @RequestMapping(value="/discharge/{pat_id}",method = RequestMethod.POST)
+    public void dischargePatient(@PathVariable Integer pat_id) {
+        System.out.println("Discharging of patient");
+        patientService.dischargePatient(pat_id);
+    }
 }

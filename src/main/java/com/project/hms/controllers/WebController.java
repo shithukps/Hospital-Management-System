@@ -43,4 +43,9 @@ public class WebController {
     public String searchPatient(){
         return "search_patient";
     }
+
+    @RequestMapping("/billing")
+    public String billing(){
+        return "billing";
+    }
 }

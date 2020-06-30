@@ -46,4 +46,26 @@ public interface PatientRepository extends CrudRepository<Patient,String> {
             value = "select patient_name,age,room_type,date_of_admission,address,state,city from patient where patient_id=:pat_id",
             nativeQuery = true)
     String searchPatientDetails(Integer pat_id);
+
+    @Query(
+            value = "select patient_name,age,address,date_of_admission,room_type from patient where patient_id=:pat_id",
+            nativeQuery = true)
+    String getBillingDetails(Integer pat_id);
+
+    @Query(
+            value = "select m.medicine_name,mt.quantity_issued,m.rate from medicine m join medicine_tracking mt on m.medicine_id=mt.medicine_id where mt.patient_id=:pat_id",
+            nativeQuery = true)
+    List<String> getMedicineDetails(Integer pat_id);
+
+    @Query(
+            value = "select d.test_name,d.test_charge from diagnostic d join diagnostic_tracking dt on d.test_id=dt.test_id where dt.patient_id=:pat_id",
+            nativeQuery = true)
+    List<String> getDiagnosticsDetails(Integer pat_id);
+
+    @Transactional
+    @Modifying
+    @Query(
+            value = "update patient set status='DISCHARGED' where patient_id=:pat_id",
+            nativeQuery = true)
+    void dischargePatient(Integer pat_id);
 }

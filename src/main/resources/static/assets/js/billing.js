@@ -1,7 +1,8 @@
 $(document).ready(function() {
     enableOptions();
+    var pat_id;
     $("#searchBtn").click(function() {
-        var pat_id=$("#patient_id").val();
+        pat_id=$("#patient_id").val();
         if(pat_id=='')
         {
             $("#errorid").slideDown();
@@ -11,27 +12,27 @@ $(document).ready(function() {
         {
             $.ajax({
                 type:"POST",
-                url:'http://localhost:8080/getdetails/'+pat_id,
+                url:'http://localhost:8080/getBillingDetails/'+pat_id,
                 headers:{
                     "Content-Type":"application/json"
                 },
-                success: function(patientddata)
+                success: function(data)
                 {
-                    setPatientData(patientddata);
+                    setPatientData(data);
                     $.ajax({
                         type:"POST",
-                        url:'http://localhost:8080/getmedicinedetails/'+pat_id,
+                        url:'http://localhost:8080/getMedicineDetails/'+pat_id,
                         headers:{
                             "Content-Type":"application/json"
                         },
-                        success: function(medicinedata)
+                        success: function(data)
                         {
-                            setMedicineData(medicinedata);
+                            setMedicineData(data);
                         }
                     });
                     $.ajax({
                         type:"POST",
-                        url:'http://localhost:8080/getdiagnosticsdetails/'+pat_id,
+                        url:'http://localhost:8080/getDiagnosticsDetails/'+pat_id,
                         headers:{
                             "Content-Type":"application/json"
                         },
@@ -47,7 +48,7 @@ $(document).ready(function() {
         }
     });
     $("#confirmbtn").click(function() {
-        var pat_id=$("#patient_id").val();
+        pat_id=$("#patient_id").val();
 
         $.ajax({
             type:"POST",
@@ -55,27 +56,30 @@ $(document).ready(function() {
             headers:{
                 "Content-Type":"application/json"
             },
-            success: function(patientddata)
+            success: function(data)
             {
                 alert("Discharged");
                 resetFields();
             }
         });
     });
-});
-function setDiagnosticsData(diagnosticsdata)
+
+function setDiagnosticsData(data)
 {
-    if(medicinedata)
+    if(data)
     {
-        var len = diagnosticsdata.length;
+        var len = data.length;
         var txt = "";
         var diagnosticsTotal=0;
         if(len > 0)
         {
             for(var i=0;i!=len;i++)
             {
-                    txt += "<tr><td>"+diagnosticsdata[i].test+"</td><td>"+diagnosticsdata[i].amount+"</td></tr>";
-                    diagnosticsTotal=diagnosticsTotal+diagnosticsdata[i].amount;
+                    var arr=data[i].split(",");
+                    var test_name=arr[0];
+                    var amount=arr[1];
+                    txt += "<tr><td>"+test_name+"</td><td>"+amount+"</td></tr>";
+                    diagnosticsTotal=diagnosticsTotal+amount;
             }
             if(txt != "")
             {
@@ -85,19 +89,23 @@ function setDiagnosticsData(diagnosticsdata)
         }
     }
 }
-function setMedicineData(medicinedata)
+function setMedicineData(data)
 {
-    if(medicinedata)
+    if(data)
     {
-        var len = medicinedata.length;
+        var len = data.length;
         var txt = "";
         var pharmacyTotal=0;
         if(len > 0)
         {
             for(var i=0;i!=len;i++)
             {
-                    var amount=medicinedata[i].quantity*medicinedata[i].rate
-                    txt += "<tr><td>"+medicinedata[i].medicine+"</td><td>"+medicinedata[i].quantity+"</td><td>"+medicinedata[i].rate+"</td><td>"+amount+"</td></tr>";
+                    var arr=data[i].split(",");
+                    var medicine_name=arr[0];
+                    var qty_issued=arr[1];
+                    var rate=arr[2];
+                    var amount=qty_issued*rate;
+                    txt += "<tr><td>"+medicine_name+"</td><td>"+qty_issued+"</td><td>"+rate+"</td><td>"+amount+"</td></tr>";
                     pharmacyTotal=pharmacyTotal+amount;
             }
             if(txt != "")
@@ -108,7 +116,7 @@ function setMedicineData(medicinedata)
         }
     }
 }
-function setPatientData(patientddata)
+function setPatientData(data)
 {
     len = data.length;
     if(len > 0)
@@ -116,18 +124,17 @@ function setPatientData(patientddata)
         var arr=data.split(",");
         var name=arr[0];
         var age=arr[1];
-        var room=arr[2];
+        var address=arr[2];
         var date=arr[3];
-        var address=arr[4];
-        var state=arr[5];
-        var city=arr[6];
-        var joinDate=new Date(date);
+        var room=arr[4];
+        var d1=new Date(date);
         var today=new Date();
+        var join_date=d1.getDate()+'-'+(d1.getMonth()+1)+'-'+d1.getFullYear();
         var leaveDate=today.getDate()+'-'+(today.getMonth()+1)+'-'+today.getFullYear();
-        var Difference_In_Time = today.getTime() - joinDate.getTime(); 
-        var noofdays = Difference_In_Time / (1000 * 3600 * 24);
+        var noofdays =Math.floor((Date.UTC(today.getFullYear(), today.getMonth(), today.getDate()) - Date.UTC(d1.getFullYear(), d1.getMonth(), d1.getDate()) ) /(1000 * 60 * 60 * 24))
+
         var txt = "";
-        txt += "<td>"+name+"</td><td>"+age+"</td><td>"+address+"</td><td>"+date+"</td><td>"+leaveDate+"</td><td>"+room+"</td></tr>";
+        txt += "<td><input type=\"text\" id=\"patient_id\" name=\"patient_id\" value="+pat_id+"><input type=\"button\" id=\"searchBtn\" name=\"searchBtn\" value=\"Search\"></td><td>"+name+"</td><td>"+age+"</td><td>"+address+"</td><td>"+join_date+"</td><td>"+leaveDate+"</td><td>"+room+"</td></tr>";
         if(txt != "")
         {
             $('#patientstbl').find("tr:gt(0)").remove();   
@@ -189,3 +196,4 @@ function resetFields()
     $("#billfordiagnostics").val('');
     $("#grandtotal").val('');
 }
+});

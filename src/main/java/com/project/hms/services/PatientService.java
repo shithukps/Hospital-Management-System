@@ -38,4 +38,20 @@ public class PatientService {
     public String searchPatientDetails(Integer pat_id) {
         return patientRepository.searchPatientDetails(pat_id);
     }
+
+    public String getBillingDetails(Integer pat_id) {
+        return patientRepository.getBillingDetails(pat_id);
+    }
+
+    public List<String> getMedicineDetails(Integer pat_id) {
+        return patientRepository.getMedicineDetails(pat_id);
+    }
+
+    public List<String> getDiagnosticsDetails(Integer pat_id) {
+        return patientRepository.getDiagnosticsDetails(pat_id);
+    }
+
+    public void dischargePatient(Integer pat_id) {
+        patientRepository.dischargePatient(pat_id);
+    }
 }

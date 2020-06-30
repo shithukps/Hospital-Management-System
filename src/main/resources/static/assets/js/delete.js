@@ -1,13 +1,12 @@
 $(document).ready(function() {
     enableOptions();
     $("#deletebtn").prop('disabled',true);
-
     $("#getBtn").click(function() {
         var pat_id=$("#ws_pat_id").val();
         if(pat_id=='')
         {
             $("#errorid").slideDown();
-            $("#errorid").html("Provide Patient ID");
+            $("#errorid").html("Enter Patient ID");
         }
         else
         {
@@ -43,18 +42,54 @@ $(document).ready(function() {
             },
             success: function(data)
             {
+                if(data=="success")
+                {
                     alert("Deleted");
                     $("#ws_pat_id").prop('disabled',false);
                     resetFields();
                     $("#deletebtn").prop('disabled',true);
+                }
+                else
+                {
+                    alert("Error");
+                }
             }
         });
     });
+    $("#useroptions").change(function(){
+        var d= $(this).val();
+        if(d!=''){
+            getval(d);
+        }
+    });
 });
+function getval(optionData)
+{
+    switch(optionData)
+    {
+        case "Register Patient":window.location.replace("http://localhost:8080/registration");
+        break;
+        case "Update Patient":window.location.replace("http://localhost:8080/updatePatient");
+        break;
+        case "Delete Patient":window.location.replace("http://localhost:8080/deletePatient");
+        break;
+        case "Search Patient":window.location.replace("http://localhost:8080/search_patient");
+        break;
+        case "View Patient":window.location.replace("http://localhost:8080/viewPatients");
+        break;
+        case "Billing":window.location.replace("http://localhost:8080/billing");
+        break;
+        case "Issue Medicine":window.location.replace("http://localhost:8080/issueMedicine");
+        break;
+        case "Diagnostics":window.location.replace("http://localhost:8080/addDiagnostics");
+        break;
+    }
+}
 function setFields(data)
 {
     len = data.length;
-    if(len > 0){
+    if(len > 0)
+    {
         var arr=data.split(",");
         var name=arr[0];
         var age=arr[1];
@@ -70,30 +105,38 @@ function setFields(data)
         $("#ws_state").val(state);
         $("#ws_doj").val(date);
         $("#ws_rtype").val(room);
+        $("#ws_pat_name").prop('disabled',false);
+        $("#ws_age").prop('disabled',false);
+        $("#ws_adrs").prop('disabled',false);
+        $("#ws_city").prop('disabled',false);
+        $("#ws_state").prop('disabled',false);
+        $("#ws_doj").prop('disabled',false);
+        $("#ws_rtype").prop('disabled',false);
     }
-    else{
+    else
+    {
         alert("Empty List");
     }
-
 }
 function enableOptions()
 {
     var uname=$.cookie("username");
     var type=uname.substring(0, 3);
-    document.getElementById("admin").disabled=true;
-    document.getElementById("pharmasist").disabled=true;
-    document.getElementById("diagnostics").disabled=true;
     if(type=="ADE")
     {
-        document.getElementById("admin").disabled=false;
+        $("#useroptions").append(new Option("Register Patient", "Register Patient"));
+        $("#useroptions").append(new Option("Update Patient", "Update Patient"));
+        $("#useroptions").append(new Option("Delete Patient", "Delete Patient"));
+        $("#useroptions").append(new Option("Search Patient", "Search Patient"));
+        $("#useroptions").append(new Option("View Patients", "View Patients"));
     }
     else if(type=="PHA")
     {
-        document.getElementById("pharmasist").disabled=false;
+        $("#useroptions").append(new Option("Issue Medicine", "Issue Medicine"));
     }
     else
     {
-        document.getElementById("diagnostics").disabled=false;
+        $("#useroptions").append(new Option("Diagnostics", "Diagnostics"));
     }
 }
 function resetFields()
@@ -102,8 +145,15 @@ function resetFields()
     document.getElementById("ws_pat_name").value="";
     document.getElementById("ws_age").value="";
     document.getElementById("ws_adrs").value="";
-    document.getElementById("ws_city").value="Select";
-    document.getElementById("ws_state").value="Select";
+    document.getElementById("ws_city").value="";
+    document.getElementById("ws_state").value="";
     document.getElementById("ws_doj").value="";
-    document.getElementById("ws_rtype").value="Select";
+    document.getElementById("ws_rtype").value="";
+    $("#ws_pat_name").prop('disabled',true);
+    $("#ws_age").prop('disabled',true);
+    $("#ws_adrs").prop('disabled',true);
+    $("#ws_city").prop('disabled',true);
+    $("#ws_state").prop('disabled',true);
+    $("#ws_doj").prop('disabled',true);
+    $("#ws_rtype").prop('disabled',true);
 }

@@ -1,116 +1,102 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>
-        Search Patient
-    </title>
-    <link rel="stylesheet" href="assets/css/main.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Search Patient</title>
 </head>
 <body>
-<div class="databox">
-    <div><h1>ABC Hospital</h1></div>
-    <div>
-        <select class="useroptions" name="admin" id="admin">
-            <option value="Select">Select</option>
-            <option value="Register Patient">Register Patient</option>
-            <option value="Update Patient">Update Patient</option>
-            <option value="Delete Patient">Delete Patient</option>
-            <option value="View Patient List">View Patient List</option>
-            <option value="Billing">Billing</option>
-        </select>
-        <select class="useroptions" name="pharmasist" id="pharmasist">
-            <option value="Select">Select</option>
-            <option value="Issue Medicine">Issue Medicine</option>
-            <option value="Get Patient Details">Get Patient Details</option>
-        </select>
-        <select class="useroptions" name="diagnostics" id="diagnostics">
-            <option value="Select">Select</option>
-            <option value="Diagnostics">Diagnostics</option>
-            <option value="Get Patient Details">Get Patient Details</option>
+<div class="row">
+    <div class="col">
+        <h1>ABC Hospital</h1>
+    </div>
+</div>
+<div class="row" style="align-items: center;justify-content: center;">
+    <div class="col-sm-2">
+        <select class="form-control" name="useroptions" id="useroptions">
+            <option value="Select Action">Select Action</option>
         </select>
     </div>
-    <h2>
-        Search Patient
-    </h2>
-    <form action="" method="POST">
-        <table>
-            <tr>
-                <td>
-                    <label>Patient ID *</label>
-                </td>
-                <td colspan="2">
-                    <input type="text" style="width: 60%;" name="ws_pat_id" id="ws_pat_id" required/>
-                    <input type="button" name="searchBtn" id="searchBtn" value="Search"/>
-                </td>
-            </tr>
-            <tr><td class="dummytd"></td><td id="errorid"></td></tr>
-            <tr>
-                <td>
-                    Patient Name
-                </td>
-                <td>
-                    <input type="text" name="ws_pat_name" id="ws_pat_name" readonly/>
-                </td>
-            </tr>
-            <tr><td class="dummytd"></td><td id="errorname"></td></tr>
-            <tr>
-                <td>
-                    Patient Age
-                </td>
-                <td>
-                    <input type="text" name="ws_age" id="ws_age" readonly/>
-                </td>
-            </tr>
-            <tr><td class="dummytd"></td><td id="errorage"></td></tr>
-            <tr>
-                <td>
-                    Room Type
-                </td>
-                <td>
-                    <input type="text" name="ws_rtype" id="ws_rtype" readonly/>
-                </td>
-            </tr>
-            <tr><td class="dummytd"></td><td id="errorrtype"></td></tr>
-            <tr>
-                <td>
-                    Date of admission
-                </td>
-                <td>
-                    <input type="text" name="ws_doj" id="ws_doj" readonly/>
-                </td>
-            </tr>
-            <tr><td class="dummytd"></td><td id="errordoa"></td></tr>
-            <tr>
-                <td>
-                    Address
-                </td>
-                <td>
-                    <textarea id="ws_adrs" name="ws_adrs"></textarea>
-                </td>
-            </tr>
-            <tr><td class="dummytd"></td><td id="erroradrs"></td></tr>
-            <tr>
-                <td>
-                    State
-                </td>
-                <td>
-                    <input type="text" name="ws_state" id="ws_state" readonly/>
-                </td>
-            </tr>
-            <tr><td class="dummytd"></td><td id="errorstate"></td></tr>
-            <tr>
-                <td>
-                    City
-                </td>
-                <td>
-                    <input type="text" name="ws_city" id="ws_city" readonly/>
-                </td>
-            </tr>
-            <tr><td class="dummytd"></td><td id="errorcity"></td></tr>
-        </table>
+</div>
+<div class="row">
+    <div class="col">
+        <h2>Search Patient</h2>
+    </div>
+</div>
+<div class="signup-form">
+    <form action="" method="post" class="form-horizontal">
+        <div class="form-group row">
+            <label class="col-form-label col-4">Patient ID <span class="required">*</span></label>
+            <div class="col-8">
+                <input type="text" class="form-control" name="ws_pat_id" id="ws_pat_id" required="required">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-form-label col-4"></label>
+            <div class="col-8">
+                <button type="button" name="getBtn" id="getBtn" class="btn btn-primary btn-lg">Search</button>
+                <div class="hidden" id="errorid"></div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-form-label col-4">Patient Name</label>
+            <div class="col-8">
+                <input type="text" class="form-control" name="ws_pat_name" id="ws_pat_name" required="required" disabled>
+                <div class="hidden" id="errorname"></div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-form-label col-4">Patient Age</label>
+            <div class="col-8">
+                <input type="text" class="form-control" name="ws_age" id="ws_age" required="required" disabled>
+                <div class="hidden" id="errorage"></div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-form-label col-4">Date Of Admission</label>
+            <div class="col-8">
+                <input type="text" class="form-control" name="ws_doj" id="ws_doj" required="required" disabled>
+                <div class="hidden" id="errordoa"></div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-form-label col-4">Type Of Bed</label>
+            <div class="col-8">
+                <input type="text" class="form-control" name="ws_rtype" id="ws_rtype" required="required" disabled>
+                <div class="hidden" id="errorrtype"></div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-form-label col-4">Address</label>
+            <div class="col-8">
+                <textarea class="form-control" name="ws_adrs" id="ws_adrs" required="required" disabled></textarea>
+                <div class="hidden" id="erroradrs"></div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-form-label col-4">State</label>
+            <div class="col-8">
+                <input type="text" class="form-control" name="ws_state" id="ws_state" required="required" disabled>
+                <div class="hidden" id="errorstate"></div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-form-label col-4">City</label>
+            <div class="col-8">
+                <input type="text" class="form-control" name="ws_city" id="ws_city" required="required" disabled>
+                <div class="hidden" id="errorcity"></div>
+            </div>
+        </div>
     </form>
 </div>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
+<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+<link rel="stylesheet" href="assets/css/font-awesome.min.css">
+<link rel="stylesheet" href="assets/css/mainstyles.css">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="assets/js/popper.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/search.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script type="text/javascript" src="assets/js/search.js"></script>
-<script type ="text/javascript" src = "http://cdn.jsdelivr.net/jquery.cookie/1.3.1/jquery.cookie.js"></script>
 </body>
 </html>

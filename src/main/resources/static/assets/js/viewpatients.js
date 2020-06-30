@@ -8,17 +8,25 @@ $(document).ready(function() {
         },
         success: function(data)
         {
+            if(data.toString()!='')
+            {
                 populateTable(data);
+            }
+            else
+            {
+                alert("No Records");
+            }
         }
     });
-    $("#admin").change(function(){
+    $("#useroptions").change(function(){
         var d= $(this).val();
         if(d!=''){
             getval(d);
         }
     });
 });
-function populateTable(data) {
+function populateTable(data)
+{
     if(data)
     {
         var len = data.length;
@@ -29,9 +37,9 @@ function populateTable(data) {
             {
                     txt += "<tr><td>"+data[i].patient_id+"</td><td>"+data[i].patient_name+"</td><td>"+data[i].age+"</td><td>"+data[i].address+"</td><td>"+data[i].date_of_admission+"</td><td>"+data[i].room_type+"</td></tr>";
             }
-            if(txt != ""){
+            if(txt != "")
+            {
                 $('#patientstbl').find("tr:gt(0)").remove();
-                $('#patientstbl').append(txt).removeClass("hidden");
             }
         }
     }
@@ -62,19 +70,20 @@ function enableOptions()
 {
     var uname=$.cookie("username");
     var type=uname.substring(0, 3);
-    document.getElementById("admin").disabled=true;
-    document.getElementById("pharmasist").disabled=true;
-    document.getElementById("diagnostics").disabled=true;
     if(type=="ADE")
     {
-        document.getElementById("admin").disabled=false;
+        $("#useroptions").append(new Option("Register Patient", "Register Patient"));
+        $("#useroptions").append(new Option("Update Patient", "Update Patient"));
+        $("#useroptions").append(new Option("Delete Patient", "Delete Patient"));
+        $("#useroptions").append(new Option("Search Patient", "Search Patient"));
+        $("#useroptions").append(new Option("View Patients", "View Patients"));
     }
     else if(type=="PHA")
     {
-        document.getElementById("pharmasist").disabled=false;
+        $("#useroptions").append(new Option("Issue Medicine", "Issue Medicine"));
     }
     else
     {
-        document.getElementById("diagnostics").disabled=false;
+        $("#useroptions").append(new Option("Diagnostics", "Diagnostics"));
     }
 }

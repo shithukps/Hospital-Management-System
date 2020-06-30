@@ -1,53 +1,52 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<title>
-    View all Patients
-</title>
-<style>
-</style>
-<link rel="stylesheet" href="assets/css/main.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>View Patients</title>
 </head>
 <body>
-    <div  class="databox">
-    <div>
-        <div><h1>ABC Hospital</h1></div>
-        <div>
-            <select class="useroptions" name="admin" id="admin">
-                <option value="Select">Select</option>
-                <option value="Register Patient">Register Patient</option>
-                <option value="Update Patient">Update Patient</option>
-                <option value="Delete Patient">Delete Patient</option>
-                <option value="View Patient List">View Patient List</option>
-                <option value="Billing">Billing</option>
-            </select>
-            <select class="useroptions" name="pharmasist" id="pharmasist">
-                <option value="Select">Select</option>
-                <option value="Issue Medicine">Issue Medicine</option>
-                <option value="Get Patient Details">Get Patient Details</option>
-            </select>
-            <select class="useroptions" name="diagnostics" id="diagnostics">
-                <option value="Select">Select</option>
-                <option value="Diagnostics">Diagnostics</option>
-                <option value="Get Patient Details">Get Patient Details</option>
-            </select>
-        </div>
+<div class="row">
+    <div class="col">
+        <h1>ABC Hospital</h1>
     </div>
-<div>
-<h2 style="text-align: center;">View Patients</h2>
-<table id="patientstbl"  class="hidden">
-  <tr>
-    <th>Patient Id</th>
-    <th>Name</th>
-    <th>Age</th>
-    <th>Address</th>
-    <th>DOJ</th>
-    <th>Type Of Room</th>
-  </tr>
-</table>
+</div>
+<div class="row" style="align-items: center;justify-content: center;">
+    <div class="col-sm-2">
+        <select class="form-control" name="useroptions" id="useroptions">
+            <option value="Select">Select Action</option>
+        </select>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <h2>View Patients</h2>
+    </div>
+</div>
+<div class="container" id="patientstbl" style="margin-top: 10px; background-color: white; color: black;">
+    <table class="table table-hover" style="text-align: center;">
+        <thead>
+        <tr>
+            <th style="width: 100px;">Patient Id</th>
+            <th style="width: 200px;">Name</th>
+            <th style="width: 50px;">Age</th>
+            <th style="width: 200px;">Address</th>
+            <th style="width: 100px;">DOJ</th>
+            <th style="width: 100px;">Type Of Room</th>
+        </tr>
+        </thead>
+        </tbody>
+    </table>
 </div>
 </div>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
+<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+<link rel="stylesheet" href="assets/css/font-awesome.min.css">
+<link rel="stylesheet" href="assets/css/mainstyles.css">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="assets/js/popper.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/viewpatients.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script type="text/javascript" src="assets/js/viewpatients.js"></script>
-<script type ="text/javascript" src = "http://cdn.jsdelivr.net/jquery.cookie/1.3.1/jquery.cookie.js"></script>
 </body>
 </html>

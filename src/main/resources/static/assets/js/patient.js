@@ -1,6 +1,5 @@
 $(document).ready(function() {
     enableOptions();
-
     $("#submitBtn").click(function() {
         var ssnid=$("#ws_ssn").val();
         var pname=$("#ws_pat_name").val();
@@ -35,25 +34,54 @@ $(document).ready(function() {
             }
         });
     });
+    $("#useroptions").change(function(){
+        var d= $(this).val();
+        if(d!=''){
+            getval(d);
+        }
+    });
 });
+function getval(optionData)
+{
+    switch(optionData)
+    {
+        case "Register Patient":window.location.replace("http://localhost:8080/registration");
+        break;
+        case "Update Patient":window.location.replace("http://localhost:8080/updatePatient");
+        break;
+        case "Delete Patient":window.location.replace("http://localhost:8080/deletePatient");
+        break;
+        case "Search Patient":window.location.replace("http://localhost:8080/search_patient");
+        break;
+        case "View Patients":window.location.replace("http://localhost:8080/viewPatients");
+        break;
+        case "Billing":window.location.replace("http://localhost:8080/billing");
+        break;
+        case "Issue Medicine":window.location.replace("http://localhost:8080/issueMedicine");
+        break;
+        case "Diagnostics":window.location.replace("http://localhost:8080/addDiagnostics");
+        break;
+    }
+}
 function enableOptions()
 {
     var uname=$.cookie("username");
     var type=uname.substring(0, 3);
-    document.getElementById("admin").disabled=true;
-    document.getElementById("pharmasist").disabled=true;
-    document.getElementById("diagnostics").disabled=true;
     if(type=="ADE")
     {
-        document.getElementById("admin").disabled=false;
+        $("#useroptions").append(new Option("Register Patient", "Register Patient"));
+        $("#useroptions").append(new Option("Update Patient", "Update Patient"));
+        $("#useroptions").append(new Option("Delete Patient", "Delete Patient"));
+        $("#useroptions").append(new Option("Search Patient", "Search Patient"));
+        $("#useroptions").append(new Option("View Patients", "View Patients"));
     }
     else if(type=="PHA")
     {
-        document.getElementById("pharmasist").disabled=false;
+        $("#useroptions").append(new Option("Issue Medicine", "Issue Medicine"));
     }
     else
     {
-        document.getElementById("diagnostics").disabled=false;
+        $("#useroptions").append(new Option("Diagnostics", "Diagnostics"));
     }
 }
 function resetFields()

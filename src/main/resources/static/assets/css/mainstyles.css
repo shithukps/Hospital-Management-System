@@ -1,0 +1,179 @@
+body,html {
+	color: #000000;
+	background-color: #1C4E80;
+    font-family: 'Roboto', sans-serif;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+.form-control {
+	border-color: gray;
+	min-height: 40px;
+	box-shadow: none !important;
+}
+.form-control:focus {
+	border-color: #1C4E80;
+}
+.form-control, .btn {        
+	border-radius: 3px;
+}
+.signup-form {
+	width: 800px;
+	margin: 0 auto;
+	padding: 10px 0;
+}
+h1{
+    color: #fff;
+    text-align: center;
+	padding: 20px;
+	font-weight: bold;
+}
+h2
+{
+    color: #fff;
+    text-align: center;
+	padding-top: 20px;
+	font-weight: bold;
+}
+.signup-form h2 {
+	color: #000000;
+	margin: 0 0 30px 0;
+	display: inline-block;
+}
+.signup-form form {
+	color: #000000;
+	border-radius: 3px;
+	margin-bottom: 15px;
+	background: #fff;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    padding: 30px;
+}
+.signup-form .form-group row {
+	margin-bottom: 20px;
+}
+.signup-form label {
+	font-weight: bold;
+	font-size: 14px;
+	line-height: 2;
+}
+.signup-form input[type="checkbox"] {
+	position: relative;
+	top: 1px;
+}
+.signup-form .btn {        
+	font-size: 16px;
+	font-weight: bold;
+	background: #5cd3b4;
+	border: none;
+	min-width: 140px;
+}
+.signup-form .btn:hover, .signup-form .btn:focus {
+	background: #41cba9;
+	outline: none !important;
+}
+.signup-form a {
+	color: #5cd3b4;
+	text-decoration: underline;
+}
+.signup-form a:hover {
+	text-decoration: none;
+}
+.signup-form form a {
+	color: #5cd3b4;
+	text-decoration: none;
+}	
+.signup-form form a:hover {
+	text-decoration: underline;
+}
+.required
+{
+    color:red;
+}
+#submitBtn
+{
+    width: 40%;
+    margin-right: 10px;
+    background-color: #3274d6;
+    border: 0;
+    cursor: pointer;
+    font-weight: bold;
+    color: #ffffff;
+    transition: background-color 0.2s;
+}
+#getBtn
+{
+    width: 100%;
+    margin-right: 10px;
+    background-color: #3fc60a;
+    border: 0;
+    cursor: pointer;
+    font-weight: bold;
+    color: #ffffff;
+    transition: background-color 0.2s;
+}
+#updateBtn
+{
+    width: 100%;
+    margin-right: 10px;
+    background-color: #3274d6;
+    border: 0;
+    cursor: pointer;
+    font-weight: bold;
+    color: #ffffff;
+    transition: background-color 0.2s;
+}
+#submitBtn:hover
+{
+    background-color: #2868c7;
+    transition: background-color 0.2s;
+}
+#getBtn:hover
+{
+    background-color: #109f2e;
+    transition: background-color 0.2s;
+}
+#updateBtn:hover
+{
+    background-color: #2868c7;
+    transition: background-color 0.2s;
+}
+#resetBtn
+{
+    width: 40%;
+    margin-right: 10px;
+    background-color: red;
+    border: 0;
+    cursor: pointer;
+    font-weight: bold;
+    color: #ffffff;
+    transition: background-color 0.2s;
+}
+#resetBtn:hover
+{
+    background-color: #f0270a;
+}
+#deleteBtn
+{
+    width: 100%;
+    margin-right: 10px;
+    background-color: red;
+    border: 0;
+    cursor: pointer;
+    font-weight: bold;
+    color: #ffffff;
+    transition: background-color 0.2s;
+}
+#deleteBtn:hover
+{
+    background-color: #f0270a;
+}
+.hidden
+{
+    display: none;
+    padding-top: 10px;
+}
+#errorid,#errorname,#errorssn,#errorage,#errorstate,#errorcity,#errordoa,#erroradrs,#errorrtype
+{
+    color: red;
+    font-weight: bold;
+}

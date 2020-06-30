@@ -1,12 +1,13 @@
 $(document).ready(function() {
     enableOptions();
     $("#deletebtn").prop('disabled',true);
+
     $("#getBtn").click(function() {
         var pat_id=$("#ws_pat_id").val();
         if(pat_id=='')
         {
             $("#errorid").slideDown();
-            $("#errorid").html("Error");
+            $("#errorid").html("Provide Patient ID");
         }
         else
         {

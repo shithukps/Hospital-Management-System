@@ -17,19 +17,16 @@ public class DiagnosticController {
 
     @RequestMapping(value="/getDiagnosticsList",method = RequestMethod.POST)
     public List<Diagnostic> getDiagnosticsList() {
-        System.out.println("Getting diagnostics details from diagnostic table");
         return diagnosticService.getDiagnosticsList();
-    }
+    }//Getting diagnostics details from diagnostic table
 
     @RequestMapping(value="/getDiagnostics/{d_id}",method = RequestMethod.POST)
     public String getDiagnostics(@PathVariable Integer d_id) {
-        System.out.println("Getting diagnostic details corresponding to d_id");
         return diagnosticService.getDiagnostics(d_id);
-    }
+    }//Getting diagnostic details corresponding to d_id
 
     @RequestMapping(value="/insertDiagnosticsTrack",method = RequestMethod.POST)
     public void insertDiagnosticsTrack(@RequestBody DiagnosticTracking diagnosticTracking) {
-        System.out.println("Insertion in DiagnosticTracking");
         diagnosticService.insertDiagnosticsTrack(diagnosticTracking.getPatient_id(),diagnosticTracking.getTest_id());
-    }
+    }//Insertion in DiagnosticTracking
 }

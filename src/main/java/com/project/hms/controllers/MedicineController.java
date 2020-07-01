@@ -16,25 +16,21 @@ public class MedicineController {
 
     @RequestMapping(value="/getmedicineslist",method = RequestMethod.POST)
     public List<Medicine> getMedicine() {
-        System.out.println("Getting medicine details from medicine table");
         return medicineService.getMedicine();
-    }
+    }//Getting medicine details from medicine table
 
     @RequestMapping(value="/getmedicine/{med_id}",method = RequestMethod.POST)
     public String getMedicineDetails(@PathVariable Integer med_id) {
-        System.out.println("Getting medicine details corresponding to med_id");
         return medicineService.getMedicineDetails(med_id);
-    }
+    }//Getting medicine details corresponding to med_id
 
     @RequestMapping(value="/insertMedicineTrack",method = RequestMethod.POST)
     public void insertMedicineTrack(@RequestBody MedicineTracking medicineTracking) {
-        System.out.println("Insertion in MedicineTracking");
         medicineService.insertMedicineTrack(medicineTracking.getPatient_id(),medicineTracking.getMedicine_id(),medicineTracking.getQuantity_issued());
-    }
+    }//Insertion in MedicineTracking
     @RequestMapping(value="/updateMedicineQty/{med_id}/{qty}",method = RequestMethod.POST)
     public void updateMedicineQty(@PathVariable Integer med_id,@PathVariable Integer qty) {
-        System.out.println("Update Quantity in medicine");
         medicineService.updateQuantityAvailable(med_id,qty);
-    }
+    }//Update Quantity in medicine
 
 }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PatientService {
@@ -53,5 +54,9 @@ public class PatientService {
 
     public void dischargePatient(Integer pat_id) {
         patientRepository.dischargePatient(pat_id);
+    }
+
+    public Integer checkPatientExistence(Integer pat_id) {
+        return patientRepository.findById(pat_id);
     }
 }

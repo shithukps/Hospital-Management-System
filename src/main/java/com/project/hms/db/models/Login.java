@@ -17,7 +17,6 @@ public class Login {
     private String id;
 
 
-    //    @JsonIgnore
     @Size(max = 20)
     @Column(name="password")
     @NotNull

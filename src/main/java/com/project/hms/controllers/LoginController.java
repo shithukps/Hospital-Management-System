@@ -18,11 +18,9 @@ public class LoginController {
     final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
     @RequestMapping(method = RequestMethod.POST,value = "/login")
-    public String loginfn(@RequestBody Login login) throws Exception {
+    public String loginFunction(@RequestBody Login login) throws Exception {
         String id=login.getId();
-//        System.out.println(id);
         Optional<Login> loggedInUser = loginService.loginVerifier(id);
-//        System.out.println(loggedInUser);
         if(loggedInUser.isPresent()){
             if(loggedInUser.get().getPassword().equals(login.getPassword())){
                 logger.info("success");
@@ -32,13 +30,12 @@ public class LoginController {
             else{
                 logger.error("wrong password");
                 return "wrong password";
-            }
+            }//close of if checking the password matching
 
         }
         else{
             logger.error("wrong user name");
             return "wrong user name";
-        }
-    }
-
+        }//close of if checking validity of username
+    }//close of login verification function
 }

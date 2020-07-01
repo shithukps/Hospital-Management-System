@@ -1,47 +1,67 @@
 $(document).ready(function() {
     $.removeCookie('pat_id');
-    enableOptions();
+    $("#issuebtn").prop('disabled',true);
+    enableOptions();//for enabling the options for the loggedIn user
     var pat_id;
     $("#searchBtn").click(function() {
         pat_id=$("#patient_id").val();
         if(pat_id=='')
         {
             $("#errorid").slideDown();
-            $("#errorid").html("Enter ID");
+            $("#errorid").html("Enter ID");//to show the error message
         }
         else
         {
-
             $("#errorid").slideUp();
             $.ajax({
-                type:"POST",
-                url:'http://localhost:8080/getBillingDetails/'+pat_id,
-                headers:{
-                    "Content-Type":"application/json"
-                },
-                success: function(data)
-                {
-                    setPatientData(data);
-                    $.ajax({
-                        type:"POST",
-                        url:'http://localhost:8080/getMedicineDetails/'+pat_id,
-                        headers:{
-                            "Content-Type":"application/json"
-                        },
-                        success: function(data)
-                        {
-                            setMedicineData(data);
-                        }
-                    });
-                }
-            });
-        }
-    });
+                            type:"POST",
+                            url:'http://localhost:8080/checkPatientExistence/'+pat_id,
+                            headers:{
+                                "Content-Type":"application/json"
+                            },
+                            success: function(data){
+                                if(data==1){
+                                    $.ajax({
+                                        type:"POST",
+                                        url:'http://localhost:8080/getBillingDetails/'+pat_id,
+                                        headers:{
+                                            "Content-Type":"application/json"
+                                        },
+                                        success: function(data)
+                                        {
+                                            setPatientData(data);
+                                            $.ajax({
+                                                type:"POST",
+                                                url:'http://localhost:8080/getMedicineDetails/'+pat_id,
+                                                headers:{
+                                                    "Content-Type":"application/json"
+                                                },
+                                                success: function(data)
+                                                {
+                                                    setMedicineData(data);
+                                                    $("#issuebtn").prop('disabled',false);
+                                                }
+                                            });//close of ajax-getMedicineDetails
+                                        }
+                                    });//close of ajax-getBillingDetails
+                                }
+                                else{
+                                    $("#errorid").slideDown();
+                                    $("#errorid").html("Enter a valid Patient ID");
+                                }//close of if
+                            },
+                            error: function () {
+                               $("#errorid").slideDown();
+                               $("#errorid").html("Enter a valid Patient ID");
+                            }
+            });//close of ajax-checkPatientExistence
+        }//close of if-checking textbox value
+    });//close of searchBtn click
     $("#issuebtn").click(function() {
             $.cookie("pat_id",$("#patient_id").val());
             window.location.replace("http://localhost:8080/medicinesList");
-    });
- });
+    });//close of issuebtn click
+ });//close of document.ready
 function setMedicineData(data)
 {
     if(data)
@@ -59,15 +79,15 @@ function setMedicineData(data)
                     var amount=qty_issued*rate;
                     txt += "<tr><td>"+medicine_name+"</td><td>"+qty_issued+"</td><td>"+rate+"</td><td>"+amount+"</td></tr>";
 
-            }
+            }//close of for loop
             if(txt != "")
             {
                 $('#medicinestbl').find("tr:gt(0)").remove();
                 $('#medicinestbl').append(txt);
             }
-        }
-    }
-}
+        }//close of if-checking data length
+    }//close of if-checking data
+}//close of setMedicineData
 function setPatientData(data)
 {
     var pat_id=$("#patient_id").val();
@@ -90,9 +110,9 @@ function setPatientData(data)
     }
     else{
         alert("Empty List");
-    }
+    }//close of if-checking data length
 
-}
+}//close of setPatientData
 function enableOptions()
 {
     var uname=$.cookie("username");
@@ -100,16 +120,13 @@ function enableOptions()
     document.getElementById("admin").disabled=true;
     document.getElementById("pharmasist").disabled=true;
     document.getElementById("diagnostics").disabled=true;
-    if(type=="ADE")
-    {
+    if(type=="ADE"){
         document.getElementById("admin").disabled=false;
     }
-    else if(type=="PHA")
-    {
+    else if(type=="PHM"){
         document.getElementById("pharmasist").disabled=false;
     }
-    else
-    {
+    else{
         document.getElementById("diagnostics").disabled=false;
     }
-}
+}//close of enableOptions

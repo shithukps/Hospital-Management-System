@@ -15,8 +15,6 @@ public class UserStore {
     @NotNull
     private String login;
 
-
-    //    @JsonIgnore
     @Size(max = 20)
     @Column(name="password")
     @NotNull

@@ -1,5 +1,7 @@
 package com.project.hms.db.models;
 
+import com.sun.istack.NotNull;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -10,11 +12,11 @@ import javax.persistence.Table;
 public class DiagnosticTracking {
 
     @Column(name = "patient_id")
-//        @NotNull
+    @NotNull
     private Integer patient_id;
 
     @Column(name = "test_id")
-//        @NotNull
+    @NotNull
     private Integer test_id;
 
     public DiagnosticTracking(){}

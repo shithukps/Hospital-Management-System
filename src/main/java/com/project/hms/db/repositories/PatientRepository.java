@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 public interface PatientRepository extends CrudRepository<Patient,String> {
     @Transactional
@@ -68,4 +69,9 @@ public interface PatientRepository extends CrudRepository<Patient,String> {
             value = "update patient set status='DISCHARGED' where patient_id=:pat_id",
             nativeQuery = true)
     void dischargePatient(Integer pat_id);
+
+    @Query(
+            value = "select count(*) from patient where patient_id=:pat_id",
+            nativeQuery = true)
+    Integer findById(Integer pat_id);
 }

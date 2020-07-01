@@ -1,8 +1,10 @@
 $(document).ready(function() {
-    enableOptions();
+    //enableOptions();
     var pat_id;
     $("#searchBtn").click(function() {
+        grantTotal=0;
         pat_id=$("#patient_id").val();
+        resetFields();
         if(pat_id=='')
         {
             $("#errorid").slideDown();
@@ -29,6 +31,7 @@ $(document).ready(function() {
                         {
                             setMedicineData(data);
                         }
+
                     });
                     $.ajax({
                         type:"POST",
@@ -39,17 +42,16 @@ $(document).ready(function() {
                         success: function(data)
                         {
                             setDiagnosticsData(data);
+
                         }
+
                     });
-                    var grantTotal=$("#billfordiagnostics").val()+$("#billforpharmacy").val()+$("#billforroom").val();
-                    $("#grandtotal").val(grantTotal);
                 }
             });
         }
     });
     $("#confirmbtn").click(function() {
         pat_id=$("#patient_id").val();
-
         $.ajax({
             type:"POST",
             url:'http://localhost:8080/discharge/'+pat_id,
@@ -79,7 +81,7 @@ function setDiagnosticsData(data)
                     var test_name=arr[0];
                     var amount=arr[1];
                     txt += "<tr><td>"+test_name+"</td><td>"+amount+"</td></tr>";
-                    diagnosticsTotal=diagnosticsTotal+amount;
+                    diagnosticsTotal=diagnosticsTotal+parseFloat(amount);
             }
             if(txt != "")
             {
@@ -88,6 +90,24 @@ function setDiagnosticsData(data)
             }
         }
     }
+    setTotal();
+}
+function setTotal()
+{
+var grantTotal=0;
+if($("#billfordiagnostics").val()!="")
+{
+   grantTotal=grantTotal+parseFloat($("#billfordiagnostics").val());
+}
+ if($("#billforpharmacy").val()!="")
+ {
+    grantTotal=grantTotal+parseFloat($("#billforpharmacy").val());
+  }
+  if($("#billforroom").val()!="")
+ {
+    grantTotal=grantTotal+parseFloat($("#billforroom").val());
+   }
+ $("#grandtotal").val(grantTotal);
 }
 function setMedicineData(data)
 {
@@ -106,13 +126,14 @@ function setMedicineData(data)
                     var rate=arr[2];
                     var amount=qty_issued*rate;
                     txt += "<tr><td>"+medicine_name+"</td><td>"+qty_issued+"</td><td>"+rate+"</td><td>"+amount+"</td></tr>";
-                    pharmacyTotal=pharmacyTotal+amount;
+                    pharmacyTotal=pharmacyTotal+parseFloat(amount);
             }
             if(txt != "")
             {
                 $('#pharmacytbl').append(txt);
                 $("#billforpharmacy").val(pharmacyTotal);
             }
+
         }
     }
 }
@@ -159,7 +180,8 @@ function setPatientData(data)
             $("#billforroom").val(noofdays*8000);
         }
     }
-    else{
+    else
+    {
         alert("Empty List");
     }
 
@@ -186,13 +208,6 @@ function enableOptions()
 }
 function resetFields()
 {
-    $("#patient_id").val('');
-    $("#patientstbl > tr").eq(1).children('td').eq(1).remove();
-    $("#patientstbl > tr").eq(1).children('td').eq(2).remove();
-    $("#patientstbl > tr").eq(1).children('td').eq(3).remove();
-    $("#patientstbl > tr").eq(1).children('td').eq(4).remove();
-    $("#patientstbl > tr").eq(1).children('td').eq(5).remove();
-    $("#patientstbl > tr").eq(1).children('td').eq(6).remove();
     $("#pharmacytbl").find("tr:gt(0)").remove();
     $("#diagnosticstbl").find("tr:gt(0)").remove();
     $("#billforroom").val('');

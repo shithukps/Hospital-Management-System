@@ -6,7 +6,7 @@ $(document).ready(function() {
         if(pat_id=='')
         {
             $("#errorid").slideDown();
-            $("#errorid").html("Enter ID");
+            $("#errorid").html("Enter Patient ID");
         }
         else
         {
@@ -160,7 +160,7 @@ function setPatientData(data)
         }
     }
     else{
-        alert("Empty List");
+        alert("Patient ID Not Found");
     }
 
 }

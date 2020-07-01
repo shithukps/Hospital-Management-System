@@ -2,7 +2,7 @@ $(document).ready(function() {
     enableOptions();
     $("updateBtn").prop('disabled',true);
     $("#ws_pat_id").blur(function(){
-        var patient_id = $('#ws_pat_id').val();
+        var patient_id =jQuery.trim($('#ws_pat_id').val());
         if(patient_id=='')
         {
             $('#errorid').slideDown();
@@ -14,7 +14,7 @@ $(document).ready(function() {
         }
     });
     $("#ws_pat_name").blur(function(){
-        var patient_name= $('#ws_pat_name').val();
+        var patient_name= jQuery.trim($('#ws_pat_name').val());
         if(patient_name=='')
         {
             $('#errorname').slideDown();
@@ -26,7 +26,7 @@ $(document).ready(function() {
         }
     });
     $("#ws_age").blur(function(){
-        var patient_age = $('#ws_age').val();
+        var patient_age = jQuery.trim($('#ws_age').val());
         if(patient_age=='')
         {
             $('#errorage').slideDown();
@@ -38,7 +38,7 @@ $(document).ready(function() {
         }
     });
     $("#ws_rtype").blur(function(){
-        rtype = $('#ws_rtype').val();
+        rtype = jQuery.trim($('#ws_rtype').val());
         if(rtype=='Select')
         {
             $('#errorrtype').slideDown();
@@ -50,7 +50,7 @@ $(document).ready(function() {
         }
     });
     $("#ws_doj").blur(function(){
-        var doa = $('#ws_doj').val();
+        var doa = jQuery.trim($('#ws_doj').val());
         if(doa=='')
         {
             $('#errordoa').slideDown();
@@ -62,7 +62,7 @@ $(document).ready(function() {
         }
     });
     $("#ws_adrs").blur(function(){
-        var address = $('#ws_adrs').val();
+        var address = jQuery.trim($('#ws_adrs').val());
         if(address=='')
         {
             $('#erroradrs').slideDown();
@@ -74,7 +74,7 @@ $(document).ready(function() {
         }
     });
     $("#ws_state").blur(function(){
-        var state = $('#ws_state').val();
+        var state = jQuery.trim($('#ws_state').val());
         if(state=='Select')
         {
             $('#errorstate').slideDown();
@@ -86,7 +86,7 @@ $(document).ready(function() {
         }
     });
     $("#ws_city").blur(function(){
-         var city = $('#ws_city').val();
+         var city = jQuery.trim($('#ws_city').val());
          if(city=='Select')
          {
             $('#errorcity').slideDown();
@@ -98,7 +98,7 @@ $(document).ready(function() {
          }
     });
     $("#getBtn").click(function() {
-        var pat_id=$("#ws_pat_id").val();
+        var pat_id=jQuery.trim($("#ws_pat_id").val());
         if(pat_id=='')
         {
             $("#errorid").slideDown();
@@ -129,14 +129,14 @@ $(document).ready(function() {
         }
     });
     $("#updateBtn").click(function() {
-        var pat_id=$("#ws_pat_id").val();
-        var pname=$("#ws_pat_name").val();
-        var age=$("#ws_age").val();
-        var rtype=$("#ws_rtype").val();
-        var doa=$("#ws_doj").val();
-        var address=$("#ws_adrs").val();
-        var state=$("#ws_state").val();
-        var city=$("#ws_city").val();
+        var pat_id=jQuery.trim($("#ws_pat_id").val());
+        var pname=jQuery.trim($("#ws_pat_name").val());
+        var age=jQuery.trim($("#ws_age").val());
+        var rtype=jQuery.trim($("#ws_rtype").val());
+        var doa=jQuery.trim($("#ws_doj").val());
+        var address=jQuery.trim($("#ws_adrs").val());
+        var state=jQuery.trim($("#ws_state").val());
+        var city=jQuery.trim($("#ws_city").val());
         var patientData={
             'patient_name':pname,
             'age':age,
@@ -159,7 +159,7 @@ $(document).ready(function() {
             $('#errorage').slideDown();
             $('#errorage').html('Please provide patient age');
         }
-        else if(rtype==''){
+        else if(rtype=='Select'){
             $('#errorrtype').slideDown();
             $('#errorrtype').html('Please provide room type');
         }
@@ -171,11 +171,11 @@ $(document).ready(function() {
             $('#erroradrs').slideDown();
             $('#erroradrs').html('Please provide address');
         }
-        else if(state==''){
+        else if(state=='Select'){
             $('#errorstate').slideDown();
             $('#errorstate').html('Please provide state');
         }
-        else if(city==''){
+        else if(city=='Select'){
             $('#errorcity').slideDown();
             $('#errorcity').html('Please provide city');
         }
@@ -265,7 +265,7 @@ function setFields(data)
     }
     else
     {
-        alert("Empty List");
+        alert("Patient ID not found");
     }
     $("#ws_pat_name").prop('disabled',false);
     $("#ws_age").prop('disabled',false);
@@ -343,7 +343,7 @@ $("#ws_pat_id").keypress(function (e) {
     });
     $("#ws_pat_name").keypress(function (e) {
         var keyCode = e.keyCode || e.which;
-        var regex = /^[A-Za-z]+$/;
+        var regex = /^[A-Za-z\s]+$/;
         var isValid = regex.test(String.fromCharCode(keyCode));
         if (!isValid) {
             $('#errorname').slideDown();
@@ -371,11 +371,17 @@ $("#ws_pat_id").keypress(function (e) {
     });
     $("#ws_age").keyup(function(){
             var len=$("#ws_age").val().length;
-            if(len>3)
+            var p_age=jQuery.trim($("#ws_age").val());
+            /*if(len>3)
             {
                 $('#errorage').slideDown();
                 $("#errorage").html("Maximum 3 digits are allowed");
-            }
+            }*/
+             if(p_age>=150)
+                        {
+                            $('#errorage').slideDown();
+                            $("#errorage").html("Please provide a valid age");
+                        }
             else
             {
                 $('#errorage').slideUp();
@@ -383,7 +389,7 @@ $("#ws_pat_id").keypress(function (e) {
     });
     $("#ws_adrs").keypress(function (e) {
         var keyCode = e.keyCode || e.which;
-        var regex = /^[A-Za-z0-9]+$/;
+        var regex = /^[A-Za-z0-9\s]+$/;
         var isValid = regex.test(String.fromCharCode(keyCode));
         if (!isValid) {
             $('#erroradrs').slideDown();
@@ -395,3 +401,21 @@ $("#ws_pat_id").keypress(function (e) {
         }
         return isValid;
     });
+    /*$("#ws_doj").keypress(function (e) {
+        var keyCode = e.keyCode || e.which;
+        var date = new Date($("#ws_doj").val());
+        var year = date.getFullYear();
+
+
+        //var regex = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/([12][0-9]{3})$/;
+        //var isValid = regex.test(String.fromCharCode(keyCode));
+        if (year<1970) {
+            $('#errordoa').slideDown();
+            $("#errordoa").html("Provide a valid date !.");
+        }
+        else
+        {
+            $('#errordoa').slideUp();
+        }
+        return isValid;
+    });*/

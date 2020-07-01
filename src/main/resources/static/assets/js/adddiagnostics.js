@@ -10,9 +10,10 @@ $(document).ready(function() {
         }
         else
         {
+            $("#errorid").slideUp();
             $.ajax({
                 type:"POST",
-                url:'http://localhost:8080/getPatientDetails/'+pat_id,
+                url:'http://localhost:8080/getBillingDetails/'+pat_id,
                 headers:{
                     "Content-Type":"application/json"
                 },
@@ -36,7 +37,7 @@ $(document).ready(function() {
     });
     $("#addDiagBtn").click(function() {
         $.cookie("pat_id",$("#patient_id").val());
-        window.location.replace="http://localhost:8080/diagnosticsList";
+        window.location.replace("http://localhost:8080/diagnosticsList");
     });
 });
 function setDiagnosticsData(data)
@@ -73,6 +74,7 @@ function setPatientData(data)
         var age=arr[1];
         var address=arr[2];
         var date=arr[3];
+        var d1=new Date(date);
         var room=arr[4];
         var join_date=d1.getDate()+'-'+(d1.getMonth()+1)+'-'+d1.getFullYear();
         $("#tdName").text(name);

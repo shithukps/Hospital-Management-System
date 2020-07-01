@@ -8,21 +8,21 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
 
-
+@Entity
 @Table(name="diagnostic")
-
 public class Diagnostic {
     @Id
     @Column(name = "test_id")
-//        @NotNull
+    @NotNull
     private Integer test_id;
 
     @Size(max=50)
     @Column(name = "test_name")
-//        @NotNull
+    @NotNull
     private String test_name;
+
     @Column(name = "test_charge")
-//        @NotNull
+    @NotNull
     private float test_charge;
 
     public Diagnostic(){

@@ -30,22 +30,23 @@ $(document).ready(function() {
                         success: function(data)
                         {
                             setMedicineData(data);
+                            $.ajax({
+                                                    type:"POST",
+                                                    url:'http://localhost:8080/getDiagnosticsDetails/'+pat_id,
+                                                    headers:{
+                                                        "Content-Type":"application/json"
+                                                    },
+                                                    success: function(data)
+                                                    {
+                                                        setDiagnosticsData(data);
+
+                                                    }
+
+                                                });
                         }
 
                     });
-                    $.ajax({
-                        type:"POST",
-                        url:'http://localhost:8080/getDiagnosticsDetails/'+pat_id,
-                        headers:{
-                            "Content-Type":"application/json"
-                        },
-                        success: function(data)
-                        {
-                            setDiagnosticsData(data);
 
-                        }
-
-                    });
                 }
             });
         }
@@ -65,7 +66,7 @@ $(document).ready(function() {
             }
         });
     });
-
+});
 function setDiagnosticsData(data)
 {
     if(data)
@@ -217,4 +218,3 @@ function resetFields()
     $("#grandtotal").val('');
 }
 
-});

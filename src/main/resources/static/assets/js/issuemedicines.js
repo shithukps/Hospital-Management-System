@@ -1,4 +1,5 @@
 $(document).ready(function() {
+    $.removeCookie('pat_id');
     enableOptions();
     var pat_id;
     $("#searchBtn").click(function() {
@@ -10,6 +11,8 @@ $(document).ready(function() {
         }
         else
         {
+
+            $("#errorid").slideUp();
             $.ajax({
                 type:"POST",
                 url:'http://localhost:8080/getBillingDetails/'+pat_id,
@@ -36,7 +39,7 @@ $(document).ready(function() {
     });
     $("#issuebtn").click(function() {
             $.cookie("pat_id",$("#patient_id").val());
-            window.location.replace="http://localhost:8080/medicinesList";
+            window.location.replace("http://localhost:8080/medicinesList");
     });
  });
 function setMedicineData(data)
@@ -76,6 +79,7 @@ function setPatientData(data)
         var age=arr[1];
         var address=arr[2];
         var date=arr[3];
+        var d1=new Date(date);
         var room=arr[4];
         var join_date=d1.getDate()+'-'+(d1.getMonth()+1)+'-'+d1.getFullYear();
         $("#tdName").text(name);

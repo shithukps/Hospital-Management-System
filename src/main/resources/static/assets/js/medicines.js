@@ -1,5 +1,6 @@
 $(document).ready(function() {
     loadMedicinesData();
+    var available=0;
     $("#addbtn").click(function() {
         var m_name=$("#medicineslist option:selected").text();
         var m_id=$("#medicineslist").val();
@@ -11,28 +12,50 @@ $(document).ready(function() {
     });
     $("#submitBtn").click(function() 
     {
+
         var pat_id=$.cookie("pat_id");
-        $.ajax({
-            type:"POST",
-            url:'http://localhost:8080/updateMedicinesDetails/'+pat_id,
-            headers:{
-                "Content-Type":"application/json"
-            },
-            success: function(data)
-            {
-                $.ajax({
-                    type:"POST",
-                    url:'http://localhost:8080/updateMedicinesData/',
-                    headers:{
-                        "Content-Type":"application/json"
-                    },
-                    success: function(data)
-                    {
-                        
-                    }
-                });
-            }
-        });
+        var qtyVal=jQuery.trim($('#quantity').val());
+        if(qtyVal>available){
+            alert("Stock is less than required");
+        }
+        else{
+            $("#medicinestbl tr").each(function() {
+                if ($(this).find("td:first").length > 0) {
+                            var med_id = $(this).find("td:first").html();
+                            var qty=$(this).find("td").eq(2).html();
+                            var patientMedicineData={
+                                'patient_id':pat_id,
+                                'medicine_id':med_id,
+                                'quantity_issued':qty
+                            };
+                            var patientMedicineJson=JSON.stringify(patientMedicineData);
+                            $.ajax({
+                                type:"POST",
+                                url:'http://localhost:8080/insertMedicineTrack',
+                                headers:{
+                                    "Content-Type":"application/json"
+                                },
+                                data:patientMedicineJson,
+                                success: function(data)
+                                {
+                                    alert("Medicines Issued");
+                                }
+                            });
+                            $.ajax({
+                                type:"POST",
+                                url:'http://localhost:8080/updateMedicineQty/'+qty+'/'+med_id,
+                                headers:{
+                                           "Content-Type":"application/json"
+                                },
+                                success: function(data)
+                                {
+                                       $.removeCookie('pat_id');
+                                       window.location.replace("http://localhost:8080/issueMedicines");
+                                }
+                            });
+                }
+            });
+        }
     });
     $("#medicineslist").change(function(){
         var d= $(this).val();
@@ -40,7 +63,7 @@ $(document).ready(function() {
             loadSelectedMedicineData(d);
         }
     });
-});
+
 function loadMedicinesData()
 {
     $.ajax({
@@ -54,12 +77,10 @@ function loadMedicinesData()
             var len=data.length;
             if(len>0)
             {
-                var arr=data.split(",");
-                var med_id=arr[0];
-                var med_name=arr[1];
-                for(i=0;i<len;i++)
-                {
-                    $("#medicineslist").append(new Option(med_id,med_name));
+                for(i=0;i<data.length;i++) {
+                     var med_id=data[i].medicine_id;
+                     var med_name=data[i].medicine_name;
+                     $("#medicineslist").append("<option value=\"" +med_id+ "\">" +med_name+ "</option>");
                 }
             }
         }
@@ -79,19 +100,10 @@ function loadSelectedMedicineData(med_id)
             if(len > 0)
             {
                 var arr=data.split(",");
-                var med_id=arr[0];
-                var med_name=arr[1];
                 var med_avail="";
-                if(parseInt(arr[2])>0)
-                {
-                    med_avail="Available"
-                }
-                else
-                {
-                    med_avail="Not Available"
-                }
-                var med_rate=arr[3];
-                $("#availability").val(med_avail);
+                available=arr[0];
+                var med_rate=arr[1];
+                $("#availability").val(available);
                 $("#rate").val(med_rate);
             }
         }
@@ -102,3 +114,4 @@ $("#quantity").keyup(function(){
     var rate=$("#rate").val();
     $("#amount").val(q*rate);
 });
+});//close of document.ready()

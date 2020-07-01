@@ -10,26 +10,29 @@ $(document).ready(function() {
     $("#submitBtn").click(function() 
     {
         var pat_id=$.cookie("pat_id");
-        $.ajax({
-            type:"POST",
-            url:'http://localhost:8080/updateDiagnosticsDetails/'+pat_id,
-            headers:{
-                "Content-Type":"application/json"
-            },
-            success: function(data)
-            {
-                $.ajax({
-                    type:"POST",
-                    url:'http://localhost:8080/updateDiagnosticsList/'+d_id,
-                    headers:{
-                        "Content-Type":"application/json"
-                    },
-                    success: function(data)
-                    {
-                        
-                    }
-                });
-            }
+        $("#diagnosticstbl tr").each(function() {
+                        if ($(this).find("td:first").length > 0) {
+                                    var d_id = $(this).find("td:first").html();
+                                    var patientMedicineData={
+                                        'patient_id':pat_id,
+                                        'test_id':d_id,
+                                    };
+                                    var patientDiagnosticsJson=JSON.stringify(patientMedicineData);
+                                    $.ajax({
+                                        type:"POST",
+                                        url:'http://localhost:8080/insertDiagnosticsTrack',
+                                        headers:{
+                                            "Content-Type":"application/json"
+                                        },
+                                        data:patientDiagnosticsJson,
+                                        success: function(data)
+                                        {
+                                            alert("Added diagnostics details");
+                                            $.removeCookie('pat_id');
+                                            window.location.replace("http://localhost:8080/addDiagnostics");
+                                        }
+                                    });
+                        }
         });
     });
     $("#diagnosticslist").change(function(){
@@ -52,12 +55,10 @@ function loadDiagnosticsData()
             var len=data.length;
             if(len>0)
             {
-                var arr=data.split(",");
-                var d_id=arr[0];
-                var d_name=arr[1];
-                for(i=0;i<len;i++)
-                {
-                    $("#diagnosticslist").append(new Option(d_id,d_name));
+                for(i=0;i<data.length;i++) {
+                    var d_id=data[i].test_id;
+                    var d_name=data[i].test_name;
+                    $("#diagnosticslist").append("<option value=\"" +d_id+ "\">" +d_name+ "</option>");
                 }
             }
         }
@@ -77,10 +78,8 @@ function loadSelectedDiagnosticData(d_id)
             if(len > 0)
             {
                 var arr=data.split(",");
-                var d_id=arr[0];
-                var d_name=arr[1];
-                var d_rate=arr[3];
-                $("#availability").val(d_avail);
+                var d_rate=arr[0];
+                $("#availability").val(d_rate);
                 $("#rate").val(d_rate);
             }
         }

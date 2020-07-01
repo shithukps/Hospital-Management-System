@@ -9,13 +9,12 @@ public class WebController {
 
     @RequestMapping("/hello")
     @ResponseBody
-    public String welcome(){
+    public String welcome() {
         return "Hello World";
     }
 
     @RequestMapping("/hospitalLogin")
-    public String login()
-    {
+    public String login(){
         return "login";
     }
 
@@ -47,5 +46,25 @@ public class WebController {
     @RequestMapping("/billing")
     public String billing(){
         return "billing";
+    }
+
+    @RequestMapping("/addDiagnostics")
+    public String addDiagnostics(){
+        return "add_diagnostics";
+    }
+
+    @RequestMapping("/diagnosticsList")
+    public String diagnostics(){
+        return "diagnostics";
+    }
+
+    @RequestMapping("/issueMedicines")
+    public String issueMedicines(){
+        return "issue_medicines";
+    }
+
+    @RequestMapping("/medicinesList")
+    public String medicines(){
+        return "medicines";
     }
 }

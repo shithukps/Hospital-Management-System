@@ -8,7 +8,7 @@ $(document).ready(function() {
         if(pat_id=='')
         {
             $("#errorid").slideDown();
-            $("#errorid").html("Enter ID");
+            $("#errorid").html("Enter Patient ID");
         }
         else
         {
@@ -181,9 +181,8 @@ function setPatientData(data)
             $("#billforroom").val(noofdays*8000);
         }
     }
-    else
-    {
-        alert("Empty List");
+    else{
+        alert("Patient ID Not Found");
     }
 
 }

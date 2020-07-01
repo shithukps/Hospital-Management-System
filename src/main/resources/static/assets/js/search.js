@@ -5,7 +5,7 @@ $(document).ready(function() {
         if(pat_id=='')
         {
             $("#errorid").slideDown();
-            $("#errorid").html("Provide User ID");
+            $("#errorid").html("Provide Patient ID");
         }
         else
         {
@@ -82,7 +82,7 @@ function setFields(data)
     }
     else
     {
-        alert("Empty List");
+        alert("Patient ID Not Found");
         resetFields();
     }
 }

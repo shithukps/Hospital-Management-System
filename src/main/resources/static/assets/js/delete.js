@@ -44,7 +44,7 @@ $(document).ready(function() {
             {
                 if(data!="")
                 {
-                    alert("Deleted");
+                    alert("Deleted Successfully");
                     $("#ws_pat_id").prop('disabled',false);
                     resetFields();
                     $("#deleteBtn").prop('disabled',true);
@@ -115,7 +115,7 @@ function setFields(data)
     }
     else
     {
-        alert("Empty List");
+        alert("Patient ID not found");
     }
 }
 function enableOptions()

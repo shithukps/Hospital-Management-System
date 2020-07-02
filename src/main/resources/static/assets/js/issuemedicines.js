@@ -1,18 +1,26 @@
 $(document).ready(function() {
   if($.cookie("username") != null){
     $.removeCookie('pat_id');
+    var uname=$.cookie("username");
+    var type=uname.substring(0, 3);
+    if(type=="ADE")
+    {
+
+         $("#options").removeClass("hidden");
+    }
+
     $("#issuebtn").prop('disabled',true);
     var pat_id;
     $("#searchBtn").click(function() {
         pat_id=$("#patient_id").val();
         if(pat_id=='')
         {
-            $("#errorid").slideDown();
-            $("#errorid").html("Enter ID");//to show the error message
+            $("#errorpatid").slideDown();
+            $("#errorpatid").html("Enter ID");//to show the error message
         }
         else
         {
-            $("#errorid").slideUp();
+            $("#errorpatid").slideUp();
             $.ajax({
                             type:"POST",
                             url:'http://localhost:8080/checkPatientExistence/'+pat_id, //checking patient is existing or not
@@ -47,8 +55,8 @@ $(document).ready(function() {
                                 }
                             },
                             error: function () {
-                               $("#errorid").slideDown();
-                               $("#errorid").html("Enter a valid Patient ID");
+                               $("#errorpatid").slideDown();
+                               $("#errorpatid").html("Enter a valid Patient ID");
                             }
             });//close of ajax-checkPatientExistence
         }//close of if-checking textbox value
@@ -61,6 +69,28 @@ $(document).ready(function() {
   else{
        window.location.replace("http://localhost:8080/hospitalLogin");
   }
+  $("#logoutBtn").click(function(){
+      $.removeCookie('username');
+      window.location.replace("http://localhost:8080/hospitalLogin");
+    });//Close of event handler of logout button
+    $("#adminoptions").change(function(){
+                    var d= $(this).val();
+                    if(d!=''){
+                        getval(d);
+                    }
+                });//close of change event handler of adminoptions
+                $("#pharmacyoptions").change(function(){
+                        var d= $(this).val();
+                        if(d!=''){
+                            getval(d);
+                        }
+                });//close of change event handler of pharmacyoptions
+                    $("#diagnosticsoptions").change(function(){
+                            var d= $(this).val();
+                            if(d!=''){
+                                getval(d);
+                            }
+                });//close of change event handler of diagnosticsoptions
 });//close of document.ready
 function setMedicineData(data){
     if(data){
@@ -83,7 +113,8 @@ function setMedicineData(data){
         }//close of if-checking data length
     }//close of if-checking data
 }//close of setMedicineData
-function setPatientData(data){
+function setPatientData(data)
+{
     var pat_id=$("#patient_id").val();
     var len = data.length;
     if(len > 0){
@@ -101,7 +132,30 @@ function setPatientData(data){
         $("#tdDoj").text(join_date);
         $("#tdRoom").text(room);
     }
-    else{
+    else
+    {
         alert("Empty List");
     }//close of if-checking data length
 }//close of setPatientData
+function getval(optionData)
+{
+    switch(optionData)
+    {
+        case "Register Patient":window.location.replace("http://localhost:8080/registration");
+        break;
+        case "Update Patient":window.location.replace("http://localhost:8080/updatePatient");
+        break;
+        case "Delete Patient":window.location.replace("http://localhost:8080/deletePatient");
+        break;
+        case "Search Patient":window.location.replace("http://localhost:8080/searchPatients");
+        break;
+        case "View Patient":window.location.replace("http://localhost:8080/viewPatients");
+        break;
+        case "Billing":window.location.replace("http://localhost:8080/billing");
+        break;
+        case "Issue Medicine":window.location.replace("http://localhost:8080/issueMedicines");
+        break;
+        case "Diagnostics":window.location.replace("http://localhost:8080/addDiagnostics");
+        break;
+    }//close of switch
+}//close of function getval

@@ -26,14 +26,16 @@ h1{
     color: #fff;
     text-align: center;
 	padding: 20px;
-	font-weight: bold;
+    font-weight: bold;
+    font-size: xx-large;
 }
 h2
 {
     color: #fff;
     text-align: center;
 	padding-top: 20px;
-	font-weight: bold;
+    font-weight: bold;
+    font-size: larger;
 }
 .signup-form h2 {
 	color: #000000;
@@ -46,7 +48,10 @@ h2
 	margin-bottom: 15px;
 	background: #fff;
     box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    padding: 30px;
+    padding-top: 30px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 10px;
 }
 .signup-form .form-group row {
 	margin-bottom: 20px;
@@ -89,91 +94,86 @@ h2
 {
     color:red;
 }
-#submitBtn
+.whiteButton
 {
-    width: 40%;
-    margin-right: 10px;
+    background-color:#ffffff;
+    border: 0;
+    cursor: pointer;
+    font-weight: bold;
+    color: #1C4E80;
+    transition: background-color 0.2s;
+    border-radius: 5px;
+}
+.redButton
+{
+    background-color: red;
+    border: 0;
+    cursor: pointer;
+    font-weight: bold;
+    color: #ffffff;
+    transition: background-color 0.2s;
+    border-radius: 5px;
+}
+.blueButton
+{
     background-color: #3274d6;
     border: 0;
     cursor: pointer;
     font-weight: bold;
     color: #ffffff;
     transition: background-color 0.2s;
+    border-radius: 5px;
 }
-#getBtn
+.greenButton
 {
-    width: 100%;
-    margin-right: 10px;
     background-color: #3fc60a;
     border: 0;
     cursor: pointer;
     font-weight: bold;
     color: #ffffff;
     transition: background-color 0.2s;
+    border-radius: 5px;
 }
-#updateBtn
-{
-    width: 100%;
-    margin-right: 10px;
-    background-color: #3274d6;
-    border: 0;
-    cursor: pointer;
-    font-weight: bold;
-    color: #ffffff;
-    transition: background-color 0.2s;
-}
-#submitBtn:hover
-{
-    background-color: #2868c7;
-    transition: background-color 0.2s;
-}
-#getBtn:hover
+.greenButton:hover
 {
     background-color: #109f2e;
     transition: background-color 0.2s;
 }
-#updateBtn:hover
+.redButton:hover
+{
+    background-color: #f0270a;
+}
+.blueButton:hover
 {
     background-color: #2868c7;
     transition: background-color 0.2s;
 }
-#resetBtn
+
+table
 {
-    width: 40%;
-    margin-right: 10px;
-    background-color: red;
-    border: 0;
-    cursor: pointer;
+    font-size: small;
     font-weight: bold;
-    color: #ffffff;
-    transition: background-color 0.2s;
-}
-#resetBtn:hover
-{
-    background-color: #f0270a;
-}
-#deleteBtn
-{
-    width: 100%;
-    margin-right: 10px;
-    background-color: red;
-    border: 0;
-    cursor: pointer;
-    font-weight: bold;
-    color: #ffffff;
-    transition: background-color 0.2s;
-}
-#deleteBtn:hover
-{
-    background-color: #f0270a;
+    padding-bottom:0px;
 }
 .hidden
 {
     display: none;
     padding-top: 10px;
 }
-#errorid,#errorname,#errorssn,#errorage,#errorstate,#errorcity,#errordoa,#erroradrs,#errorrtype
+#errorid,#errorname,#errorssn,#errorage,#errorstate,#errorcity,#errordoa,#errordoj,#erroradrs,#errorrtype,#errormedicine,#errorquantity
 {
     color: red;
     font-weight: bold;
+}
+#errorpatid
+{
+color: red;
+font-weight: bold;
+margin-top:0px;
+padding-top:0px;
+margin-left:10px;
+margin-top:0px;
+color: red;
+    font-weight: bold;
+padding-bottom:0px;
 }

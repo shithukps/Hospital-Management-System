@@ -1,5 +1,11 @@
 $(document).ready(function() {
   if($.cookie("username") != null){
+  var uname=$.cookie("username");
+      var type=uname.substring(0, 3);
+      if(type=="ADE")
+      {
+         $("#options").removeClass("hidden");
+      }
     loadDiagnosticsData();
     $("#addbtn").click(function() {
         var d_name=$("#diagnosticslist option:selected").text();
@@ -46,6 +52,28 @@ $(document).ready(function() {
   else{
        window.location.replace("http://localhost:8080/hospitalLogin");
   }
+  $("#adminoptions").change(function(){
+              var d= $(this).val();
+              if(d!=''){
+                  getval(d);
+              }
+          });//close of change event handler of adminoptions
+          $("#pharmacyoptions").change(function(){
+                  var d= $(this).val();
+                  if(d!=''){
+                      getval(d);
+                  }
+          });//close of change event handler of pharmacyoptions
+              $("#diagnosticsoptions").change(function(){
+                      var d= $(this).val();
+                      if(d!=''){
+                          getval(d);
+                      }
+          });//close of change event handler of diagnosticsoptions
+  $("#logoutBtn").click(function(){
+      $.removeCookie('username');
+      window.location.replace("http://localhost:8080/hospitalLogin");
+    });//Close of event handler of logout button
 });//close of document.ready
 function loadDiagnosticsData(){
     $.ajax({
@@ -87,3 +115,23 @@ function loadSelectedDiagnosticData(d_id){
         }
     });//close of ajax-getDiagnostics
 }//close of function loadSelectedDiagnosticData
+function getval(optionData){
+    switch(optionData){
+        case "Register Patient":window.location.replace("http://localhost:8080/registration");
+        break;
+        case "Update Patient":window.location.replace("http://localhost:8080/updatePatient");
+        break;
+        case "Delete Patient":window.location.replace("http://localhost:8080/deletePatient");
+        break;
+        case "Search Patient":window.location.replace("http://localhost:8080/searchPatients");
+        break;
+        case "View Patient":window.location.replace("http://localhost:8080/viewPatients");
+        break;
+        case "Billing":window.location.replace("http://localhost:8080/billing");
+        break;
+        case "Issue Medicine":window.location.replace("http://localhost:8080/issueMedicines");
+        break;
+        case "Diagnostics":window.location.replace("http://localhost:8080/addDiagnostics");
+        break;
+    }//close of switch
+}//close of function getval

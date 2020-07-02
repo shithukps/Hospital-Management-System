@@ -4,14 +4,16 @@ $(document).ready(function() {
     $("#searchBtn").click(function() {
         grantTotal=0;
         pat_id=$("#patient_id").val();
-        resetFields();
+        $("#pharmacytbl").find("tr:gt(0)").remove();
+        $("#diagnosticstbl").find("tr:gt(0)").remove();
         if(pat_id=='')
         {
-            $("#errorid").slideDown();
-            $("#errorid").html("Enter Patient ID");
+            $("#errorpatid").slideDown();
+            $("#errorpatid").html("Enter Patient ID");
         }
         else
         {
+            $("#errorpatid").slideUp();
             $.ajax({
                      type:"POST",
                      url:'http://localhost:8080/checkPatientExistence/'+pat_id, //checking patient is existing or not
@@ -53,8 +55,8 @@ $(document).ready(function() {
                                     }
                      },
                      error: function () {
-                         $("#errorid").slideDown();
-                         $("#errorid").html("Enter a valid Patient ID");
+                         $("#errorpatid").slideDown();
+                         $("#errorpatid").html("Enter a valid Patient ID");
                      }
             });//close of ajax-checkPatientExistence
         }//close of if-checking value of textbox
@@ -74,10 +76,32 @@ $(document).ready(function() {
             }
         });//close of ajax-discharge
     });//close of click-confirmbtn
+    $("#adminoptions").change(function(){
+            var d= $(this).val();
+            if(d!=''){
+                getval(d);
+            }
+        });//close of change event handler of adminoptions
+        $("#pharmacyoptions").change(function(){
+                var d= $(this).val();
+                if(d!=''){
+                    getval(d);
+                }
+        });//close of change event handler of pharmacyoptions
+            $("#diagnosticsoptions").change(function(){
+                    var d= $(this).val();
+                    if(d!=''){
+                        getval(d);
+                    }
+        });//close of change event handler of diagnosticsoptions
   }
   else{
      window.location.replace("http://localhost:8080/hospitalLogin");
   }
+  $("#logoutBtn").click(function(){
+      $.removeCookie('username');
+      window.location.replace("http://localhost:8080/hospitalLogin");
+    });//Close of event handler of logout button
 });//close of document.ready
 function setDiagnosticsData(data){
     if(data){
@@ -93,8 +117,8 @@ function setDiagnosticsData(data){
                     diagnosticsTotal=diagnosticsTotal+parseFloat(amount); //finding total amount of diagnostics done
             }
             if(txt != ""){
+                txt=txt+"<tr><td class=\"required\">Bill for Diagnostics</td><td class=\"required\">"+diagnosticsTotal+"</td></tr>";
                 $('#diagnosticstbl').append(txt);
-                $("#billfordiagnostics").val(diagnosticsTotal);//setting the value of textbox
             }
         }
     }//close of if-checking the content of data
@@ -102,16 +126,23 @@ function setDiagnosticsData(data){
 }//close of function setDiagnosticsData
 function setTotal(){
     var grantTotal=0;
-    if($("#billfordiagnostics").val()!=""){
-        grantTotal=grantTotal+parseFloat($("#billfordiagnostics").val());
+    var rbill=0;
+    var pbill=0;
+    var dbill=0;
+    if($("#billforroom").text()!="")
+    {
+        rbill=$("#billforroom").text();
     }
-    if($("#billforpharmacy").val()!="") {
-        grantTotal=grantTotal+parseFloat($("#billforpharmacy").val());
+    if($('#diagnosticstbl tr').length>1)
+    {
+        dbill=$("#diagnosticstbl").find("tr:last td:eq(1)").text();
     }
-    if($("#billforroom").val()!=""){
-        grantTotal=grantTotal+parseFloat($("#billforroom").val());
+    if($('#pharmacytbl tr').length>1)
+    {
+        pbill=$("#pharmacytbl").find("tr:last td:eq(1)").text();
     }
-    $("#grandtotal").val(grantTotal);
+    grantTotal=parseFloat(rbill)+parseFloat(pbill)+parseFloat(dbill);
+    $("#grandtotal").text(grantTotal);
 }//close of function setTotal
 function setMedicineData(data){
     if(data){
@@ -129,8 +160,8 @@ function setMedicineData(data){
                     pharmacyTotal=pharmacyTotal+parseFloat(amount); //finding total of prices of medicine
             }
             if(txt != ""){
+                txt=txt+"<tr><td colspan=\"3\" class=\"required\">Bill for Pharmacy</td><td class=\"required\">"+pharmacyTotal+"</td></tr>"
                 $('#pharmacytbl').append(txt);
-                $("#billforpharmacy").val(pharmacyTotal);
             }
         }
     }
@@ -155,15 +186,15 @@ function setPatientData(data){
         $("#tdDoj").text(join_date);
         $("#tdDol").text(leaveDate);
         $("#tdRoom").text(room);
-        $("#noofdays").val(noofdays);
+        $("#noofdays").text(noofdays);
         if(room=="General"){
-            $("#billforroom").val(noofdays*2000);
+            $("#billforroom").text(noofdays*2000);
         }
         else if(room=="Semi"){
-            $("#billforroom").val(noofdays*4000);
+            $("#billforroom").text(noofdays*4000);
         }
         else{
-            $("#billforroom").val(noofdays*8000);
+            $("#billforroom").text(noofdays*8000);
         }
     }
     else{
@@ -171,12 +202,42 @@ function setPatientData(data){
     }
 }//close of function setPatientData
 function resetFields(){
+    $("#patient_id").val("");
+    $("#tdName").text("");
+    $("#tdAge").text("");
+    $("#tdAddress").text("");
+    $("#tdDoj").text("");
+    $("#tdDol").text("");
+    $("#tdRoom").text("");
+    $("#noofdays").text("");
     $("#pharmacytbl").find("tr:gt(0)").remove();
     $("#diagnosticstbl").find("tr:gt(0)").remove();
-    $("#billforroom").val('');
-    $("#noofdays").val('');
-    $("#billforpharmacy").val('');
-    $("#billfordiagnostics").val('');
-    $("#grandtotal").val('');
+    var txt="<tr><td colspan=\"3\">Bill for Pharmacy</td><td>0000</td></tr>";
+    $("#pharmacytbl").append(txt);
+    txt="<tr><td>Bill for diagnostics</td><td>0000</td></tr>";
+    $("#diagnosticstbl").append(txt);
+    $("#billforroom").text('0');
+    $("#noofdays").text('0');
+    $("#grandtotal").text('0');
 }// close of function resetFields
+function getval(optionData){
+    switch(optionData){
+        case "Register Patient":window.location.replace("http://localhost:8080/registration");
+        break;
+        case "Update Patient":window.location.replace("http://localhost:8080/updatePatient");
+        break;
+        case "Delete Patient":window.location.replace("http://localhost:8080/deletePatient");
+        break;
+        case "Search Patient":window.location.replace("http://localhost:8080/searchPatients");
+        break;
+        case "View Patient":window.location.replace("http://localhost:8080/viewPatients");
+        break;
+        case "Billing":window.location.replace("http://localhost:8080/billing");
+        break;
+        case "Issue Medicine":window.location.replace("http://localhost:8080/issueMedicines");
+        break;
+        case "Diagnostics":window.location.replace("http://localhost:8080/addDiagnostics");
+        break;
+    }//close of switch
+}//close of function getval
 

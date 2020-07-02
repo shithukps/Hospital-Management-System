@@ -50,8 +50,22 @@ $(document).ready(function() {
                                 data:loginJson,
                                 success: function(data){
                                     if(data=="success"){
-                                      $.cookie("username", username); //cookie to hold the loggedIn username
-                                      window.location.replace("http://localhost:8080/registration"); //redirection to registration
+                                      $.cookie("username", username);
+                                      var uname=$.cookie("username");
+
+                                      var type=username.substring(0, 3);
+                                      if(type=="ADE")
+                                      {
+                                        window.location.replace("http://localhost:8080/registration");
+                                       }
+                                       else if(type=="PHM")
+                                       {
+                                        window.location.replace("http://localhost:8080/issueMedicines");
+                                       }
+                                       else
+                                       {
+                                            window.location.replace("http://localhost:8080/addDiagnostics");
+                                       }
                                     }
                                     else{
                                             $('#error_cred').slideDown();

@@ -1,177 +1,170 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<title>
-    Billing
-</title>
-<style>
-
-#pharmacytbl,#diagnosticstbl{
-  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-  text-align: center;
-  color: black;
-}
-#pharmacytbl.center,#diagnosticstbl.center{
-    margin-left: auto;
-    margin-right: auto;
-}
-#pharmacytbl td, #pharmacytbl th,#diagnosticstbl td,#diagnosticstbl th {
-  border: 1px solid #ddd;
-  padding: 8px;
-}
-#pharmacytbl tr{background-color: #f2f2f2;}
-#diagnosticstbl tr{background-color: #f2f2f2;}
-
-#pharmacytbl th,#diagnosticstbl th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
-  background-color:#3274d6;
-  color: white;
-}
-#patient_id{
-    border:none;
-    width:50%;
-    height:100%;
-    box-sizing: border-box;
-}
-.wrapper {
-    text-align: center;
-}
-
-.button {
-    top: 45%;
-    border: 3px solid #3274d6;
-    justify-content: center;
-    width: 200px;
-    height: 30px;
-}
-#confirmbtn
-{
-    width: 200px;
-    padding: 10px;
-    margin-top: 10px;
-    margin-left: 150px;
-    background-color: #3274d6;
-    border: 0;
-    cursor: pointer;
-    font-weight: bold;
-    color: #ffffff;
-    transition: background-color 0.2s;
-}
-#confirmbtn:hover {
-        background-color: #2868c7;
-      transition: background-color 0.2s;
-}
-</style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Billing</title>
 </head>
 <body>
-    <div class="container">
-        <div><h1>ABC Hospital</h1></div>
-        <div>
-            <select class="useroptions" name="admin" id="admin">
-                <option value="Select">Select</option>
-                <option value="Register Patient">Register Patient</option>
-                <option value="Update Patient">Update Patient</option>
-                <option value="Delete Patient">Delete Patient</option>
-                <option value="View Patient List">View Patient List</option>
-                <option value="Billing">Billing</option>
-            </select>
-            <select class="useroptions" name="pharmasist" id="pharmasist">
-                <option value="Select">Select</option>
-                <option value="Issue Medicine">Issue Medicine</option>
-                <option value="Get Patient Details">Get Patient Details</option>
-            </select>
-            <select class="useroptions" name="diagnostics" id="diagnostics">
-                <option value="Select">Select</option>
-                <option value="Diagnostics">Diagnostics</option>
-                <option value="Get Patient Details">Get Patient Details</option>
-            </select>
-        </div>
-
-<h2 style="text-align: center;">Billing</h2>
-<table id="patientstbl" class="center">
-  <tr>
-    <th>Patient Id</th>
-    <th>Name</th>
-    <th>Age</th>
-    <th>Address</th>
-    <th>DOJ</th>
-    <th>DOL</th>
-    <th>Type Of Room</th>
-  </tr>
-  <tr>
-    <td>
-        <input type="text" id="patient_id" name="patient_id">
-        <input type="button" id="searchBtn" name="searchBtn" value="Search" >
-    </td>
-      <td><p id="tdName"></p></td>
-      <td><p id="tdAge"></p></td>
-      <td><p id="tdAddress"></p></td>
-      <td><p id="tdDoj"></p></td>
-      <td><p id="tdDol"></p></td>
-      <td><p id="tdRoom"></p></td>
-  </tr> 
-</table>
-<div style="display: none;" id="errorid">
-</div>
-<table class="center" style="margin-top: 10px;">
-    <tr>
-        <td>
-            <label for="noofdays">No Of Days</label>
-            <input type="text" id="noofdays" name="noofdays" style="margin: 20px;" disabled>
-            <label for="billforroom">Bill For Room</label>
-            <input type="text" id="billforroom" name="billforroom" style="margin: 20px;" disabled>
-        </td>
-    </tr>
-</table>
-<h2 style="text-align: center;">Pharmacy Charges</h2>
-<table id="pharmacytbl" class="center">
-    <tr>
-        <th>Medicine</th>
-        <th>Quantity</th>
-        <th>Rate</th>
-        <th>Amount</th>
-    </tr>
-</table>
-<table align="center" class="center" style="margin-top: 10px;">
-    <tr>
-        <td>
-            <label for="billforpharmacy">Bill For Pharmacy</label>
-            <input type="text" id="billforpharmacy" name="billforpharmacy" style="margin: 20px;" disabled>
-        </td>
-    </tr>
-</table>
-</br>
-<h2 style="text-align: center;">Diagnostics Charges</h2>
-<table id="diagnosticstbl" class="center">
-    <tr>
-        <th>Name of the Test</th>
-        <th>Amount</th> 
-    </tr>
-</table>
-<table align="center" class="center" style="margin-top: 10px;">
-    <tr>
-        <td>
-            <label for="billfordiagnostics">Bill For Diagnostics</label>
-            <input type="text" id="billfordiagnostics" name="billfordiagnostics" style="margin: 20px;" disabled>
-        </td>
-    </tr>
-</table>
-<table align="center"  class="center">
-    <tr>
-        <td>
-            <input type="button" id="confirmbtn" name="confirmbtn" value="Confirm" style="margin: 20px;">
-            <label for="grandtotal">Grand Total</label>
-            <input type="text" id="grandtotal" name="grandtotal" style="margin: 20px;" disabled>
-        </td>
-    </tr>
-</table>
+<!-- Start Header Div -->
+<div class="row">
+    <div class="col-sm-4"></div>
+    <div class="col-sm-4"><h1>ABC Hospital</h1></div>
+    <div class="col-sm-4"><button id="logoutBtn" name="logoutBtn" class='btn btn-danger pull-right' style="margin-right: 20px;margin-top: 20px; font-weight: bold;">Logout</button> 
     </div>
-<link rel="stylesheet" href="assets/css/main.css">
+</div>
+<!-- Close Header Div -->
+<!-- Start Options Div -->
+<div class="row" style="align-items: center;justify-content: center;">
+    <div class="col-sm-2">
+        <select class="form-control" name="adminoptions" id="adminoptions">
+            <option value="Select Action">Select Action</option>
+            <option value="Register Patient">Register Patient</option>
+            <option value="Update Patient">Update Patient</option>
+            <option value="Delete Patient">Delete Patient</option>
+            <option value="Search Patient">Search Patient</option>
+            <option value="View Patient">View Patient</option>
+            <option value="Billing">Billing</option>
+        </select>
+    </div>
+    <div class="col-sm-2">
+        <select class="form-control" name="pharmacyoptions" id="pharmacyoptions">
+            <option value="Select Action">Select Action</option>
+            <option value="Issue Medicine">Issue Medicine</option>
+        </select>
+    </div>
+    <div class="col-sm-2">
+        <select class="form-control" name="diagnosticsoptions" id="diagnosticsoptions">
+            <option value="Select Action">Select Action</option>
+            <option value="Diagnostics">Diagnostics</option>
+        </select>
+    </div>
+</div>
+<!-- Close Options Div -->
+<div class="row">
+    <div class="col">
+        <h2>Patient Billing</h2>
+    </div>
+</div>
+<!-- Start Patient Details Div -->
+<div class="container"  style="margin-top: 10px; background-color: white; color: black; width: 100%;">
+    <table id="patientstbl" class="table table-hover" style="text-align: center;">
+        <thead>
+        <tr>
+            <th style="width: 150px;">Patient ID</th>
+            <th style="width: 150px;">Name</th>
+            <th style="width: 50px;">Age</th>
+            <th style="width: 150px;">Address</th>
+            <th style="width: 75px;">DOJ</th>
+            <th style="width: 75px;">DOL</th>
+            <th style="width: 100px;">Type Of Room</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <input type="text" style="width: 100px;" id="patient_id" name="patient_id">
+                    <input type="button" id="searchBtn" class="greenButton" style="width: 100px;border-radius: 0px;padding-top: 3px;padding-bottom: 3px;" name="searchBtn" value="Search" >
+                </td>
+                  <td><p id="tdName"></p></td>
+                  <td><p id="tdAge"></p></td>
+                  <td style="white-space:nowrap;max-width:150px;overflow:hidden;text-overflow:ellipsis;"><p id="tdAddress"></p></td>
+                  <td><p id="tdDoj"></p></td>
+                  <td><p id="tdDol"></p></td>
+                  <td><p id="tdRoom"></p></td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="hidden" id="errorpatid"></div>
+</div>
+<!-- Close Patient Details Div -->
+<!-- Start Room Bill Div -->
+<div class="container" style="margin-top: 20px;">
+    <div class="form-inline" style="align-items: center;justify-content: center; color: black;">
+        <div class="form-group">
+            <label for="noofdays" style="font-size:small; color: white; font-weight: bold;margin-right: 20px;">No Of Days : </label>
+            <label id="noofdays" name="noofdays" style="font-size:small;color: white; font-weight: bold;margin-right: 20px;">0</label>
+        </div>
+        <div class="form-group">
+            <label for="billforroom" style="font-size:small;color: white; font-weight: bold;margin-right: 20px;">Bill For Room : </label>
+            <label id="billforroom" name="billforroom" style="font-size:small;color: white; font-weight: bold">0</label>
+        </div>
+    </div>
+</div>
+<!-- Close Room Bill Div -->
+<div class="row">
+    <div class="col">
+        <h2>Pharmacy Charges</h2>
+    </div>
+</div>
+<!-- Start Medicine Bill Div -->
+<div class="container"  style="margin-top: 10px; background-color: white; color: black; width: 40%;">
+    <table id="pharmacytbl" class="table table-hover" style="text-align: center;">
+        <thead>
+        <tr>
+            <th>Medicine</th>
+            <th>Quantity</th>
+            <th>Rate</th>
+            <th>Amount</th>
+        </tr>
+        </thead>
+        <tr>
+            <td colspan="3">
+                Bill for Pharmacy
+            </td>
+            <td>0000</td>
+        </tr>
+    </table>
+</div>
+<!-- Close Medicine Bill Div -->
+<div class="row">
+    <div class="col">
+        <h2>Diagnostics Charges</h2>
+    </div>
+</div>
+<!-- Start Diagnostics Bill Div -->
+<div class="container"  style="margin-top: 10px; background-color: white; color: black; width: 30%;">
+    <table id="diagnosticstbl" class="table table-hover" style="text-align: center;">
+        <thead>
+        <tr>
+            <th>Name of the Test</th>
+            <th>Amount</th> 
+        </tr>
+        </thead>
+        <tr>
+            <td>
+                Bill for diagnostics
+            </td>
+            <td>
+                0000
+            </td>
+        </tr>
+    </table>
+</div>
+<!-- Close Diagnostics Bill Div -->
+<!-- Start Grand Total Bill Div -->
+<div class="container" style="margin-top: 20px; margin-bottom: 20px;">
+    <div class="form-inline" style="align-items: center;justify-content: center; color: black;">
+        <div class="form-group">
+            <input type="button" id="confirmbtn" class="greenButton" style="width: 200px;margin-right: 20px;padding-top: 10px;padding-bottom: 10px;" name="confirmbtn" value="Confirm"/>
+            <label for="grandtotal" style="color: white; font-weight: bold;margin-right: 20px;">Grand Total : </label>
+            <label id="grandtotal" style="color: white; font-weight: bold;margin-right: 20px;" name="grandtotal">0</label>
+        </div>
+    </div>
+</div>
+<!-- Close Grand Total Bill Div -->
+<!-- Scripts and CSS Links -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
+<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+<link rel="stylesheet" href="assets/css/font-awesome.min.css">
+<link rel="stylesheet" href="assets/css/mainstyles.css">
+<script src="assets/js/jquery.growl.js"></script>
+<script src="assets/js/jquery.dataTables.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script type="text/javascript" src="assets/js/billing.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type ="text/javascript" src = "http://cdn.jsdelivr.net/jquery.cookie/1.3.1/jquery.cookie.js"></script>
+<script src="assets/js/popper.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/billing.js"></script>
 </body>
 </html>

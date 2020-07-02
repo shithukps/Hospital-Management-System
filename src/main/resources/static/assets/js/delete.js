@@ -24,9 +24,8 @@ $(document).ready(function() {
                                                 },
                                                 success: function(data){
                                                     if(data.toString()!=''){
-                                                            alert("Found patient record");
+
                                                             $("#deleteBtn").prop('disabled',false);
-                                                            $("#ws_pat_id").prop('disabled',true);
                                                             setFields(data); //setting the value in corresponding fields
                                                     }
                                                     else{
@@ -62,16 +61,32 @@ $(document).ready(function() {
             }
         });//close of ajax-delete
     });//close of click-deleteBtn
-    $("#useroptions").change(function(){
-        var d= $(this).val();
-        if(d!=''){
-            getval(d);
-        }
-    });//close of change event listener of useroptions
+    $("#adminoptions").change(function(){
+            var d= $(this).val();
+            if(d!=''){
+                getval(d);
+            }
+        });//close of change event handler of adminoptions
+        $("#pharmacyoptions").change(function(){
+                var d= $(this).val();
+                if(d!=''){
+                    getval(d);
+                }
+        });//close of change event handler of pharmacyoptions
+            $("#diagnosticsoptions").change(function(){
+                    var d= $(this).val();
+                    if(d!=''){
+                        getval(d);
+                    }
+        });//close of change event handler of diagnosticsoptions
   }
   else{
        window.location.replace("http://localhost:8080/hospitalLogin");
   }
+  $("#logoutBtn").click(function(){
+      $.removeCookie('username');
+      window.location.replace("http://localhost:8080/hospitalLogin");
+    });//Close of event handler of logout button
 });//close of document.ready
 function getval(optionData){
     switch(optionData){
@@ -87,7 +102,7 @@ function getval(optionData){
         break;
         case "Billing":window.location.replace("http://localhost:8080/billing");
         break;
-        case "Issue Medicine":window.location.replace("http://localhost:8080/issueMedicine");
+        case "Issue Medicine":window.location.replace("http://localhost:8080/issueMedicines");
         break;
         case "Diagnostics":window.location.replace("http://localhost:8080/addDiagnostics");
         break;

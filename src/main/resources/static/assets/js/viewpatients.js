@@ -15,16 +15,39 @@ $(document).ready(function() {
             }
         }
     });//close of ajax-getAll
-    $("#useroptions").change(function(){
+    $("#adminoptions").change(function(){
         var d= $(this).val();
         if(d!=''){
             getval(d);
         }
-    });//close of change event handler of useroptions
+    });//close of change event handler of adminoptions
+    $("#pharmacyoptions").change(function(){
+            var d= $(this).val();
+            if(d!=''){
+                getval(d);
+            }
+    });//close of change event handler of pharmacyoptions
+        $("#diagnosticsoptions").change(function(){
+                var d= $(this).val();
+                if(d!=''){
+                    getval(d);
+                }
+    });//close of change event handler of diagnosticsoptions
+
   }
   else{
        window.location.replace("http://localhost:8080/hospitalLogin");
   }
+  $('#patientstbl').DataTable( {
+              "pagingType": "full_numbers",
+              "searching": false,
+              "ordering": false,
+              "lengthChange": false
+  });
+  $("#logoutBtn").click(function(){
+    $.removeCookie('username');
+    window.location.replace("http://localhost:8080/hospitalLogin");
+  });//Close of event handler of logout button
 });//close of document.ready
 function populateTable(data){
     if(data){
@@ -55,7 +78,7 @@ function getval(optionData){
         break;
         case "Billing":window.location.replace("http://localhost:8080/billing");
         break;
-        case "Issue Medicine":window.location.replace("http://localhost:8080/issueMedicine");
+        case "Issue Medicine":window.location.replace("http://localhost:8080/issueMedicines");
         break;
         case "Diagnostics":window.location.replace("http://localhost:8080/addDiagnostics");
         break;

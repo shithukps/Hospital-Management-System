@@ -30,16 +30,32 @@ $(document).ready(function() {
             });//close of ajax-search
         }
     });//close of click-getBtn
-    $("#useroptions").change(function(){
-        var d= $(this).val();
-        if(d!=''){
-            getval(d);
-        }
-    });//close of change event handler-useroptions
+    $("#adminoptions").change(function(){
+            var d= $(this).val();
+            if(d!=''){
+                getval(d);
+            }
+        });//close of change event handler of adminoptions
+        $("#pharmacyoptions").change(function(){
+                var d= $(this).val();
+                if(d!=''){
+                    getval(d);
+                }
+        });//close of change event handler of pharmacyoptions
+            $("#diagnosticsoptions").change(function(){
+                    var d= $(this).val();
+                    if(d!=''){
+                        getval(d);
+                    }
+        });//close of change event handler of diagnosticsoptions
   }
   else{
        window.location.replace("http://localhost:8080/hospitalLogin");
   }
+  $("#logoutBtn").click(function(){
+      $.removeCookie('username');
+      window.location.replace("http://localhost:8080/hospitalLogin");
+    });//Close of event handler of logout button
 });
 function getval(optionData){
     switch(optionData){
@@ -55,7 +71,7 @@ function getval(optionData){
         break;
         case "Billing":window.location.replace("http://localhost:8080/billing");
         break;
-        case "Issue Medicine":window.location.replace("http://localhost:8080/issueMedicine");
+        case "Issue Medicine":window.location.replace("http://localhost:8080/issueMedicines");
         break;
         case "Diagnostics":window.location.replace("http://localhost:8080/addDiagnostics");
         break;
@@ -87,11 +103,11 @@ function setFields(data){
 }//close of function setFields
 function resetFields()
 {
-    document.getElementById("ws_pat_name").value="";
-    document.getElementById("ws_age").value="";
-    document.getElementById("ws_adrs").value="";
-    document.getElementById("ws_city").value="Select";
-    document.getElementById("ws_state").value="Select";
-    document.getElementById("ws_doj").value="";
-    document.getElementById("ws_rtype").value="Select";
+    $("#ws_pat_name").val("");
+            $("#ws_age").val("");
+            $("#ws_adrs").val("");
+            $("#ws_city").val("");
+            $("#ws_state").val("");
+            $("#ws_doj").val("");
+            $("#ws_rtype").val("");
 }//close of function resetFields

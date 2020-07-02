@@ -6,23 +6,47 @@
     <title>Update Patient</title>
 </head>
 <body>
+<!-- Start Header Div -->
 <div class="row">
-    <div class="col">
-        <h1>ABC Hospital</h1>
+    <div class="col-sm-4"></div>
+    <div class="col-sm-4"><h1>ABC Hospital</h1></div>
+    <div class="col-sm-4"><button id="logoutBtn" name="logoutBtn" class='btn btn-danger pull-right' style="margin-right: 20px;margin-top: 20px; font-weight: bold;">Logout</button> 
     </div>
 </div>
+<!-- Close Header Div -->
+<!-- Start Options Div -->
 <div class="row" style="align-items: center;justify-content: center;">
     <div class="col-sm-2">
-        <select class="form-control" name="useroptions" id="useroptions">
+        <select class="form-control" name="adminoptions" id="adminoptions">
             <option value="Select Action">Select Action</option>
+            <option value="Register Patient">Register Patient</option>
+            <option value="Update Patient">Update Patient</option>
+            <option value="Delete Patient">Delete Patient</option>
+            <option value="Search Patient">Search Patient</option>
+            <option value="View Patient">View Patient</option>
+            <option value="Billing">Billing</option>
+        </select>
+    </div>
+    <div class="col-sm-2">
+        <select class="form-control" name="pharmacyoptions" id="pharmacyoptions">
+            <option value="Select Action">Select Action</option>
+            <option value="Issue Medicine">Issue Medicine</option>
+        </select>
+    </div>
+    <div class="col-sm-2">
+        <select class="form-control" name="diagnosticsoptions" id="diagnosticsoptions">
+            <option value="Select Action">Select Action</option>
+            <option value="Diagnostics">Diagnostics</option>
         </select>
     </div>
 </div>
+<!-- Close Options Div -->
 <div class="row">
     <div class="col">
         <h2>Update Patient</h2>
     </div>
 </div>
+<!-- Start Update Patient Details Form Div -->
 <div class="signup-form">
     <form action="" method="post" class="form-horizontal">
         <div class="form-group row">
@@ -34,7 +58,7 @@
         <div class="form-group row">
             <label class="col-form-label col-4"></label>
             <div class="col-8">
-                <button type="button" name="getBtn" id="getBtn" class="btn btn-primary btn-lg">Get</button>
+                <button type="button" class="greenButton" style="width: 100%; padding: 10px;" name="getBtn" id="getBtn">Get</button>
                 <div class="hidden" id="errorid"></div>
             </div>
         </div>
@@ -104,16 +128,19 @@
         </div>
         <div class="form-group row">
             <div class="col-8 offset-4">
-                <button type="button" name="updateBtn" id="updateBtn" class="btn btn-primary btn-lg">Update</button>
+                <button type="button" class="blueButton" style="width: 100%; padding: 10px;" name="updateBtn" id="updateBtn">Update</button>
             </div>
         </div>
-
     </form>
 </div>
+<!-- Close Update Patient Details Form Div -->
+<!-- Scripts and CSS Links-->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
 <link rel="stylesheet" href="assets/css/bootstrap.min.css">
 <link rel="stylesheet" href="assets/css/font-awesome.min.css">
 <link rel="stylesheet" href="assets/css/mainstyles.css">
+<script src="assets/js/jquery.growl.js"></script>
+<script src="assets/js/jquery.dataTables.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type ="text/javascript" src = "http://cdn.jsdelivr.net/jquery.cookie/1.3.1/jquery.cookie.js"></script>

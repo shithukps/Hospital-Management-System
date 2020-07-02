@@ -9,6 +9,7 @@ import java.util.Date;
 @Entity
 @Table
 public class Patient {
+    @Size(max=9)
     @Id @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name = "patient_id")
     @NotNull
@@ -61,7 +62,7 @@ public class Patient {
     public Patient() {
     }
 
-    public Patient(int patient_id, @Size(max = 9) String ssnid, @Size(max = 30) String patient_name, @Size(max = 50) String address, int age, String date_of_admission, @Size(max = 10) String room_type, @Size(max = 20) String city, @Size(max = 20) String state, @Size(max = 15) String status) {
+    public Patient(@Size(max = 9) int patient_id, @Size(max = 9) String ssnid, @Size(max = 30) String patient_name, @Size(max = 50) String address, int age, String date_of_admission, @Size(max = 10) String room_type, @Size(max = 20) String city, @Size(max = 20) String state, @Size(max = 15) String status) {
         this.patient_id = patient_id;
         this.ssnid = ssnid;
         this.patient_name = patient_name;

@@ -1,4 +1,5 @@
 $(document).ready(function() {
+  if($.cookie("username") != null){
     loadMedicinesData();
     var available=0;
     $("#addbtn").click(function() {
@@ -108,4 +109,8 @@ $(document).ready(function() {
         var rate=$("#rate").val();
         $("#amount").val(q*rate);
     });//close of keyup of textbox quantity
+  }
+  else{
+         window.location.replace("http://localhost:8080/hospitalLogin");
+  }
 });//close of document.ready

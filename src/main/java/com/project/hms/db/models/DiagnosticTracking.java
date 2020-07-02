@@ -6,14 +6,15 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 
 @Table(name="diagnostic_tracking")
 public class DiagnosticTracking {
-
+    @Size(max=9)
     @Column(name = "patient_id")
     @NotNull
-    private Integer patient_id;
+    private int patient_id;
 
     @Column(name = "test_id")
     @NotNull

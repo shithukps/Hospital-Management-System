@@ -1,7 +1,7 @@
 $(document).ready(function() {
+  if($.cookie("username") != null){
     $.removeCookie('pat_id');
     $("#issuebtn").prop('disabled',true);
-    enableOptions();//for enabling the options for the loggedIn user
     var pat_id;
     $("#searchBtn").click(function() {
         pat_id=$("#patient_id").val();
@@ -15,7 +15,7 @@ $(document).ready(function() {
             $("#errorid").slideUp();
             $.ajax({
                             type:"POST",
-                            url:'http://localhost:8080/checkPatientExistence/'+pat_id,
+                            url:'http://localhost:8080/checkPatientExistence/'+pat_id, //checking patient is existing or not
                             headers:{
                                 "Content-Type":"application/json"
                             },
@@ -45,10 +45,6 @@ $(document).ready(function() {
                                         }
                                     });//close of ajax-getBillingDetails
                                 }
-                                else{
-                                    $("#errorid").slideDown();
-                                    $("#errorid").html("Enter a valid Patient ID");
-                                }//close of if
                             },
                             error: function () {
                                $("#errorid").slideDown();
@@ -61,17 +57,17 @@ $(document).ready(function() {
             $.cookie("pat_id",$("#patient_id").val());
             window.location.replace("http://localhost:8080/medicinesList");
     });//close of issuebtn click
- });//close of document.ready
-function setMedicineData(data)
-{
-    if(data)
-    {
+  }
+  else{
+       window.location.replace("http://localhost:8080/hospitalLogin");
+  }
+});//close of document.ready
+function setMedicineData(data){
+    if(data){
         var len = data.length;
         var txt = "";
-        if(len > 0)
-        {
-            for(var i=0;i!=len;i++)
-            {
+        if(len > 0){
+            for(var i=0;i!=len;i++){
                     var arr=data[i].split(",");
                     var medicine_name=arr[0];
                     var qty_issued=arr[1];
@@ -80,20 +76,17 @@ function setMedicineData(data)
                     txt += "<tr><td>"+medicine_name+"</td><td>"+qty_issued+"</td><td>"+rate+"</td><td>"+amount+"</td></tr>";
 
             }//close of for loop
-            if(txt != "")
-            {
+            if(txt != ""){
                 $('#medicinestbl').find("tr:gt(0)").remove();
                 $('#medicinestbl').append(txt);
             }
         }//close of if-checking data length
     }//close of if-checking data
 }//close of setMedicineData
-function setPatientData(data)
-{
+function setPatientData(data){
     var pat_id=$("#patient_id").val();
     var len = data.length;
-    if(len > 0)
-    {
+    if(len > 0){
         var arr=data.split(",");
         var name=arr[0];
         var age=arr[1];
@@ -111,22 +104,4 @@ function setPatientData(data)
     else{
         alert("Empty List");
     }//close of if-checking data length
-
 }//close of setPatientData
-function enableOptions()
-{
-    var uname=$.cookie("username");
-    var type=uname.substring(0, 3);
-    document.getElementById("admin").disabled=true;
-    document.getElementById("pharmasist").disabled=true;
-    document.getElementById("diagnostics").disabled=true;
-    if(type=="ADE"){
-        document.getElementById("admin").disabled=false;
-    }
-    else if(type=="PHM"){
-        document.getElementById("pharmasist").disabled=false;
-    }
-    else{
-        document.getElementById("diagnostics").disabled=false;
-    }
-}//close of enableOptions

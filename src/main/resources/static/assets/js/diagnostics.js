@@ -1,4 +1,5 @@
 $(document).ready(function() {
+  if($.cookie("username") != null){
     loadDiagnosticsData();
     $("#addbtn").click(function() {
         var d_name=$("#diagnosticslist option:selected").text();
@@ -41,6 +42,10 @@ $(document).ready(function() {
             loadSelectedDiagnosticData(d);
         }
     });//close of change event handler of select box diagnosticslist
+  }
+  else{
+       window.location.replace("http://localhost:8080/hospitalLogin");
+  }
 });//close of document.ready
 function loadDiagnosticsData(){
     $.ajax({

@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    enableOptions();
+  if($.cookie("username") != null){
     var pat_id;
     $("#searchBtn").click(function() {
         pat_id=$("#patient_id").val();
@@ -12,33 +12,54 @@ $(document).ready(function() {
         {
             $("#errorid").slideUp();
             $.ajax({
-                type:"POST",
-                url:'http://localhost:8080/getBillingDetails/'+pat_id,
-                headers:{
-                    "Content-Type":"application/json"
-                },
-                success: function(data)
-                {
-                    setPatientData(data);//for setting values on respective fields
-                    $.ajax({
-                        type:"POST",
-                        url:'http://localhost:8080/getDiagnosticsDetails/'+pat_id,
-                        headers:{
+                    type:"POST",
+                    url:'http://localhost:8080/checkPatientExistence/'+pat_id, //checking if patient exists in patient table
+                    headers:{
                             "Content-Type":"application/json"
-                        },
-                        success: function(data)
-                        {
-                            setDiagnosticsData(data);
-                        }
-                    });//close of ajax-getDiagnosticsDetails
-                }
-            });//close of ajax-getBillingDetails
+                    },
+                    success: function(data){
+                                        if(data==1){
+                                                       $.ajax({
+                                                                type:"POST",
+                                                                url:'http://localhost:8080/getBillingDetails/'+pat_id, //getting patient details
+                                                                headers:{
+                                                                        "Content-Type":"application/json"
+                                                                },
+                                                                success: function(data){
+                                                                    setPatientData(data);//for setting values on respective fields
+                                                                    $.ajax({
+                                                                                type:"POST",
+                                                                                url:'http://localhost:8080/getDiagnosticsDetails/'+pat_id, //getting diagnostic details
+                                                                                headers:{
+                                                                                            "Content-Type":"application/json"
+                                                                                },
+                                                                                success: function(data){
+                                                                                        setDiagnosticsData(data);
+                                                                                }
+                                                                    });//close of ajax-getDiagnosticsDetails
+                                                                }
+                                                        });//close of ajax-getBillingDetails
+                                        }
+                                        else{
+                                               $("#errorid").slideDown();
+                                               $("#errorid").html("Enter valid patient ID");
+                                        }//close of if
+                    },
+                    error: function () {
+                                         $("#errorid").slideDown();
+                                         $("#errorid").html("Enter a valid Patient ID");
+                    }
+            });//close of ajax-checkPatientExistence
         }//close of if
     });//close of searchBtn
     $("#addDiagBtn").click(function() {
         $.cookie("pat_id",$("#patient_id").val());//creating a cookie named pat_id
         window.location.replace("http://localhost:8080/diagnosticsList");//redirecting to the page for adding new diagnostics
     });//close of click-addDiagBtn
+  }
+  else{
+         window.location.replace("http://localhost:8080/hospitalLogin");
+  }
 });//close of ready
 function setDiagnosticsData(data){
     if(data){
@@ -80,22 +101,6 @@ function setPatientData(data){
         alert("Empty List");
     }//close of if
 }//close of function setPatientData
-function enableOptions(){
-    var uname=$.cookie("username");
-    var type=uname.substring(0, 3);
-    document.getElementById("admin").disabled=true;
-    document.getElementById("pharmasist").disabled=true;
-    document.getElementById("diagnostics").disabled=true;
-    if(type=="ADE"){
-        document.getElementById("admin").disabled=false;
-    }
-    else if(type=="PHM"){
-        document.getElementById("pharmasist").disabled=false;
-    }
-    else{
-        document.getElementById("diagnostics").disabled=false;
-    }//close of if checking the type of loggedIn user
-}//close of function enableOptions
 function resetFields(){
     $("#patient_id").val('');
 }//close of function resetFields

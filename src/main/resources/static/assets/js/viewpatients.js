@@ -1,55 +1,48 @@
 $(document).ready(function() {
-    enableOptions();
+  if($.cookie("username") != null){
     $.ajax({
         type:"POST",
         url:'http://localhost:8080/getAll',
         headers:{
             "Content-Type":"application/json"
         },
-        success: function(data)
-        {
-            if(data.toString()!='')
-            {
+        success: function(data){
+            if(data.toString()!=''){
                 populateTable(data);
             }
-            else
-            {
+            else{
                 alert("No Records");
             }
         }
-    });
+    });//close of ajax-getAll
     $("#useroptions").change(function(){
         var d= $(this).val();
         if(d!=''){
             getval(d);
         }
-    });
-});
-function populateTable(data)
-{
-    alert("sdasd");
-    if(data)
-    {
+    });//close of change event handler of useroptions
+  }
+  else{
+       window.location.replace("http://localhost:8080/hospitalLogin");
+  }
+});//close of document.ready
+function populateTable(data){
+    if(data){
         var len = data.length;
         var txt = "";
-        if(len > 0)
-        {
-            for(var i=0;i!=len;i++)
-            {
+        if(len > 0){
+            for(var i=0;i!=len;i++){
                     txt += "<tr><td>"+data[i].patient_id+"</td><td>"+data[i].patient_name+"</td><td>"+data[i].age+"</td><td>"+data[i].address+"</td><td>"+data[i].date_of_admission+"</td><td>"+data[i].room_type+"</td></tr>";
             }
-            if(txt != "")
-            {
+            if(txt != ""){
                 $('#patientstbl').find("tr:gt(0)").remove();
                 $('#patientstbl').append(txt);
             }
         }
     }
-}
-function getval(optionData)
-{
-    switch(optionData)
-    {
+}//close of function populateTable
+function getval(optionData){
+    switch(optionData){
         case "Register Patient":window.location.replace("http://localhost:8080/registration");
         break;
         case "Update Patient":window.location.replace("http://localhost:8080/updatePatient");
@@ -66,27 +59,5 @@ function getval(optionData)
         break;
         case "Diagnostics":window.location.replace("http://localhost:8080/addDiagnostics");
         break;
-    }
-}
-function enableOptions()
-{
-    var uname=$.cookie("username");
-    var type=uname.substring(0, 3);
-    if(type=="ADE")
-    {
-        $("#useroptions").append(new Option("Register Patient", "Register Patient"));
-        $("#useroptions").append(new Option("Update Patient", "Update Patient"));
-        $("#useroptions").append(new Option("Delete Patient", "Delete Patient"));
-        $("#useroptions").append(new Option("Search Patient", "Search Patient"));
-        $("#useroptions").append(new Option("View Patients", "View Patients"));
-        $("#useroptions").append(new Option("Billing", "Billing"));
-    }
-    else if(type=="PHA")
-    {
-        $("#useroptions").append(new Option("Issue Medicine", "Issue Medicine"));
-    }
-    else
-    {
-        $("#useroptions").append(new Option("Diagnostics", "Diagnostics"));
-    }
-}
+    }//close of switch
+}//close of function getval

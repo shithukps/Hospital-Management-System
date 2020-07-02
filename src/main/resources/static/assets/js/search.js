@@ -1,46 +1,48 @@
 $(document).ready(function() {
-    enableOptions();
+  if($.cookie("username") != null){
     $("#getBtn").click(function() {
         var pat_id=$("#ws_pat_id").val();
-        if(pat_id=='')
-        {
+        if(pat_id==''){
             $("#errorid").slideDown();
             $("#errorid").html("Provide Patient ID");
         }
-        else
-        {
+        else{
+            $("#errorid").slideUp();
             $.ajax({
                 type:"POST",
-                url:'http://localhost:8080/search/'+pat_id,
+                url:'http://localhost:8080/search/'+pat_id, //getting the details of patient
                 headers:{
                     "Content-Type":"application/json"
                 },
-                success: function(data)
-                {
-                    if(data.toString()!='')
-                    {
-                        setFields(data);
+                success: function(data){
+                    if(data.toString()!=''){
+                        setFields(data); //setting values of corresponding fields
                     }
-                    else
-                    {
-                        resetFields();
+                    else{
+                        resetFields(); //clear the fields
                         alert("Patient Record Not Found");
                     }
+                },
+                error: function () {
+                    $("#errorid").slideDown();
+                    $("#errorid").html("Enter a valid Patient ID");
                 }
-            });
+            });//close of ajax-search
         }
-    });
+    });//close of click-getBtn
     $("#useroptions").change(function(){
         var d= $(this).val();
         if(d!=''){
             getval(d);
         }
-    });
+    });//close of change event handler-useroptions
+  }
+  else{
+       window.location.replace("http://localhost:8080/hospitalLogin");
+  }
 });
-function getval(optionData)
-{
-    switch(optionData)
-    {
+function getval(optionData){
+    switch(optionData){
         case "Register Patient":window.location.replace("http://localhost:8080/registration");
         break;
         case "Update Patient":window.location.replace("http://localhost:8080/updatePatient");
@@ -57,13 +59,11 @@ function getval(optionData)
         break;
         case "Diagnostics":window.location.replace("http://localhost:8080/addDiagnostics");
         break;
-    }
-}
-function setFields(data)
-{
+    }//close of switch
+}//close of function getval
+function setFields(data){
     len = data.length;
-    if(len > 0)
-    {
+    if(len > 0){
         var arr=data.split(",");
         var name=arr[0];
         var age=arr[1];
@@ -80,34 +80,11 @@ function setFields(data)
         $("#ws_doj").val(date);
         $("#ws_rtype").val(room);
     }
-    else
-    {
+    else{
         alert("Patient ID Not Found");
         resetFields();
     }
-}
-function enableOptions()
-{
-    var uname=$.cookie("username");
-    var type=uname.substring(0, 3);
-    if(type=="ADE")
-    {
-        $("#useroptions").append(new Option("Register Patient", "Register Patient"));
-        $("#useroptions").append(new Option("Update Patient", "Update Patient"));
-        $("#useroptions").append(new Option("Delete Patient", "Delete Patient"));
-        $("#useroptions").append(new Option("Search Patient", "Search Patient"));
-        $("#useroptions").append(new Option("View Patients", "View Patients"));
-        $("#useroptions").append(new Option("Billing", "Billing"));
-    }
-    else if(type=="PHA")
-    {
-        $("#useroptions").append(new Option("Issue Medicine", "Issue Medicine"));
-    }
-    else
-    {
-        $("#useroptions").append(new Option("Diagnostics", "Diagnostics"));
-    }
-}
+}//close of function setFields
 function resetFields()
 {
     document.getElementById("ws_pat_name").value="";
@@ -117,4 +94,4 @@ function resetFields()
     document.getElementById("ws_state").value="Select";
     document.getElementById("ws_doj").value="";
     document.getElementById("ws_rtype").value="Select";
-}
+}//close of function resetFields

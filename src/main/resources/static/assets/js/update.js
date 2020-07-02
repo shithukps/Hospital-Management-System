@@ -1,66 +1,56 @@
 $(document).ready(function() {
-    enableOptions();
+  if($.cookie("username") != null){
     $("updateBtn").prop('disabled',true);
     $("#ws_pat_id").blur(function(){
         var patient_id =jQuery.trim($('#ws_pat_id').val());
-        if(patient_id=='')
-        {
+        if(patient_id==''){
             $('#errorid').slideDown();
             $('#errorid').html('Please provide patient id');
         }
-        else
-        {
+        else{
             $('#errorid').slideUp();
         }
-    });
+    });//close of blur-ID
     $("#ws_pat_name").blur(function(){
         var patient_name= jQuery.trim($('#ws_pat_name').val());
-        if(patient_name=='')
-        {
+        if(patient_name==''){
             $('#errorname').slideDown();
             $('#errorname').html('Please provide patient name');
         }
-        else
-        {
+        else{
             $('#errorname').slideUp();
         }
-    });
+    });//close of blur-name
     $("#ws_age").blur(function(){
         var patient_age = jQuery.trim($('#ws_age').val());
-        if(patient_age=='')
-        {
+        if(patient_age==''){
             $('#errorage').slideDown();
             $('#errorage').html('Please provide patient age');
         }
-        else
-        {
+        else{
             $('#errorage').slideUp();
         }
-    });
+    });//close of blur-age
     $("#ws_rtype").blur(function(){
         rtype = jQuery.trim($('#ws_rtype').val());
-        if(rtype=='Select')
-        {
+        if(rtype=='Select'){
             $('#errorrtype').slideDown();
             $('#errorrtype').html('Please select room type');
         }
-        else
-        {
+        else{
             $('#errorrtype').slideUp();
         }
-    });
+    });//close of blur-room
     $("#ws_doj").blur(function(){
         var doa = jQuery.trim($('#ws_doj').val());
-        if(doa=='')
-        {
+        if(doa==''){
             $('#errordoa').slideDown();
             $('#errordoa').html('Please provide date of admission');
         }
-        else
-        {
+        else{
                $('#errordoa').slideUp();
         }
-    });
+    });//close of blur-doj
     $("#ws_adrs").blur(function(){
         var address = jQuery.trim($('#ws_adrs').val());
         if(address=='')
@@ -75,59 +65,54 @@ $(document).ready(function() {
     });
     $("#ws_state").blur(function(){
         var state = jQuery.trim($('#ws_state').val());
-        if(state=='Select')
-        {
+        if(state=='Select'){
             $('#errorstate').slideDown();
             $('#errorstate').html('Please provide state');
         }
-        else
-        {
+        else{
             $('#errorstate').slideUp();
         }
-    });
+    });//close of blur-state
     $("#ws_city").blur(function(){
          var city = jQuery.trim($('#ws_city').val());
-         if(city=='Select')
-         {
+         if(city=='Select'){
             $('#errorcity').slideDown();
             $('#errorcity').html('Please provide city');
          }
-         else
-         {
+         else{
             $('#errorcity').slideUp();
          }
-    });
+    });//close of blur-city
     $("#getBtn").click(function() {
         var pat_id=jQuery.trim($("#ws_pat_id").val());
-        if(pat_id=='')
-        {
+        if(pat_id==''){
             $("#errorid").slideDown();
             $("#errorid").html("Provide Patient ID");
         }
-        else
-        {
+        else{
             $.ajax({
                 type:"POST",
                 url:'http://localhost:8080/getdetails/'+pat_id,
                 headers:{
                     "Content-Type":"application/json"
                 },
-                success: function(data)
-                {
-                    if(data.toString()!='')
-                    {
+                success: function(data){
+                    if(data.toString()!=''){
                         $("#updateBtn").prop('disabled',false);
                         $("#ws_pat_id").prop('disabled',true);
                         setFields(data);
                     }
-                    else
-                    {
+                    else{
                         alert("Patient Record Not Found");
                     }
+                },
+                error: function () {
+                     $("#errorid").slideDown();
+                     $("#errorid").html("Enter a valid Patient ID");
                 }
-            });
+            });//close of ajax-getdetails
         }
-    });
+    });//close of click-getBtn
     $("#updateBtn").click(function() {
         var pat_id=jQuery.trim($("#ws_pat_id").val());
         var pname=jQuery.trim($("#ws_pat_name").val());
@@ -209,21 +194,22 @@ $(document).ready(function() {
                             alert("Error");
                         }
                     }
-                });
+            });//close of ajax-update
         }
-    });
+    });//close of click-updateBtn
     $("#useroptions").change(function(){
         var d= $(this).val();
         if(d!=''){
             getval(d);
         }
-    });
-
-});
-function getval(optionData)
-{
-    switch(optionData)
-    {
+    });//close of change event handler of useroptions
+  }
+  else{
+       window.location.replace("http://localhost:8080/hospitalLogin");
+  }
+});//close of document.ready
+function getval(optionData){
+    switch(optionData){
         case "Register Patient":window.location.replace("http://localhost:8080/registration");
         break;
         case "Update Patient":window.location.replace("http://localhost:8080/updatePatient");
@@ -240,13 +226,11 @@ function getval(optionData)
         break;
         case "Diagnostics":window.location.replace("http://localhost:8080/addDiagnostics");
         break;
-    }
-}
-function setFields(data)
-{
+    }//close of switch
+}//close of function getval
+function setFields(data){
     len = data.length;
-    if(len > 0)
-    {
+    if(len > 0){
         var arr=data.split(",");
         var name=arr[0];
         var age=arr[1];
@@ -263,8 +247,7 @@ function setFields(data)
         $("#ws_doj").val(date);
         $("#ws_rtype").val(room);
     }
-    else
-    {
+    else{
         alert("Patient ID not found");
     }
     $("#ws_pat_name").prop('disabled',false);
@@ -274,31 +257,8 @@ function setFields(data)
     $("#ws_state").prop('disabled',false);
     $("#ws_doj").prop('disabled',false);
     $("#ws_rtype").prop('disabled',false);
-}
-function enableOptions()
-{
-    var uname=$.cookie("username");
-    var type=uname.substring(0, 3);
-    if(type=="ADE")
-    {
-        $("#useroptions").append(new Option("Register Patient", "Register Patient"));
-        $("#useroptions").append(new Option("Update Patient", "Update Patient"));
-        $("#useroptions").append(new Option("Delete Patient", "Delete Patient"));
-        $("#useroptions").append(new Option("Search Patient", "Search Patient"));
-        $("#useroptions").append(new Option("View Patients", "View Patients"));
-        $("#useroptions").append(new Option("Billing", "Billing"));
-    }
-    else if(type=="PHA")
-    {
-        $("#useroptions").append(new Option("Issue Medicine", "Issue Medicine"));
-    }
-    else
-    {
-        $("#useroptions").append(new Option("Diagnostics", "Diagnostics"));
-    }
-}
-function resetFields()
-{
+}//close of function setFields
+function resetFields(){
     $("#ws_pat_id").val('');
     document.getElementById("ws_pat_name").value="";
     document.getElementById("ws_age").value="";
@@ -314,7 +274,7 @@ function resetFields()
     $("#ws_state").prop('disabled',true);
     $("#ws_doj").prop('disabled',true);
     $("#ws_rtype").prop('disabled',true);
-}
+}//close of function resetFields
 $("#ws_pat_id").keypress(function (e) {
         var keyCode = e.keyCode || e.which;
         var regex = /^([0-9])$/;
@@ -328,8 +288,8 @@ $("#ws_pat_id").keypress(function (e) {
             $('#errorid').slideUp();
         }
         return isValid;
-    });
-    $("#ws_pat_id").keyup(function(){
+});//close of keypress-ID
+$("#ws_pat_id").keyup(function(){
             var len=$("#ws_pat_id").val().length;
             if(len>9)
             {
@@ -340,8 +300,8 @@ $("#ws_pat_id").keypress(function (e) {
             {
                 $('#errorage').slideUp();
             }
-    });
-    $("#ws_pat_name").keypress(function (e) {
+});//close of keyup-Id
+$("#ws_pat_name").keypress(function (e) {
         var keyCode = e.keyCode || e.which;
         var regex = /^[A-Za-z\s]+$/;
         var isValid = regex.test(String.fromCharCode(keyCode));
@@ -354,10 +314,10 @@ $("#ws_pat_id").keypress(function (e) {
             $('#errorname').slideUp();
         }
         return isValid;
-    });
-    $("#ws_age").keypress(function (e) {
+});//close of keypress-name
+$("#ws_age").keypress(function (e) {
         var keyCode = e.keyCode || e.which;
-         var regex = /^([0-9])$/;
+        var regex = /^([0-9])$/;
         var isValid = regex.test(String.fromCharCode(keyCode));
         if (!isValid) {
             $('#errorage').slideDown();
@@ -368,16 +328,11 @@ $("#ws_pat_id").keypress(function (e) {
             $('#errorage').slideUp();
         }
         return isValid;
-    });
-    $("#ws_age").keyup(function(){
+});//close of keypress-age
+$("#ws_age").keyup(function(){
             var len=$("#ws_age").val().length;
             var p_age=jQuery.trim($("#ws_age").val());
-            /*if(len>3)
-            {
-                $('#errorage').slideDown();
-                $("#errorage").html("Maximum 3 digits are allowed");
-            }*/
-             if(p_age>=150)
+            if(p_age>=150)
                         {
                             $('#errorage').slideDown();
                             $("#errorage").html("Please provide a valid age");
@@ -386,8 +341,8 @@ $("#ws_pat_id").keypress(function (e) {
             {
                 $('#errorage').slideUp();
             }
-    });
-    $("#ws_adrs").keypress(function (e) {
+});//close of keyup-age
+$("#ws_adrs").keypress(function (e) {
         var keyCode = e.keyCode || e.which;
         var regex = /^[A-Za-z0-9\s]+$/;
         var isValid = regex.test(String.fromCharCode(keyCode));
@@ -400,22 +355,4 @@ $("#ws_pat_id").keypress(function (e) {
             $('#erroradrs').slideUp();
         }
         return isValid;
-    });
-    /*$("#ws_doj").keypress(function (e) {
-        var keyCode = e.keyCode || e.which;
-        var date = new Date($("#ws_doj").val());
-        var year = date.getFullYear();
-
-
-        //var regex = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/([12][0-9]{3})$/;
-        //var isValid = regex.test(String.fromCharCode(keyCode));
-        if (year<1970) {
-            $('#errordoa').slideDown();
-            $("#errordoa").html("Provide a valid date !.");
-        }
-        else
-        {
-            $('#errordoa').slideUp();
-        }
-        return isValid;
-    });*/
+});//close of keypress address

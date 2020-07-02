@@ -10,10 +10,10 @@ import java.util.Date;
 
 @Table(name="medicine_tracking")
 public class MedicineTracking {
-
+    @Size(max=9)
     @Column(name = "patient_id")
     @NotNull
-    private Integer patient_id;
+    private int patient_id;
 
     @Column(name = "medicine_id")
     @NotNull
@@ -26,7 +26,7 @@ public class MedicineTracking {
 
     }
 
-    public MedicineTracking(Integer patient_id, Integer medicene_id, Integer quantity_issued) {
+    public MedicineTracking(int patient_id, Integer medicene_id, Integer quantity_issued) {
         this.patient_id = patient_id;
         this.medicine_id = medicene_id;
         this.quantity_issued = quantity_issued;

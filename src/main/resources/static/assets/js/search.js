@@ -111,3 +111,29 @@ function resetFields()
             $("#ws_doj").val("");
             $("#ws_rtype").val("");
 }//close of function resetFields
+$("#ws_pat_id").keypress(function (e) {
+        var keyCode = e.keyCode || e.which;
+        var regex = /^([0-9])$/;
+        var isValid = regex.test(String.fromCharCode(keyCode));
+        if (!isValid) {
+            $('#errorid').slideDown();
+            $("#errorid").html("Only Numbers are allowed.");
+        }
+        else
+        {
+            $('#errorid').slideUp();
+        }
+        return isValid;
+});//close of keypress-ID
+$("#ws_pat_id").keyup(function(){
+            var len=$("#ws_pat_id").val().length;
+            if(len>9)
+            {
+                $('#errorid').slideDown();
+                $("#errorid").html("Maximum 9 digits are allowed");
+            }
+            else
+            {
+                $('#errorage').slideUp();
+            }
+});//close of keyup-Id

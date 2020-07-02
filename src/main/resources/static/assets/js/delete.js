@@ -24,7 +24,6 @@ $(document).ready(function() {
                                                 },
                                                 success: function(data){
                                                     if(data.toString()!=''){
-
                                                             $("#deleteBtn").prop('disabled',false);
                                                             setFields(data); //setting the value in corresponding fields
                                                     }
@@ -33,6 +32,10 @@ $(document).ready(function() {
                                                     }
                                                 }
                                         });//close of ajax-getdetails
+                        }
+                        else{
+                            $("#errorid").slideDown();
+                            $("#errorid").html("Enter a valid Patient ID");
                         }
                      },
                      error: function () {
@@ -155,3 +158,29 @@ function resetFields(){
     $("#ws_doj").prop('disabled',true);
     $("#ws_rtype").prop('disabled',true);
 }//close of function resetFields
+$("#ws_pat_id").keypress(function (e) {
+        var keyCode = e.keyCode || e.which;
+        var regex = /^([0-9])$/;
+        var isValid = regex.test(String.fromCharCode(keyCode));
+        if (!isValid) {
+            $('#errorid').slideDown();
+            $("#errorid").html("Only Numbers are allowed.");
+        }
+        else
+        {
+            $('#errorid').slideUp();
+        }
+        return isValid;
+});//close of keypress-ID
+$("#ws_pat_id").keyup(function(){
+            var len=$("#ws_pat_id").val().length;
+            if(len>9)
+            {
+                $('#errorid').slideDown();
+                $("#errorid").html("Maximum 9 digits are allowed");
+            }
+            else
+            {
+                $('#errorage').slideUp();
+            }
+});//close of keyup-Id

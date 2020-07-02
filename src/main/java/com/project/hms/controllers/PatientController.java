@@ -66,4 +66,9 @@ public class PatientController {
     public Integer checkPatientExistence(@PathVariable Integer pat_id) {
         return patientService.checkPatientExistence(pat_id);
     }//Checking patient for existence
+
+    @RequestMapping(value="/checkPatientActive/{pat_id}",method = RequestMethod.POST)
+    public Integer checkPatientActive(@PathVariable Integer pat_id) {
+        return patientService.checkPatientActive(pat_id);
+    }//Checking patient for existence
 }

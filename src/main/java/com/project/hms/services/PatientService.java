@@ -59,4 +59,8 @@ public class PatientService {
     public Integer checkPatientExistence(Integer pat_id) {
         return patientRepository.findById(pat_id);
     }
+
+    public Integer checkPatientActive(Integer pat_id) {
+        return patientRepository.checkPatientActive(pat_id);
+    }
 }

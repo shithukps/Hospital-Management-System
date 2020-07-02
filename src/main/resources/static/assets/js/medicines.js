@@ -7,29 +7,32 @@ $(document).ready(function() {
        $("#options").removeClass("hidden");
     }
     loadMedicinesData();
-    var available=0;
     $("#addbtn").click(function() {
         var m_name=$("#medicineslist option:selected").text();
         var m_id=$("#medicineslist").val();
         var m_rate=$("#rate").val();
-        var qua=$("#quantity").val();
-        var amt=m_rate*qua;
-        var txt="<tr><td style=\"display: none;\">"+m_id+"</td><td>"+m_name+"</td><td>"+qua+"</td><td>"+m_rate+"</td><td>"+amt+"</td><tr>";
-        $('#medicinestbl').append(txt);//to populate table with corresponding medicine list
-        $("#medicineslist").val("Select Medicine");
-        $("#rate").val('');
-        $("#quantity").val('');
-        $("#availability").val('');
-        $("#amount").val('');
+        var qua=jQuery.trim($('#quantity').val());
+        var av=jQuery.trim($('#availability').val());
+        if(parseInt(qua)<parseInt(av)){   //checking medicine demand is more than the available stock
+            $('#errorquantity').slideUp();
+            var amt=m_rate*qua;
+            var txt="<tr><td style=\"display: none;\">"+m_id+"</td><td>"+m_name+"</td><td>"+qua+"</td><td>"+m_rate+"</td><td>"+amt+"</td><tr>";
+            $('#medicinestbl').append(txt);//to populate table with corresponding medicine list
+            $("#medicineslist").val("Select Medicine");
+            $("#rate").val('');
+            $("#quantity").val('');
+            $("#availability").val('');
+            $("#amount").val('');
+        }
+        else{
+            $('#errorquantity').slideDown();
+            $('#errorquantity').html('Required quantity is not in Stock!...');
+            return false;
+        }
     });//close of button click-addbtn
     $("#submitBtn").click(function() 
     {
         var pat_id=$.cookie("pat_id");
-        var qtyVal=jQuery.trim($('#quantity').val());
-        if(qtyVal>available){   //checking medicine demand is more than the available stock
-            alert("Stock is less than required");
-        }
-        else{
             $("#medicinestbl tr").each(function() {
                 if ($(this).find("td:first").length > 0) {
                             var med_id = $(this).find("td:first").html();
@@ -49,29 +52,66 @@ $(document).ready(function() {
                                 data:patientMedicineJson,
                                 success: function(data)
                                 {
-                                    alert("Medicines Issued");
+                                     $.ajax({
+                                                  type:"POST",
+                                                  url:'http://localhost:8080/updateMedicineQty/'+parseInt(qty)+'/'+med_id,
+                                                  headers:{
+                                                              "Content-Type":"application/json"
+                                                  },
+                                                  success: function(data){
+
+                                                  }
+                                     });//close of ajax-updateMedicineQty
+                                },
+                                error: function(data){
+                                    alert("Error");
                                 }
                             });//close of ajax-insertMedicineTrack
-                            $.ajax({
-                                type:"POST",
-                                url:'http://localhost:8080/updateMedicineQty/'+qty+'/'+med_id,
-                                headers:{
-                                           "Content-Type":"application/json"
-                                },
-                                success: function(data)
-                                {
-                                       $.removeCookie('pat_id');
-                                       window.location.replace("http://localhost:8080/issueMedicines");
-                                }
-                            });//close of ajax-updateMedicineQty
+
                 }//close of if
             });//close of each function to iterate the table rows
-        }//close of availability checking if
+            alert("Medicines Issued");
+            $.removeCookie('pat_id');
+            window.location.replace("http://localhost:8080/issueMedicines");
     });//close of click-submitBtn
     $("#medicineslist").change(function(){
         var d= $(this).val();
         if(d!='Select Medicine'){
-            loadSelectedMedicineData(d);
+            $.ajax({
+                        type:"POST",
+                        url:'http://localhost:8080/getmedicine/'+d,
+                        headers:{
+                            "Content-Type":"application/json"
+                        },
+                        success: function(data){
+                            len = data.length;
+                            if(len > 0){
+                                var arr=data.split(",");
+                                var med_avail="";
+                                var available=arr[0];
+                                var med_rate=arr[1];
+                                $("#availability").val(available);
+                                $("#rate").val(med_rate);
+                                if(available<1)
+                                {
+                                        alert("Not available");
+                                        $.growl.notice({ message: "Medicine Available!" });
+                                }
+                                /*if(parseInt(available)>0)
+                                {
+                                    $.growl.notice({ message: "Medicine Available!" });
+                                    $("#availability").val(available);
+                                    $("#rate").val(med_rate);
+                                }
+                                else
+                                {
+                                    $.growl.error({ message: "Medicine Not Available!" });
+                                    $("#availability").val('');
+                                    $("#rate").val('');
+                                }*/
+                            }
+                        }
+                    });//close of ajax-getmedicine
         }
         else
         {
@@ -103,41 +143,7 @@ $(document).ready(function() {
     }//close of function loadMedicinesData
     function loadSelectedMedicineData(med_id)
     {
-        $.ajax({
-            type:"POST",
-            url:'http://localhost:8080/getmedicine/'+med_id,
-            headers:{
-                "Content-Type":"application/json"
-            },
-            success: function(data){
-                len = data.length;
-                if(len > 0){
-                    var arr=data.split(",");
-                    var med_avail="";
-                    available=arr[0];
-                    var med_rate=arr[1];
-                    $("#availability").val(available);
-                    $("#rate").val(med_rate);
-                    if(available<1)
-                    {
-                            alert("Not available");
-                            $.growl.notice({ message: "Medicine Available!" });
-                    }
-                    /*if(parseInt(available)>0)
-                    {
-                        $.growl.notice({ message: "Medicine Available!" });
-                        $("#availability").val(available);
-                        $("#rate").val(med_rate);
-                    }
-                    else
-                    {
-                        $.growl.error({ message: "Medicine Not Available!" });
-                        $("#availability").val('');
-                        $("#rate").val('');
-                    }*/
-                }
-            }
-        });//close of ajax-getmedicine
+
     }//close of function loadSelectedMedicineData
     $("#quantity").keyup(function(){
         var q=$("#quantity").val();
@@ -191,3 +197,17 @@ function getval(optionData){
         break;
     }//close of switch
 }//close of function getval
+$("#quantity").keypress(function (e) {
+        var keyCode = e.keyCode || e.which;
+        var regex = /^([0-9])$/;
+        var isValid = regex.test(String.fromCharCode(keyCode));
+        if (!isValid) {
+            $('#errorquantity').slideDown();
+            $("#errorquantity").html("Only Numbers are allowed.");
+        }
+        else
+        {
+            $('#errorid').slideUp();
+        }
+        return isValid;
+});//close of keypress-ID

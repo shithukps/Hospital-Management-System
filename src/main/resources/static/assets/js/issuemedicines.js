@@ -23,7 +23,7 @@ $(document).ready(function() {
             $("#errorpatid").slideUp();
             $.ajax({
                             type:"POST",
-                            url:'http://localhost:8080/checkPatientExistence/'+pat_id, //checking patient is existing or not
+                            url:'http://localhost:8080/checkPatientActive/'+pat_id, //checking patient is Discharged or not
                             headers:{
                                 "Content-Type":"application/json"
                             },

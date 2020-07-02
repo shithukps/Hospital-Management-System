@@ -62,7 +62,7 @@ $(document).ready(function() {
                 return false;
             }
             else{
-                   $('#errordoa').slideUp();
+                   $('#errordoj').slideUp();
             }
     });//close of blur function of doj
     $("#ws_adrs").blur(function(){
@@ -145,14 +145,14 @@ $(document).ready(function() {
                    $('#errorage').html('Please provide a valid age');
                    return false;
         }
-        else if(rtype=='Select'){
-                   $('#errorrtype').slideDown();
-                   $('#errorrtype').html('Please provide room type');
-                   return false;
-        }
         else if(doa==''){
                    $('#errordoj').slideDown();
                    $('#errordoj').html('Please provide date of admission');
+                   return false;
+        }
+        else if(rtype=='Select'){
+                   $('#errorrtype').slideDown();
+                   $('#errorrtype').html('Please provide room type');
                    return false;
         }
         else if(address==''){

@@ -20,7 +20,7 @@ $(document).ready(function() {
             $("#errorpatid").slideUp();
             $.ajax({
                     type:"POST",
-                    url:'http://localhost:8080/checkPatientExistence/'+pat_id, //checking if patient exists in patient table
+                    url:'http://localhost:8080/checkPatientActive/'+pat_id, //checking if patient exists in patient table
                     headers:{
                             "Content-Type":"application/json"
                     },

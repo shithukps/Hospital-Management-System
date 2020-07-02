@@ -74,4 +74,9 @@ public interface PatientRepository extends CrudRepository<Patient,String> {
             value = "select count(*) from patient where patient_id=:pat_id",
             nativeQuery = true)
     Integer findById(Integer pat_id);
+
+    @Query(
+            value = "select count(*) from patient where patient_id=:pat_id and status='ACTIVE'",
+            nativeQuery = true)
+    Integer checkPatientActive(Integer pat_id);
 }

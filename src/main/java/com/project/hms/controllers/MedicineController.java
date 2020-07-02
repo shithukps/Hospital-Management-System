@@ -28,8 +28,10 @@ public class MedicineController {
     public void insertMedicineTrack(@RequestBody MedicineTracking medicineTracking) {
         medicineService.insertMedicineTrack(medicineTracking.getPatient_id(),medicineTracking.getMedicine_id(),medicineTracking.getQuantity_issued());
     }//Insertion in MedicineTracking
-    @RequestMapping(value="/updateMedicineQty/{med_id}/{qty}",method = RequestMethod.POST)
-    public void updateMedicineQty(@PathVariable Integer med_id,@PathVariable Integer qty) {
+    @RequestMapping(value="/updateMedicineQty/{qty}/{med_id}",method = RequestMethod.POST)
+    public void updateMedicineQty(@PathVariable Integer qty,@PathVariable Integer med_id) {
+        System.out.println(med_id);
+        System.out.println(qty);
         medicineService.updateQuantityAvailable(med_id,qty);
     }//Update Quantity in medicine
 

@@ -63,4 +63,12 @@ public class PatientService {
     public Integer checkPatientActive(Integer pat_id) {
         return patientRepository.checkPatientActive(pat_id);
     }
+
+    public void deleteMedicineTacking(Integer pat_id) {
+        patientRepository.deleteMedicineTacking(pat_id);
+    }
+
+    public void deleteDiagnosticTacking(Integer pat_id) {
+        patientRepository.deleteDiagnosticTacking(pat_id);
+    }
 }

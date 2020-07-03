@@ -29,6 +29,8 @@ public class PatientController {
 
     @RequestMapping(value="/delete/{pat_id}",method = RequestMethod.POST)
     public void deletePatientDetails(@PathVariable Integer pat_id) {
+        patientService.deleteMedicineTacking(pat_id);
+        patientService.deleteDiagnosticTacking(pat_id);
         patientService.deletePatientDetails(pat_id);
     }//Deleting Patient details
 

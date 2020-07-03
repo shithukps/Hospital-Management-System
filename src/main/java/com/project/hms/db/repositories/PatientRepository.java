@@ -79,4 +79,18 @@ public interface PatientRepository extends CrudRepository<Patient,String> {
             value = "select count(*) from patient where patient_id=:pat_id and status='ACTIVE'",
             nativeQuery = true)
     Integer checkPatientActive(Integer pat_id);
+
+    @Transactional
+    @Modifying
+    @Query(
+            value = "delete from medicine_tracking where patient_id=:pat_id",
+            nativeQuery = true)
+    void deleteMedicineTacking(Integer pat_id);
+
+    @Transactional
+    @Modifying
+    @Query(
+            value = "delete from diagnostic_tracking where patient_id=:pat_id",
+            nativeQuery = true)
+    void deleteDiagnosticTacking(Integer pat_id);
 }

@@ -104,17 +104,13 @@ $(document).ready(function() {
                     }
                     else
                     {
-                        var notyf = new Notyf({
-                            position:
-                            {
-                                x: 'right',
-                                y: 'top',
-                            }
-                        });
-                        notyf.error('Patient Record Not Found');
+                        resetFields();
+                        $("#errorid").slideDown();
+                        $("#errorid").html("Enter a valid Patient ID");
                     }
                 },
                 error: function () {
+                     resetFields();
                      $("#errorid").slideDown();
                      $("#errorid").html("Enter a valid Patient ID");
                 }

@@ -47,11 +47,13 @@ $(document).ready(function() {
                                         });//close of ajax-getdetails
                         }
                         else{
+                            resetFields();
                             $("#errorid").slideDown();
                             $("#errorid").html("Enter a valid Patient ID");
                         }
                      },
                      error: function () {
+                                    resetFields();
                                     $("#errorid").slideDown();
                                     $("#errorid").html("Enter a valid Patient ID");
                      }

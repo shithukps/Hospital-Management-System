@@ -20,14 +20,8 @@ $(document).ready(function() {
                     }
                     else{
                         resetFields(); //clear the fields
-                        var notyf = new Notyf({
-                            position:
-                            {
-                                x: 'right',
-                                y: 'top',
-                            }
-                        });
-                        notyf.error('Patient Record Not Found');
+                        $("#errorid").slideDown();
+                        $("#errorid").html("Enter a valid Patient ID");
                     }
                 },
                 error: function () {

@@ -16,6 +16,7 @@ $(document).ready(function() {
                 }
             });
             notyf.error('Enter Patient ID');
+            resetFields();
         }
         else
         {
@@ -66,6 +67,7 @@ $(document).ready(function() {
                                                      }
                                                      });
                                                      notyf.error('Enter Valid Patient ID');
+                                                     resetFields();
                                     }
                      },
                      error: function () {
@@ -74,6 +76,7 @@ $(document).ready(function() {
                                       }
                                       });
                                       notyf.error('Enter Patient ID');
+                                      resetFields();
                      }
             });//close of ajax-checkPatientExistence
         }//close of if-checking value of textbox
@@ -141,7 +144,7 @@ function setDiagnosticsData(data){
                     diagnosticsTotal=diagnosticsTotal+parseFloat(amount); //finding total amount of diagnostics done
             }
             if(txt != ""){
-                txt=txt+"<tr><td class=\"required\">Bill for Diagnostics</td><td class=\"required\">"+diagnosticsTotal+"</td></tr>";
+                txt=txt+"<tr><td class=\"required\">Bill for Diagnostics</td><td class=\"required\">"+diagnosticsTotal.toFixed()+"</td></tr>";
                 $('#diagnosticstbl').append(txt);
             }
         }
@@ -166,6 +169,7 @@ function setTotal(){
         pbill=$("#pharmacytbl").find("tr:last td:eq(1)").text();
     }
     grantTotal=parseFloat(rbill)+parseFloat(pbill)+parseFloat(dbill);
+    grantTotal=grantTotal.toFixed();
     $("#grandtotal").text(grantTotal);
 }//close of function setTotal
 function setMedicineData(data){
@@ -184,7 +188,7 @@ function setMedicineData(data){
                     pharmacyTotal=pharmacyTotal+parseFloat(amount); //finding total of prices of medicine
             }
             if(txt != ""){
-                txt=txt+"<tr><td colspan=\"3\" class=\"required\">Bill for Pharmacy</td><td class=\"required\">"+pharmacyTotal+"</td></tr>"
+                txt=txt+"<tr><td colspan=\"3\" class=\"required\">Bill for Pharmacy</td><td class=\"required\">"+pharmacyTotal.toFixed()+"</td></tr>"
                 $('#pharmacytbl').append(txt);
             }
         }
@@ -230,7 +234,8 @@ function setPatientData(data){
                 y: 'top',
             }
         });
-        notyf.error('Enter Valid Patient ID');   
+        notyf.error('Enter Valid Patient ID');
+        resetFields();
     }
 }//close of function setPatientData
 function resetFields(){

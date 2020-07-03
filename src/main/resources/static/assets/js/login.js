@@ -3,6 +3,8 @@ $(document).ready(function() {
         var user = $('#username').val();
         if(user==''){
             $('#error_username').slideDown();
+            $('#error_cred').slideUp();
+            $('#error_password').slideUp();
             $('#error_username').html('Please provide username');
         }
         else{
@@ -14,6 +16,8 @@ $(document).ready(function() {
         var pass = $('#password').val();
         if(pass==''){
             $('#error_password').slideDown();
+            $('#error_cred').slideUp();
+            $('#error_username').slideUp();
             $('#error_password').html('Please provide password');
         }
         else{
@@ -32,10 +36,14 @@ $(document).ready(function() {
         var loginJson=JSON.stringify(userData);
         if(username==''){
                       $('#error_username').slideDown();
+                      $('#error_cred').slideUp();
+                      $('#error_password').slideUp();
                       $('#error_username').html('Please provide username');
         }
         else if(password==''){
                       $('#error_password').slideDown();
+                      $('#error_cred').slideUp();
+                      $('#error_username').slideUp();
                       $('#error_password').html('Please provide password');
         }
         else{

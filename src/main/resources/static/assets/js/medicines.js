@@ -52,6 +52,13 @@ $(document).ready(function() {
                                 data:patientMedicineJson,
                                 success: function(data)
                                 {
+                                    var notyf = new Notyf({
+                                    position:
+                                    {
+                                         x: 'right',
+                                         y: 'top',
+                                    }});
+                                    notyf.success('Medicines Issued');
                                      $.ajax({
                                                   type:"POST",
                                                   url:'http://localhost:8080/updateMedicineQty/'+parseInt(qty)+'/'+med_id,
@@ -77,14 +84,6 @@ $(document).ready(function() {
 
                 }//close of if
             });//close of each function to iterate the table rows
-            var notyf = new Notyf({
-                position:
-                {
-                    x: 'right',
-                    y: 'top',
-                }
-            });
-            notyf.success('Medicines Issued');
             $.removeCookie('pat_id');
             window.location.replace("http://localhost:8080/issueMedicines");
     });//close of click-submitBtn

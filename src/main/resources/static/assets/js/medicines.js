@@ -90,12 +90,22 @@ $(document).ready(function() {
                                 var med_avail="";
                                 var available=arr[0];
                                 var med_rate=arr[1];
-                                $("#availability").val(available);
-                                $("#rate").val(med_rate);
+
                                 if(available<1)
                                 {
-                                        alert("Not available");
-                                        $.growl.notice({ message: "Medicine Available!" });
+                                        var notyf = new Notyf();
+                                        notyf.error('Medicine Not Available');
+                                        $("#rate").val('');
+                                        $("#quantity").val('');
+                                        $("#availability").val('');
+                                        $("#amount").val('');
+                                }
+                                else
+                                {
+                                    var notyf = new Notyf();
+                                    notyf.success('Medicine vailable');
+                                    $("#availability").val(available);
+                                    $("#rate").val(med_rate);
                                 }
                                 /*if(parseInt(available)>0)
                                 {
@@ -193,7 +203,7 @@ function getval(optionData){
         break;
         case "Issue Medicine":window.location.replace("http://localhost:8080/issueMedicines");
         break;
-        case "Diagnostics":window.location.replace("http://localhost:8080/addDiagnostics");
+        case "Add Diagnostics":window.location.replace("http://localhost:8080/addDiagnostics");
         break;
     }//close of switch
 }//close of function getval

@@ -52,7 +52,6 @@ $(document).ready(function() {
                                     if(data=="success"){
                                       $.cookie("username", username);
                                       var uname=$.cookie("username");
-
                                       var type=username.substring(0, 3);
                                       if(type=="ADE")
                                       {

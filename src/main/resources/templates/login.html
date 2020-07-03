@@ -1,32 +1,28 @@
-<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <title>Login</title>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <title>ABC Hospital Login</title>
 </head>
 <body>
-<div class="loginbox">
-    <h1>Login</h1>
-    <form>
-        <div class="error" id="error_username"></div>
-        <label for="username">
-            <i class="fas fa-user-circle"></i>
-        </label>
-        <input type="text" name="username" placeholder="Username" id="username" required>
-        <div class="error" id="error_password"></div>
-        <label for="password">
-            <i class="fas fa-key"></i>
-        </label>
-        <input type="password" name="password" placeholder="Password" id="password" required>
-        <div class="error" id="error_cred"></div>
-        <input type="button" name="submitBtn" id="submitBtn" value="Login">
-    </form>
+<div class="wrapper fadeInDown" style="padding-bottom: 0px; margin-bottom: 0px;">
+    <div id="formContent" style="padding-bottom: 0px; margin-bottom: 0px;">
+        <div>
+            <h2>Login</h2>
+        </div>
+        <form style="padding-bottom: 0px; margin-bottom: 0px;">
+            <input type="text" id="username" class="fadeIn second" name="username" placeholder="Username"/><br>
+            <div id="error_username" style="padding:10px;display: none;"></div>
+            <input type="password" id="password" class="fadeIn third" name="password" placeholder="Password"/>
+            <div id="error_password" style="padding:10px;display: none;"></div>
+            <div id="error_cred" style="padding:10px;display: none;"></div>
+            <input type="button" id="submitBtn" class="fadeIn fourth" style="margin-top:10px;margin-botoom:10px" value="Log In"/>
+        </form>
+    </div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src = "http://cdn.jsdelivr.net/jquery.cookie/1.3.1/jquery.cookie.js"></script>
-<script type="text/javascript" src="assets/js/login.js"></script>
-
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/login.js"></script>
+<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+<link rel="stylesheet" href="assets/css/styles.css">
 </body>
 </html>

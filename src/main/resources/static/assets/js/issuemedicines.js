@@ -153,7 +153,7 @@ function getval(optionData)
         break;
         case "Billing":window.location.replace("http://localhost:8080/billing");
         break;
-        case "Issue Medicine":window.location.replace("http://localhost:8080/issueMedicines");
+        case "Add Diagnostics":window.location.replace("http://localhost:8080/issueMedicines");
         break;
         case "Diagnostics":window.location.replace("http://localhost:8080/addDiagnostics");
         break;

@@ -15,10 +15,10 @@
 </div>
 <!-- Close Header Div -->
 <!-- Start Options Div -->
-<div class="row" style="align-items: center;justify-content: center;">
+<div class="row" id="options" style="align-items: center;justify-content: center;">
     <div class="col-sm-2">
         <select class="form-control" name="adminoptions" id="adminoptions">
-            <option value="Select Action">Select Action</option>
+            <option value="Patient">Patient</option>
             <option value="Register Patient">Register Patient</option>
             <option value="Update Patient">Update Patient</option>
             <option value="Delete Patient">Delete Patient</option>
@@ -29,14 +29,14 @@
     </div>
     <div class="col-sm-2">
         <select class="form-control" name="pharmacyoptions" id="pharmacyoptions">
-            <option value="Select Action">Select Action</option>
+            <option value="Pharmacy">Pharmacy</option>
             <option value="Issue Medicine">Issue Medicine</option>
         </select>
     </div>
     <div class="col-sm-2">
         <select class="form-control" name="diagnosticsoptions" id="diagnosticsoptions">
-            <option value="Select Action">Select Action</option>
             <option value="Diagnostics">Diagnostics</option>
+            <option value="Add Diagnostics">Add Diagnostics</option>
         </select>
     </div>
 </div>
@@ -64,17 +64,18 @@
 </div>
 <!-- Close Patients Table Div -->
 <!-- Scripts and CSS Links -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
-<link rel="stylesheet" href="assets/css/bootstrap.min.css">
-<link rel="stylesheet" href="assets/css/font-awesome.min.css">
-<link rel="stylesheet" href="assets/css/mainstyles.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="assets/js/jquery.growl.js"></script>
 <script src="assets/js/jquery.dataTables.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type ="text/javascript" src = "http://cdn.jsdelivr.net/jquery.cookie/1.3.1/jquery.cookie.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
 <script src="assets/js/popper.min.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
 <script src="assets/js/viewpatients.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
+<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+<link rel="stylesheet" href="assets/css/font-awesome.min.css">
+<link rel="stylesheet" href="assets/css/mainstyles.css">
 </body>
 </html>

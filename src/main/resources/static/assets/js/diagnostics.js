@@ -56,7 +56,7 @@ $(document).ready(function()
             setTimeout(function()
             {
                 window.location.replace("http://localhost:8080/addDiagnostics");
-            },3000);
+            },2000);
             //redirecting the page
         });//close of click-submitBtn
         $("#diagnosticslist").change(function(){

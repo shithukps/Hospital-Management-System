@@ -88,7 +88,7 @@ $(document).ready(function() {
             setTimeout(function()
             {
                 window.location.replace("http://localhost:8080/issueMedicines");
-            },3000);
+            },2000);
             
     });//close of click-submitBtn
     $("#medicineslist").change(function(){

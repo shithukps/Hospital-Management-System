@@ -1,6 +1,6 @@
 $(document).ready(function() {
-  if($.cookie("username") != null){
-    $("#ws_ssn").blur(function(){
+    if($.cookie("username") != null){
+        $("#ws_ssn").blur(function(){
             var patient_ssn =jQuery.trim($('#ws_ssn').val());
             var len=patient_ssn.length;
             if(patient_ssn==''){

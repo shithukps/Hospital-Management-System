@@ -148,7 +148,6 @@ h2
     background-color: #2868c7;
     transition: background-color 0.2s;
 }
-
 table
 {
     font-size: small;
@@ -174,6 +173,6 @@ padding-top:0px;
 margin-left:10px;
 margin-top:0px;
 color: red;
-    font-weight: bold;
+font-weight: bold;
 padding-bottom:0px;
 }

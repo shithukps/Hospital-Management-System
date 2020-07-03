@@ -8,12 +8,18 @@ $(document).ready(function() {
         $("#diagnosticstbl").find("tr:gt(0)").remove();
         if(pat_id=='')
         {
-            $("#errorpatid").slideDown();
-            $("#errorpatid").html("Enter Patient ID");
+            var notyf = new Notyf({
+                position:
+                {
+                    x: 'right',
+                    y: 'top',
+                }
+            });
+            notyf.error('Enter Patient ID');
         }
         else
         {
-            $("#errorpatid").slideUp();
+
             $.ajax({
                      type:"POST",
                      url:'http://localhost:8080/checkPatientActive/'+pat_id, //checking patient is existing or not
@@ -53,10 +59,21 @@ $(document).ready(function() {
                                                         }
                                             });//close of ajax-getBillingDetails
                                     }
+                                    else
+                                    {
+                                        var notyf = new Notyf({position:
+                                                    {x: 'right',y: 'top',
+                                                     }
+                                                     });
+                                                     notyf.error('Enter Valid Patient ID');
+                                    }
                      },
                      error: function () {
-                         $("#errorpatid").slideDown();
-                         $("#errorpatid").html("Enter a valid Patient ID");
+                         var notyf = new Notyf({position:
+                                     {x: 'right',y: 'top',
+                                      }
+                                      });
+                                      notyf.error('Enter Patient ID');
                      }
             });//close of ajax-checkPatientExistence
         }//close of if-checking value of textbox
@@ -71,7 +88,14 @@ $(document).ready(function() {
             },
             success: function(data)
             {
-                alert("Discharged");
+                var notyf = new Notyf({
+                    position:
+                    {
+                        x: 'right',
+                        y: 'top',
+                    }
+                });
+                notyf.success('Patient Discharged');
                 resetFields(); // clear the fields
             }
         });//close of ajax-discharge
@@ -197,8 +221,16 @@ function setPatientData(data){
             $("#billforroom").text(noofdays*8000);
         }
     }
-    else{
-        alert("Patient ID Not Found");
+    else
+    {
+        var notyf = new Notyf({
+            position:
+            {
+                x: 'right',
+                y: 'top',
+            }
+        });
+        notyf.error('Enter Valid Patient ID');   
     }
 }//close of function setPatientData
 function resetFields(){

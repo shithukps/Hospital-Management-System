@@ -5,7 +5,6 @@ $(document).ready(function() {
     var type=uname.substring(0, 3);
     if(type=="ADE")
     {
-
          $("#options").removeClass("hidden");
     }
 
@@ -15,12 +14,15 @@ $(document).ready(function() {
         pat_id=$("#patient_id").val();
         if(pat_id=='')
         {
-            $("#errorpatid").slideDown();
-            $("#errorpatid").html("Enter ID");//to show the error message
+            var notyf = new Notyf({position:
+            {x: 'right',y: 'top',
+             }
+             });
+             notyf.error('Enter Patient ID');
         }
         else
         {
-            $("#errorpatid").slideUp();
+
             $.ajax({
                             type:"POST",
                             url:'http://localhost:8080/checkPatientActive/'+pat_id, //checking patient is Discharged or not
@@ -53,10 +55,21 @@ $(document).ready(function() {
                                         }
                                     });//close of ajax-getBillingDetails
                                 }
+                                else
+                                {
+                                var notyf = new Notyf({position:
+                                            {x: 'right',y: 'top',
+                                             }
+                                             });
+                                             notyf.error('Enter Valid Patient ID');
+                                }
                             },
                             error: function () {
-                               $("#errorpatid").slideDown();
-                               $("#errorpatid").html("Enter a valid Patient ID");
+                               var notyf = new Notyf({position:
+                                           {x: 'right',y: 'top',
+                                            }
+                                            });
+                                            notyf.error('Enter Valid Patient ID');
                             }
             });//close of ajax-checkPatientExistence
         }//close of if-checking textbox value
@@ -134,7 +147,14 @@ function setPatientData(data)
     }
     else
     {
-        alert("Empty List");
+        var notyf = new Notyf({
+            position:
+            {
+                x: 'right',
+                y: 'top',
+            }
+        });
+        notyf.error('Enter Valid Patient ID');
     }//close of if-checking data length
 }//close of setPatientData
 function getval(optionData)
@@ -153,9 +173,9 @@ function getval(optionData)
         break;
         case "Billing":window.location.replace("http://localhost:8080/billing");
         break;
-        case "Add Diagnostics":window.location.replace("http://localhost:8080/issueMedicines");
+        case "Issue Medicine":window.location.replace("http://localhost:8080/issueMedicines");
         break;
-        case "Diagnostics":window.location.replace("http://localhost:8080/addDiagnostics");
+        case "Add Diagnostics":window.location.replace("http://localhost:8080/addDiagnostics");
         break;
     }//close of switch
 }//close of function getval

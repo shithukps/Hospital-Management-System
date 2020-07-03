@@ -10,8 +10,16 @@ $(document).ready(function() {
             if(data.toString()!=''){
                 populateTable(data);
             }
-            else{
-                alert("No Records");
+            else
+            {
+                var notyf = new Notyf({
+                    position:
+                    {
+                        x: 'right',
+                        y: 'top',
+                    }
+                });
+                notyf.error('No Records'); 
             }
         }
     });//close of ajax-getAll

@@ -187,7 +187,14 @@ $(document).ready(function() {
                         },
                         data:patientJson,
                         success: function(data){
-                            alert("Registered Successfully");
+                            var notyf = new Notyf({
+                                position:
+                                {
+                                    x: 'right',
+                                    y: 'top',
+                                }
+                            });
+                            notyf.success('Patient Registered Successfully');
                             resetFields(); //clear the fields
                         }
                    });//close of ajax-register

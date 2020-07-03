@@ -39,7 +39,14 @@ $(document).ready(function() {
                                     });//close of ajax-insertDiagnosticsTrack
                         }//close of if
         });//close of iterating through table rows
-        alert("Added diagnostics details");
+        var notyf = new Notyf({
+            position:
+            {
+                x: 'right',
+                y: 'top',
+            }
+        });
+        notyf.success('Diagnostic Details Added');
         $.removeCookie('pat_id');//removing value of cookie
         window.location.replace("http://localhost:8080/addDiagnostics");//redirecting the page
     });//close of click-submitBtn

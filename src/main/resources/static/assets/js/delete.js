@@ -34,7 +34,14 @@ $(document).ready(function() {
                                                             setFields(data); //setting the value in corresponding fields
                                                     }
                                                     else{
-                                                            alert("Patient Record Not Found");
+                                                        var notyf = new Notyf({
+                                                            position:
+                                                            {
+                                                                x: 'right',
+                                                                y: 'top',
+                                                            }
+                                                        });
+                                                        notyf.error('Patient Record Not Found');
                                                     }
                                                 }
                                         });//close of ajax-getdetails
@@ -60,13 +67,27 @@ $(document).ready(function() {
                 "Content-Type":"application/json"
             },
             success: function(data){
-                    alert("Deleted Successfully");
-                    $("#ws_pat_id").prop('disabled',false);
-                    resetFields();
-                    $("#deleteBtn").prop('disabled',true);
+                var notyf = new Notyf({
+                    position:
+                    {
+                        x: 'right',
+                        y: 'top',
+                    }
+                });
+                notyf.success('Patient Deleted Successfully');
+                $("#ws_pat_id").prop('disabled',false);
+                resetFields();
+                $("#deleteBtn").prop('disabled',true);
             },
             error: function () {
-                    alert("Cannot delete the patient")
+                var notyf = new Notyf({
+                    position:
+                    {
+                        x: 'right',
+                        y: 'top',
+                    }
+                });
+                notyf.error('Error On Delete');
             }
         });//close of ajax-delete
     });//close of click-deleteBtn
@@ -144,7 +165,14 @@ function setFields(data){
         $("#ws_rtype").prop('disabled',true);
     }
     else{
-        alert("Patient ID not found");
+        var notyf = new Notyf({
+            position:
+            {
+                x: 'right',
+                y: 'top',
+            }
+        });
+        notyf.error('Enter Valid Patient ID');
     }
 }//close of function setFields
 function resetFields(){

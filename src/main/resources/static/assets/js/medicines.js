@@ -13,7 +13,7 @@ $(document).ready(function() {
         var m_rate=$("#rate").val();
         var qua=jQuery.trim($('#quantity').val());
         var av=jQuery.trim($('#availability').val());
-        if(parseInt(qua)<parseInt(av)){   //checking medicine demand is more than the available stock
+        if(parseInt(qua)<=parseInt(av)){   //checking medicine demand is more than the available stock
             $('#errorquantity').slideUp();
             var amt=m_rate*qua;
             var txt="<tr><td style=\"display: none;\">"+m_id+"</td><td>"+m_name+"</td><td>"+qua+"</td><td>"+m_rate+"</td><td>"+amt+"</td><tr>";
@@ -64,13 +64,27 @@ $(document).ready(function() {
                                      });//close of ajax-updateMedicineQty
                                 },
                                 error: function(data){
-                                    alert("Error");
+                                    var notyf = new Notyf({
+                                        position:
+                                        {
+                                            x: 'right',
+                                            y: 'top',
+                                        }
+                                    });
+                                    notyf.error('Error');
                                 }
                             });//close of ajax-insertMedicineTrack
 
                 }//close of if
             });//close of each function to iterate the table rows
-            alert("Medicines Issued");
+            var notyf = new Notyf({
+                position:
+                {
+                    x: 'right',
+                    y: 'top',
+                }
+            });
+            notyf.success('Medicines Issued');
             $.removeCookie('pat_id');
             window.location.replace("http://localhost:8080/issueMedicines");
     });//close of click-submitBtn
@@ -93,7 +107,12 @@ $(document).ready(function() {
 
                                 if(available<1)
                                 {
-                                        var notyf = new Notyf();
+                                        var notyf = new Notyf({
+                                                position: {
+                                                    x: 'right',
+                                                    y: 'top',
+                                                  }
+                                            });
                                         notyf.error('Medicine Not Available');
                                         $("#rate").val('');
                                         $("#quantity").val('');
@@ -102,23 +121,17 @@ $(document).ready(function() {
                                 }
                                 else
                                 {
-                                    var notyf = new Notyf();
-                                    notyf.success('Medicine vailable');
+                                    var notyf = new Notyf({
+                                            position: {
+                                                x: 'right',
+                                                y: 'top',
+                                              }
+                                        });
+                                    notyf.success('Medicine available');
                                     $("#availability").val(available);
                                     $("#rate").val(med_rate);
                                 }
-                                /*if(parseInt(available)>0)
-                                {
-                                    $.growl.notice({ message: "Medicine Available!" });
-                                    $("#availability").val(available);
-                                    $("#rate").val(med_rate);
-                                }
-                                else
-                                {
-                                    $.growl.error({ message: "Medicine Not Available!" });
-                                    $("#availability").val('');
-                                    $("#rate").val('');
-                                }*/
+
                             }
                         }
                     });//close of ajax-getmedicine

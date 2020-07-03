@@ -20,7 +20,14 @@ $(document).ready(function() {
                     }
                     else{
                         resetFields(); //clear the fields
-                        alert("Patient Record Not Found");
+                        var notyf = new Notyf({
+                            position:
+                            {
+                                x: 'right',
+                                y: 'top',
+                            }
+                        });
+                        notyf.error('Patient Record Not Found');
                     }
                 },
                 error: function () {
@@ -97,7 +104,14 @@ function setFields(data){
         $("#ws_rtype").val(room);
     }
     else{
-        alert("Patient ID Not Found");
+        var notyf = new Notyf({
+            position:
+            {
+                x: 'right',
+                y: 'top',
+            }
+        });
+        notyf.error('Enter Valid Patient ID');
         resetFields();
     }
 }//close of function setFields

@@ -102,8 +102,16 @@ $(document).ready(function() {
 
                         setFields(data);
                     }
-                    else{
-                        alert("Patient Record Not Found");
+                    else
+                    {
+                        var notyf = new Notyf({
+                            position:
+                            {
+                                x: 'right',
+                                y: 'top',
+                            }
+                        });
+                        notyf.error('Patient Record Not Found');
                     }
                 },
                 error: function () {
@@ -184,14 +192,28 @@ $(document).ready(function() {
                     {
                         if(data.toString()=='')
                         {
-                            alert("Updated");
+                            var notyf = new Notyf({
+                                position:
+                                {
+                                    x: 'right',
+                                    y: 'top',
+                                }
+                            });
+                            notyf.success('Patient Details Updated');
                             resetFields();
                             $("#ws_pat_id").prop('disabled',false);
                             $("#updateBtn").prop('disabled',true);
                         }
                         else
                         {
-                            alert("Error");
+                            var notyf = new Notyf({
+                                position:
+                                {
+                                    x: 'right',
+                                    y: 'top',
+                                }
+                            });
+                            notyf.error('Error');
                         }
                     }
             });//close of ajax-update
@@ -264,7 +286,14 @@ function setFields(data){
         $("#ws_rtype").val(room);
     }
     else{
-        alert("Patient ID not found");
+        var notyf = new Notyf({
+            position:
+            {
+                x: 'right',
+                y: 'top',
+            }
+        });
+        notyf.error('Enter Valid Patient ID');
     }
     $("#ws_pat_name").prop('disabled',false);
     $("#ws_age").prop('disabled',false);

@@ -1,0 +1,10 @@
+insert into diagnostic values(1,'Gastric Fluid Analysis',1000);
+insert into diagnostic values(2,'Kidney Function Test',5000);
+insert into diagnostic values(3,'Liver Function Test',5000);
+insert into diagnostic values(4,'Malabsorption Test',3400);
+insert into diagnostic values(5,'Echocardiography',6700);
+insert into medicine values(1,'Aspirin',150,1.72);
+insert into medicine values(2,'Verapamil',345,8.56);
+insert into medicine values(3,'Carbamazepine',500,14.83);
+insert into medicine values(4,'Cefadroxil',505,45.6);
+insert into medicine values(5,'Tolnaftate',423,3.86);

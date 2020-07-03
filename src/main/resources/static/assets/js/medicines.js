@@ -52,13 +52,6 @@ $(document).ready(function() {
                                 data:patientMedicineJson,
                                 success: function(data)
                                 {
-                                    var notyf = new Notyf({
-                                    position:
-                                    {
-                                         x: 'right',
-                                         y: 'top',
-                                    }});
-                                    notyf.success('Medicines Issued');
                                      $.ajax({
                                                   type:"POST",
                                                   url:'http://localhost:8080/updateMedicineQty/'+parseInt(qty)+'/'+med_id,
@@ -66,7 +59,14 @@ $(document).ready(function() {
                                                               "Content-Type":"application/json"
                                                   },
                                                   success: function(data){
-
+                                                    var notyf = new Notyf({
+                                                        position:
+                                                        {
+                                                            x: 'right',
+                                                            y: 'top',
+                                                        }
+                                                    });
+                                                    notyf.success('Medicines Issued');
                                                   }
                                      });//close of ajax-updateMedicineQty
                                 },
@@ -85,7 +85,11 @@ $(document).ready(function() {
                 }//close of if
             });//close of each function to iterate the table rows
             $.removeCookie('pat_id');
-            window.location.replace("http://localhost:8080/issueMedicines");
+            setTimeout(function()
+            {
+                window.location.replace("http://localhost:8080/issueMedicines");
+            },3000);
+            
     });//close of click-submitBtn
     $("#medicineslist").change(function(){
         var d= $(this).val();

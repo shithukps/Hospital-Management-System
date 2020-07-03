@@ -46,12 +46,12 @@ $(document).ready(function() {
   else{
        window.location.replace("http://localhost:8080/hospitalLogin");
   }
-  $('#patientstbl').DataTable( {
+  /*$('#patientstbl').DataTable( {
               "pagingType": "full_numbers",
               "searching": false,
               "ordering": false,
               "lengthChange": false
-  });
+  });*/
   $("#logoutBtn").click(function(){
     $.removeCookie('username');
     window.location.replace("http://localhost:8080/hospitalLogin");

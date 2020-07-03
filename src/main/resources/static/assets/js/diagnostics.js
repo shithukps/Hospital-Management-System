@@ -19,14 +19,6 @@ $(document).ready(function()
         });//close of click-addbtn
         $("#submitBtn").click(function() 
         {
-            var notyf = new Notyf({
-                position:
-                {
-                    x: 'right',
-                    y: 'top',
-                }
-            });
-            notyf.success('Diagnostic Details Added');
             var pat_id=$.cookie("pat_id"); //getting the patient id from addDiagnotic page
             $("#diagnosticstbl tr").each(function() 
             {
@@ -48,12 +40,24 @@ $(document).ready(function()
                         success: function(data)
                         {
                             //alert("Added");
+                            var notyf = new Notyf({
+                                position:
+                                {
+                                    x: 'right',
+                                    y: 'top',
+                                }
+                            });
+                            notyf.success('Diagnostic Details Added');
                         }
                     });//close of ajax-insertDiagnosticsTrack
                 }//close of if
             });//close of iterating through table rows
             $.removeCookie('pat_id');//removing value of cookie
-            window.location.replace("http://localhost:8080/addDiagnostics");//redirecting the page
+            setTimeout(function()
+            {
+                window.location.replace("http://localhost:8080/addDiagnostics");
+            },3000);
+            //redirecting the page
         });//close of click-submitBtn
         $("#diagnosticslist").change(function(){
             var d= $(this).val();
